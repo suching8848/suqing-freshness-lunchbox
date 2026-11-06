@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "status": "verified_public",
+  "app_id": 108600,
+  "mod_id": "SuQingFreshnessLunchbox",
+  "publishedfileid": "3834693433",
+  "version": "0.1.0-rc.8-perf.8",
+  "visibility": "public",
+  "visibility_value": 0,
+  "verified_at_bjt": "2026-11-07T06:52:13.557388+08:00",
+  "workshop_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3834693433",
+  "native_receipt": "D:\\steam\\steamapps\\common\\ProjectZomboid\\CodexAssets\\UnifiedCoolingRelease_20261107_0634\\publication-receipts\\freshness-lunchbox\\verify-public-20261107-065212-060c7092.json",
+  "native_receipt_sha256": "178c10c52e620bdd4e9fbf1d199369027e0c55c8a034317887d6a1021900b744",
+  "verified_checks": {
+    "title": true,
+    "description": true,
+    "metadata": true,
+    "content_bytes": true,
+    "preview_policy": true,
+    "tags": true,
+    "dependencies": true
+  },
+  "content_tree_sha256": "8338d7707933996c809e2a24d787946d182abea94e57e5740c1b5f99e64b76aa",
+  "local_runtime_files": 43,
+  "content_bytes": 3778012,
+  "local_preview_sha256": "7ae22f48c3f67a25764d39dc0a0705584ccd1385f10e83d5e8a23853f6570ced",
+  "title_sha256": "0e0cab1283de4ff2edbb016d1157998a85f03ca1c68d66baed6bc72009c4392e",
+  "description_sha256": "b84143416a5dd389f5c784ea9ce03f26ef91995c9242787a231b725b057e44a8",
+  "change_note_sha256": "02e0f5a830759ff626a4d838a3a534aab8575e86185f98e79a8911ec1edd72b9",
+  "verification_boundary": "Native success plus exact text, metadata tree hash, content-byte total, tags and preview presence; not a remote per-file SHA download.",
+  "gameplay_acceptance_changed_by_publication": false,
+  "privacy": "Only public item/release data and a receipt fingerprint are recorded; account identifiers and full user logs are excluded."
+}
