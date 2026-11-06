@@ -1,5 +1,7 @@
 # SuQing's Freshness Lunchbox / 蘇清的返鲜餐盒
 
+Current item identity, visibility and upload status: [workshop-item.json](publishing/workshop-item.json). Frozen manifests under release/ retain their preparation-time state; an old uploaded=false value there does not describe the current Steam item.
+
 Workshop item: [uploaded and verified private item](https://steamcommunity.com/sharedfiles/filedetails/?id=3834693433). Source repository: [suching8848/suqing-freshness-lunchbox](https://github.com/suching8848/suqing-freshness-lunchbox). Private upload and native content readback completed on2026-11-06. The item is not public; gameplay acceptance is unchanged.
 
 **0.1.0-rc.5**, a Project Zomboid B42.21 single-player candidate. This project contains one Mod ID: `SuQingFreshnessLunchbox`. Item: `SuQingFreshnessLunchbox.FreshnessLunchbox`.

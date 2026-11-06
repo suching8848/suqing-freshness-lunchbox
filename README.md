@@ -1,5 +1,7 @@
 # 蘇清的返鲜餐盒 / SuQing's Freshness Lunchbox
 
+当前工坊ID、可见性与上传状态见[workshop-item.json](publishing/workshop-item.json)。release/中的冻结manifest保留准备时状态；其中历史uploaded=false不代表当前工坊状态。
+
 工坊条目：[已上传并核验的私有条目](https://steamcommunity.com/sharedfiles/filedetails/?id=3834693433)。源码仓库：[suching8848/suqing-freshness-lunchbox](https://github.com/suching8848/suqing-freshness-lunchbox)。2026-11-06已完成私有上传与原生内容读回；未公开，游戏内验收状态不变。
 
 Project Zomboid B42.21 单人候选版 **0.1.0-rc.5**。本项目仅含一个 Mod ID：`SuQingFreshnessLunchbox`；食品容器：`SuQingFreshnessLunchbox.FreshnessLunchbox`。
