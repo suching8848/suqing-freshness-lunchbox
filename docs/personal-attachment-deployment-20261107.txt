@@ -1,0 +1,39 @@
+返鲜餐盒rc.6背包底部挂点：个人部署记录 / Personal Deployment
+2026-11-07，北京时间。用户确认游戏已退出并授权本地部署。
+
+已部署
+目标：C:\Users\15792\Zomboid\mods\SuQingFreshnessLunchbox
+版本：0.1.0-rc.6，Mod ID SuQingFreshnessLunchbox保持。
+来源：D:\steam\steamapps\common\ProjectZomboid\CodexAssets\SuQingFreshnessLunchbox_Attachments_20261107\candidate-0.1.0-rc.6\mods\SuQingFreshnessLunchbox
+冻结ZIP SHA-256：e38eafd54b052af5365dd301642c49e63c5489ae62a626a710b496039e77bbdd
+43个运行文件与已通过离线验证的冻结清单逐文件SHA-256相同。
+
+发现路径处理
+原 C:\Users\15792\Zomboid\Workshop\SuQingFreshnessLunchbox 上传准备目录仍含rc.5，优先发现会遮住个人rc.6。本轮已将其完整移出发现路径并保留，不改线上工坊条目。
+独立的当前原生ZomboidFileSystem/ChooseGameInfo目录与mod.info解析PASS：餐盒实际解析路径为上述个人目录、版本rc.6；普通容器升级仍解析为1.0.3。该解析仅索引文件和元数据，非游戏启动／世界／UI测试，Java缓存与日志在审计目录独立user.home。
+
+恢复材料
+审计目录：D:\GameBackups\ProjectZomboid\返鲜餐盒挂点部署_20261107_010739
+旧个人安装完整ZIP：该目录installed-lunchbox-rc5-before.zip，40文件，SHA-256 f22fb03509515a858080f69d9ca3a22253b6930e70b7ebc603d0fc783b93a985。
+旧上传准备包完整ZIP：该目录upload-staging-rc5-before.zip，45文件，SHA-256 8614912ae43c81a453535aa7d023ec01b009d3b7d4d922342beda3d229119527。
+两包均逐成员内容／清单／SHA读回匹配原目录。
+旧安装目录：C:\Users\15792\Zomboid\CodexDeploymentRecovery\返鲜餐盒挂点部署_20261107_010739\previous-installed-rc5
+旧上传目录：C:\Users\15792\Zomboid\CodexDeploymentRecovery\返鲜餐盒挂点部署_20261107_010739\previous-upload-rc5
+两份目录均与移出前文件清单／SHA一致，没有删除旧版本。
+恢复时先正常退出游戏，核对之后有无新修改，保留当时rc.6目录，再只恢复旧个人餐盒目录。不应随意把旧上传准备目录放回，它会重新优先加载rc.5。不要覆盖存档、名单或配置；本次没有执行回滚。
+
+保护范围与状态
+184个其他模组／关键存档及用户配置／启动文件／发布身份文件的操作前、操作后、原生解析完成后SHA保持一致。正式档 C:\Users\15792\Zomboid\Saves\Sandbox\2026-10-09_18-19-22 已启用餐盒，名单和顺序不变；全局default的有意差异保持。
+本轮未修改存档、沙盒、用户选项、其他模组、启用名单或Steam Workshop原件，未制作额外完整世界备份。未Git提交／推送，未上传或改变工坊可见性；工坊最近已核验内容仍是rc.5。
+冻结包及开发阶段“未部署”的记录保留其冻结时状态；本记录与审计deployment.json是后续个人部署事实。
+未启动或操作游戏。离线功能回归沿用本候选已通过的57场景／370断言、模型和原有集成回归；本轮执行了包／备份／部署哈希及原生目录解析。游戏内挂载、视觉和保存重进由用户验收。
+
+用户实测
+1. 正常启动原正式档；新日志应出现返鲜餐盒rc.6，原生底部挂点适配就绪。
+2. 穿有底部睡袋／帐篷位的背包，在原生挂载入口选择返鲜餐盒，与帐篷共用位置。
+3. 验证挂载后出现唯一容器按钮、可取放食品且继续返鲜；检查普通／Viewpoint视角和走跑蹲伏下的方向／穿模。
+4. 强化／还原前先卸下并清空；挂着时应拒绝且不扣料。外挂负重按原生规则，不套用手持容器减重比例。
+5. 验证换包／卸包、左右手切换、地面取放和保存重进，核对食品及升级记录保持。
+
+English
+Locally deployed rc.6 to the existing personal Mod ID after the user confirmed game exit. All43 runtime files match the verified frozen candidate. The old40-file personal installation and45-file upload staging were fully ZIP-verified and preserved outside discovery. Native directory/mod-info indexing resolves the personal rc.6 and ordinary upgrades1.0.3. No game/world/UI was started.184 protected files remained unchanged; enable lists, saves, settings, other mods, Git and Workshop publication were not changed. The latest verified Workshop version remains rc.5. Test native attachment/container access, visuals, detach-before-upgrade and save/reload in game. Recovery is limited to the lunchbox mod after normal exit; do not overwrite saves or blindly restore the old priority upload folder.

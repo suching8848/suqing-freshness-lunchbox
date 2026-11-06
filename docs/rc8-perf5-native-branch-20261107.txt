@@ -1,0 +1,36 @@
+perf.4实测检查与perf.5真实分支／精度修复
+2026-11-07，北京时间；perf.5本地部署03:32:58。
+
+本轮采样结论
+本轮加载冷藏perf.4／餐盒rc.8-perf.4，显示合并依然未启用：unsupported active P4HasBeenRead。29个快照全部display_enabled=false，display_reuses始终0，因此本轮不能证明显示合并改善FPS。
+稳态开背包36.647FPS（35–38），上轮32.932；关背包47.692FPS（45–50），上轮43.714。数值本轮更高，但两轮显示均关闭、主体Runtime/Cache相同，不能把差值归因该功能。冷藏EWMA约9.193/9.311ms，主线程约98.8/98.7%，GPU9.42/8.34ms。仍为主线程受限方向。
+571食品、6袋和8条历史不变；缓存命中99.9964/99.9971%，稳态失效增量0。开包704.93次结算/Tick，关包571次；额外UI入口仍存在。暂停实际计数停止，旧EWMA不作暂停占用。
+快照：D:\steam\steamapps\common\ProjectZomboid\CodexAssets\CoolingDisplayGateFix_20261107_0302\capture_20261107_031749
+
+真实元数据根因
+之前按包内42/mod.info的P4 2.14.1做校验，却遗漏当前B42.21由原生选择器实际选择42.15/3.8.1。不是本轮Steam更新导致的已证变化。
+现用真实ChooseGameInfo/ZomboidFileSystem/getModInfoByID读回：P4=42.15/3.8.1、CUI=42.19/2.10.4、本地拼音=42/1.1、性能补丁=42/1.2.2（实际ID Codex_InventoryTransferPerformance_4221）。正式名单231ID只读镜像，未改名单。
+P4真实42.15 renderer573–685先调用prior一次，再读取标记/图标和绘制，无食品年龄或转移动作。其原标记表惰性创建仍完整执行，Display不会跳过整段render。修复只支持已审3.8.1→42.15、2.14.1→42精确配对，并核对直接P4 source与原生versionDir；未知版本/分支/来源仍回退。
+同一原生API完整Install预检：旧Display拒绝，修后Install=true。Core两API、四个ModInfo、启用ID、真实外层函数体编译出的closure来源均通过真实API读取；仅ready/SP/事件注册是受控上下文。没有执行render或创建游戏世界，不能当游戏内启用完成。
+
+原生温度精度问题
+又用真实NativeFood复现第二层拒绝：逻辑record.heat的Lua double0.2与Java float物理值0.20000000298023224不同，旧memo把正常舍入当外部编辑，导致同clock仍重复nativeAge。渐变温度也有同样问题。
+修后分别保存并精确比较逻辑记录和物理值各自快照，不使用epsilon。floor/gradient两场景的SettleDisplay和真实Food:updateAge(displayDepth=1)均命中，无额外nativeAge；1e-12记录修改及物理温度修改仍即时严格结算。食品年龄、温度和lastAged计算未改。
+
+验证与当前部署
+55显示场景174断言；真实Install修前FAIL/修后PASS；真实Food精度修前FAIL/修后PASS，保留全部证据。短counts+13场景61断言：Native4568保持、Cooling6、Config8、Integral8、571项Age/Heat/LastAged差0。五个桥接版本各17场景567断言；短原生组合13场景2181断言；原生倍率/冷冻/保存读回及快速时钟对照与perf4一致。完整世界删除/玩法验收仍由用户操作。
+正式本地已部署冷藏1.0.0-rc.2-perf.5、餐盒0.1.0-rc.8-perf.5。冷藏27文件、餐盒43文件的冻结包全部成员SHA读回。仅覆盖8文件，StateCache、存档、两份名单、沙盒、画质、启动器和已有临时采样脚本哈希保持；未启动游戏、未提交Git、未上传工坊。
+本轮FPS数据属于perf.4，不能算作perf.5效果。根交付deployment.json含版本/文件hash/保护项，lunchbox-handoff.json含门禁和Native组合报告。
+
+下一次只做短启用确认
+照常进原档，打开存有食品的冷藏背包，正常运行约10–15秒后退出即可。先查display ready、display_enabled=true和display_reuses增长，不再要求先完整跑50/50/30。确认真正启用后再评价开包FPS；短启动样本不当稳定长时间性能结论。
+采样仍后台自动记录，真实游戏和UI由用户操作。完成后保留新日志，再精确清除临时两键块和logger，不删除永久Cache/Display。
+
+恢复
+before/installed仅8份本次覆盖文件，已读回校验；这不是完整存档备份。恢复前正常退出，核对当前hash并保留后续编辑，再只还原对应8项。不要覆盖存档、名单或整份旧配置，也不删除永久模块。
+
+English
+Display reuse still did not activate in the perf.4 capture. Open/closed steady FPS was36.647/47.692 versus32.932/43.714 previously, but both runs had display disabled; these differences cannot be attributed to display coalescing.
+Native metadata selection reveals P4 actually uses42.15/3.8.1, not the old42/2.14.1 branch previously reviewed. The exact native-selected pair is now supported without accepting unknown branches or versions. A full native-API Install preflight reproduces rejection before and enables after, without executing render or a world.
+Real Food tests also reproduced double-versus-float heat causing false memo misses. Separate exact ledger/physical snapshots now permit same-clock reuse, while tiny external edits still force strict settlement; no epsilon is used. Native aging/heat calculations and StateCache remain unchanged. Focused, native precision, counts, bridge and native combination checks pass; game activation/FPS remains pending.
+Personally deployed perf.5 is frozen and hash-verified. No save/list/graphics edit, client/world operation, Git commit or Workshop upload occurred. Next, the user only needs a10–15second open-food-container activation check; verify ready/enabled/reuse counters before another full performance comparison. Restore only the exact8 changed mod files after checking hashes, never a save or unrelated configuration.

@@ -1,0 +1,25 @@
+module Base
+{
+    /* Dedicated attached view; hand/ground definitions and geometry are unchanged. */
+    model SuQingFreshnessLunchbox_Attached
+    {
+        mesh = WorldItems/SuQingFreshnessLunchbox/SuQingFreshnessLunchbox_Ground,
+        texture = Clothes/Bag/SuQingFreshnessLunchbox,
+        scale = 0.4,
+        attachment bedroll_bottom
+        {
+            offset = 0.0 -0.035 -0.04605,
+            rotate = 90.0 -90.0 0.0,
+        }
+        attachment bedroll_bottom_big
+        {
+            offset = 0.0 -0.0503 -0.16545,
+            rotate = 90.0 -90.0 0.0,
+        }
+        attachment bedroll_bottom_alice
+        {
+            offset = 0.0 -0.0423 -0.11725,
+            rotate = 90.0 -90.0 0.0,
+        }
+    }
+}

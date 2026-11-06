@@ -23,3 +23,8 @@ Capacity 4, weight 1.0, weight reduction 50%. Separate settings: restoration ena
 [/list]
 Held and ground models are independently derived from vanilla lunchbox assets. Cover and small icons are separately created series artwork.
 [b]Mod ID: SuQingFreshnessLunchbox[/b]
+
+[h2]0.1.0-rc.8-perf.8 update[/h2]
+Includes the deployed backpack-bottom attachment, vehicle Set iteration, model-registration and concise-tooltip fixes, retaining rc.8’s0.08 upward adjustment of the regular bottom slot. Uses an existing normal/large/ALICE bedroll or tent slot, shared with its original item, without new slots or a mandatory backpack mod. Attached food access/restoration remain; detach and empty before ordinary upgrades/restoration. Supports exactly audited Coolingperf.1–8, avoiding unrelated lunchbox write scopes for ordinary cold food while preserving protected-food scopes and every hook-identity check.
+
+Offline native model/vehicle-collection, attachment and Cooling combination checks pass; the user reported the rc.7 model displaying. Exact rc.8 fit, animations, Viewpoint, special equipment conversion and complete save/reload still need user acceptance. Lunchbox restoration rules, IDs, save records and selected cover/icon remain; no Java dependency is added. Optional native takeover belongs to the refrigeration base’s separate companion.

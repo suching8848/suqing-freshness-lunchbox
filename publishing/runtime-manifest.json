@@ -1,0 +1,181 @@
+{
+  "mod_id": "SuQingFreshnessLunchbox",
+  "version": "0.1.0-rc.8-perf.8",
+  "files": {
+    "42/icon.png": {
+      "bytes": 28191,
+      "sha256": "bea52933c046e7e0d9099bd6d7145e8d2273140a639c772baea06c59910d1d00"
+    },
+    "42/media/clothing/clothingItems/SuQingFreshnessLunchbox_LHand.xml": {
+      "bytes": 530,
+      "sha256": "6a1b26e4dae58b9d84c5862fdce299d85bb03abc38e604b148ca5b232274d0e9"
+    },
+    "42/media/clothing/clothingItems/SuQingFreshnessLunchbox_RHand.xml": {
+      "bytes": 530,
+      "sha256": "8b93e70e0d1db92b64ead0d530f34b5029ce14e6087f15e053c209c2ec9f60d4"
+    },
+    "42/media/fileGuidTable.xml": {
+      "bytes": 415,
+      "sha256": "85e6c8dfdf6eac7ac5b8514d6446ef8f59e4937061817b34e6d5dce643f0e72c"
+    },
+    "42/media/inventory/world/WItem_SuQingFreshnessLunchbox.png": {
+      "bytes": 1459,
+      "sha256": "53dbfbca857273622c96db02956831a0e02a3ea6b84fd052e3d1876d291253e0"
+    },
+    "42/media/lua/client/SuQingFreshnessLunchbox_AttachedContainers.lua": {
+      "bytes": 4361,
+      "sha256": "6fa3ec1beace0a3abe6b85e43a59a7bd59254fb698c77b984d03fe0852af9268"
+    },
+    "42/media/lua/client/SuQingFreshnessLunchbox_Attachments.lua": {
+      "bytes": 5049,
+      "sha256": "8ebfecb95bdf77cb44853be5f83a2aed632c280b85707b69e7ec629f75893ce5"
+    },
+    "42/media/lua/client/SuQingFreshnessLunchbox_Crafting.lua": {
+      "bytes": 1263,
+      "sha256": "d5587968b3738ccac1042788f7f8eafdaa034af42ef9d224e26817f915195133"
+    },
+    "42/media/lua/client/SuQingFreshnessLunchbox_Runtime.lua": {
+      "bytes": 17696,
+      "sha256": "08f6308ebfe476c3f33615cb221d7513bd8686f53c25757bf16162412307faee"
+    },
+    "42/media/lua/client/SuQingFreshnessLunchbox_UI.lua": {
+      "bytes": 2543,
+      "sha256": "356f8cc912473be14b8377ff1363c3dd128c3aea33915d809435f1502f4e0be5"
+    },
+    "42/media/lua/shared/SuQingFreshnessLunchbox/Core.lua": {
+      "bytes": 20666,
+      "sha256": "6984a2d6c4f87d9b8c49ce63f6559006ca745f65f06838d82f00fae9e5f10dd6"
+    },
+    "42/media/lua/shared/SuQingFreshnessLunchbox/Crafting.lua": {
+      "bytes": 5611,
+      "sha256": "1e30138c84eef1869f89261d973eff30b1e0ac66a158d9d6ab614a0be6b84bf7"
+    },
+    "42/media/lua/shared/Translate/CH/IG_UI.json": {
+      "bytes": 2315,
+      "sha256": "ea5f76e1d3756c5456a399888fedc4541bc7cf2ac4d7bf0d3ad17a26031d6a57"
+    },
+    "42/media/lua/shared/Translate/CH/ItemName.json": {
+      "bytes": 78,
+      "sha256": "d04da6a65c8dbde87185256f1cd141d4b424e74425f4ac8f1b4e3ace1deefe46"
+    },
+    "42/media/lua/shared/Translate/CH/Mod.json": {
+      "bytes": 789,
+      "sha256": "bfd7d1777f65acf5561dfe486c5b62bf04213f77b3a0cce6c37a3e9c330c4a51"
+    },
+    "42/media/lua/shared/Translate/CH/Recipes.json": {
+      "bytes": 168,
+      "sha256": "046b17a5a7ce0fa51a6f9ac964ecd4b4d518e6ec5c1ce9f62831f4d76c918ee7"
+    },
+    "42/media/lua/shared/Translate/CH/Sandbox.json": {
+      "bytes": 955,
+      "sha256": "46a5df01bf3e292d8e0e8b62f2529ffa0edebc15439f3aa1b12c92805abdec21"
+    },
+    "42/media/lua/shared/Translate/CH/Tooltip.json": {
+      "bytes": 597,
+      "sha256": "fb02ff099310c37f9fa4e28ce0b07c5b057e77d0c7a24d67a8ceb710bfa88017"
+    },
+    "42/media/lua/shared/Translate/CN/IG_UI.json": {
+      "bytes": 2315,
+      "sha256": "6b7c964d595868b97344f6177f894f2fd1fd53c3ec8e27777a7f3f2730c129ac"
+    },
+    "42/media/lua/shared/Translate/CN/ItemName.json": {
+      "bytes": 78,
+      "sha256": "d04da6a65c8dbde87185256f1cd141d4b424e74425f4ac8f1b4e3ace1deefe46"
+    },
+    "42/media/lua/shared/Translate/CN/Mod.json": {
+      "bytes": 789,
+      "sha256": "bfd7d1777f65acf5561dfe486c5b62bf04213f77b3a0cce6c37a3e9c330c4a51"
+    },
+    "42/media/lua/shared/Translate/CN/Recipes.json": {
+      "bytes": 168,
+      "sha256": "046b17a5a7ce0fa51a6f9ac964ecd4b4d518e6ec5c1ce9f62831f4d76c918ee7"
+    },
+    "42/media/lua/shared/Translate/CN/Sandbox.json": {
+      "bytes": 955,
+      "sha256": "46a5df01bf3e292d8e0e8b62f2529ffa0edebc15439f3aa1b12c92805abdec21"
+    },
+    "42/media/lua/shared/Translate/CN/Tooltip.json": {
+      "bytes": 597,
+      "sha256": "815f4c94e829b35e637d049d6628ddf2cb8fb370cce5fdcd19a170e36cf96a75"
+    },
+    "42/media/lua/shared/Translate/EN/IG_UI.json": {
+      "bytes": 2611,
+      "sha256": "4bb95483c0c5f5a767259595ba59640821913f300c1abac872ae4d4cde5b57d5"
+    },
+    "42/media/lua/shared/Translate/EN/ItemName.json": {
+      "bytes": 84,
+      "sha256": "b377a8f70b212ca7e09e8e1c702d5e8ec13a2a107f945f3bfc52dcf66f5e64c4"
+    },
+    "42/media/lua/shared/Translate/EN/Mod.json": {
+      "bytes": 964,
+      "sha256": "a243bf147464160bf37001a2f120e0203f77a957b972f4f2d57835a50e22e267"
+    },
+    "42/media/lua/shared/Translate/EN/Recipes.json": {
+      "bytes": 192,
+      "sha256": "772de3dd90fe27248ab949e74af9efee4e3cd1050b4a37a936e99a761c1e0a27"
+    },
+    "42/media/lua/shared/Translate/EN/Sandbox.json": {
+      "bytes": 1115,
+      "sha256": "7d1b88d0e6fc0a4a4f027fe4e68e54a54fa043706a53470bb635650764ed5a8a"
+    },
+    "42/media/lua/shared/Translate/EN/Tooltip.json": {
+      "bytes": 730,
+      "sha256": "1af12920ed7a782f165eb57ee9a305fe421640aa056c65587dc605ed1db1d8ba"
+    },
+    "42/media/models_X/Skinned/BackPacks/SuQingFreshnessLunchbox_LHand.x": {
+      "bytes": 96289,
+      "sha256": "55f10e31f7ec674919896235b1897b96d582c5177060a56e08c0285d1b825da3"
+    },
+    "42/media/models_X/Skinned/BackPacks/SuQingFreshnessLunchbox_RHand.x": {
+      "bytes": 96761,
+      "sha256": "fc5f195e211159ec4bd5e4aace97173f82dbdcc0a67f0ae3bf6ab005fa1e67dc"
+    },
+    "42/media/models_X/WorldItems/SuQingFreshnessLunchbox/SuQingFreshnessLunchbox_Ground.fbx": {
+      "bytes": 38640,
+      "sha256": "dc747871cbec8ac1f53bbbdaf63f7c5be1c4905d441602fa1ec14fd78fbc3e29"
+    },
+    "42/media/sandbox-options.txt": {
+      "bytes": 698,
+      "sha256": "4fc035a4f5fe64994b13e2d7d0cb588cf7e2485d6d645e35bc2c3e7ce5fe38c0"
+    },
+    "42/media/scripts/items_FreshnessLunchbox.txt": {
+      "bytes": 948,
+      "sha256": "33d699cb21c04da4bfa5954e5fa057c113fcc66c4dd9794f1be5f314535092e8"
+    },
+    "42/media/scripts/models_FreshnessLunchbox.txt": {
+      "bytes": 236,
+      "sha256": "dd2326dd77eb244d5d40eee2f490aeffca32e7be8a076bea82b000e2a68e10a6"
+    },
+    "42/media/scripts/models_FreshnessLunchbox_Attached.txt": {
+      "bytes": 727,
+      "sha256": "9b051d754374aa80fec2a9d5b67f2c35162967300301625d92420707902e3a9c"
+    },
+    "42/media/scripts/recipes_FreshnessLunchbox.txt": {
+      "bytes": 3119,
+      "sha256": "6e393b1deda6c8c19cba5df0c18b36b599e55e40b14a127aac40c61392978971"
+    },
+    "42/media/textures/Clothes/Bag/SuQingFreshnessLunchbox.png": {
+      "bytes": 59463,
+      "sha256": "0060a604a6ec16dc8e151ec2057182195b876b6ab88d8d9d7a9e3ce1d143ebff"
+    },
+    "42/media/textures/Item_SuQingFreshnessLunchbox.png": {
+      "bytes": 2266,
+      "sha256": "e20b8887a7b7dac431d4836fdf2d6948b8c6e66a4f60feb38da3436636ae673e"
+    },
+    "42/mod.info": {
+      "bytes": 1579,
+      "sha256": "9897a7e2111f1a3ac91b7d02b92b545ac7e22bbd3107e794b346219879929f5d"
+    },
+    "42/poster.png": {
+      "bytes": 3369076,
+      "sha256": "2b5eadda8952ee914e5de108da1cc4a4c5e80ab9f113f9cc8ab776a968d59a6a"
+    },
+    "common/README.txt": {
+      "bytes": 4396,
+      "sha256": "565f773604368c509a244fbb3289900b9d2ac9c54752af6d9dcab4fa73de5e1b"
+    }
+  },
+  "byte_scope": "Windows prepared runtime bytes; Git checkout line-ending settings may differ.",
+  "source_formal_matching": true,
+  "prepared_at_bjt": "2026-11-07T06:41:17.100372+08:00"
+}

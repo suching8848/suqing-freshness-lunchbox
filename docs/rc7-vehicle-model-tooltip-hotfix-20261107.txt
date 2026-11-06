@@ -1,0 +1,23 @@
+返鲜餐盒rc.7：车辆扫描、外挂模型与简短提示
+2026-11-07，北京时间
+
+已修复
+1. 当前42.21的IsoCell.getVehicles返回HashSet，原扫描使用不存在的get(index)。改用iterator/hasNext/next遍历，保留车辆、容器与食品实际归属检查，不跳过或吞掉错误。该误用在rc.5源码归档中已经存在；rc.6用户实测触发，导致保护机制暂停该次返鲜运行。
+2. rc.6新增外挂模型文件在model声明前用了不支持的//注释，整个模型未注册。改成/*...*/，完整原生脚本加载和模型名称查找现在能找到原网格、贴图、0.4尺度及三个锚点。没有更改模型几何、贴图或偏移。
+3. 物品悬浮说明缩为两句，保留食品返鲜及挂点／升级前卸下清空提示；右键状态中的时间范围与容量文字也精简。材料配方、详细机制和限制保留在文档，不塞进物品说明。
+
+状态与验证
+rc.7是本轮新修复候选；冻结包准备完成和个人部署分别以对应candidate-receipt.json及deployment.json为准，旧冻结包不回写。本轮获用户授权在正常退出游戏后更新本地，不上传工坊。
+真实当前LuaManager.Exposer+HashSet回归：旧rc.6原Runtime稳定复现nil；修复版10场景／38断言通过，覆盖非空多车、多部件、未加载位置、移出集合、嵌套容器和空／缺集合。车辆/Cell是受控方法壳，集合及Lua暴露是真实实现；没有构造真实世界或驾驶车辆。
+完整模型文件经原生stripComments、ParseScript、LoadScripts、getModelScript与item resolve路径：旧包缺失9项断言、新源码35项断言，共44项通过。没有截取model声明来绕过原注释。
+现有运行模拟31场景／267断言及全部7个Lua编译通过；模型／贴图、挂点映射、容器入口、升级保护、食品限制和存档ID保留。
+这些离线结果不等同于游戏内验证。没有启动游戏、世界、角色或GL，最终外观、真实装卸、车辆食品返鲜及保存重进由用户实测。
+
+用户验收
+正常启动原正式档，先确认新日志为rc.7。观察是否还出现ScanVehicles nil；在有车辆的已加载区域，让餐盒分别处于人物、背包挂点、车内容器并观察返鲜与状态开关。挂到背包底部后，检查模型能显示、容器按钮唯一且可取放食品。检查物品悬浮说明是否足够紧凑，最后保存重进确认食品、挂点和升级记录保留。
+发生过保护停用的旧运行需正常退出再启动新版，不能从旧进程继续期待修复生效。无需重制餐盒、修改沙盒或恢复存档。
+外挂负重继续按原生计算，不套用手持容器减重；强化／还原仍须先卸下并清空。
+
+English
+rc.7 fixes vehicle scanning against the real B42.21 HashSet API, replaces an unsupported line comment that prevented attached-model registration, and shortens the item/status tooltips. Collection ownership checks, error visibility, item identity, freshness rules, crafting, upgrades, model geometry and textures remain.
+Old rc.6 reproduces both failures offline. The fixed vehicle path passes10 cases/38 assertions against the real Java collection and current Lua exposure, with controlled vehicle/Cell shells. Full native model-file registration/lookup passes44 assertions including the old failure fixture. Existing runtime mocks pass31 cases/267 assertions and all7 Lua files compile. No game/world/character/GL was started. After authorized local deployment, restart normally and test vehicle-area scanning, carried/attached/vehicle food storage, visible attached model, compact tooltips and save/reload. Workshop upload is separate and was not performed.

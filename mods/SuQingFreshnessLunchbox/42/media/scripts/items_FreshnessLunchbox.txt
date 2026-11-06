@@ -10,6 +10,8 @@ module SuQingFreshnessLunchbox
         CanHaveHoles = false,
         MaxItemSize = 1.0,
         AcceptItemFunction = SuQingFreshnessLunchbox.AcceptFood,
+        AttachmentType = SuQingFreshnessLunchbox,
+        StaticModel = SuQingFreshnessLunchbox_Attached,
         Icon = SuQingFreshnessLunchbox,
         UseWorldItem = true,
         ScaleWorldIcon = 1.0,

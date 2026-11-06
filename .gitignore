@@ -44,3 +44,11 @@ art/model/asset-load-audit/
 art/model/cross-mod-guid-audit/
 tests/ex_guard_validation/
 tests/runtime_isa_validation/
+
+# Reproducible reports and private runtime homes; retain the test sources.
+tests/attached_containers_validation/
+tests/model_registration_runtime/
+tests/attached_containers_validation.json
+tests/attachments_validation.json
+tests/model_registration_validation.json
+tests/vehicle_collection_validation.json

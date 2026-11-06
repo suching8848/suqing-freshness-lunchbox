@@ -172,8 +172,10 @@ function R.ScanVehicles()
     local cell=type(getCell)=="function" and getCell()
     local vehicles=cell and cell.getVehicles and cell:getVehicles()
     if not vehicles then return end
-    for i=0,vehicles:size()-1 do
-        local vehicle=vehicles:get(i)
+    -- B42.21 returns HashSet<BaseVehicle>; Set has no indexed get(int).
+    local iterator=vehicles:iterator()
+    while iterator:hasNext() do
+        local vehicle=iterator:next()
         if loadedSquare(vehicle:getSquare()) then
             for n=0,vehicle:getPartCount()-1 do
                 local part=vehicle:getPartByIndex(n)

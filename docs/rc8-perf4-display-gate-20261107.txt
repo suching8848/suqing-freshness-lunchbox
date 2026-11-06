@@ -1,0 +1,34 @@
+perf.3实测效果与perf.4显示门禁修复 / perf.3 results and perf.4 display-gate hotfix
+2026-11-07，北京时间；perf.4部署时间03:11:20。
+
+本轮实际测到的效果
+正式复测加载冷藏1.0.0-rc.2-perf.3、餐盒0.1.0-rc.8-perf.3；冷藏错误计数0。571件食品、6袋、8条历史不变，人物仅0.16格内微移。
+可比稳态开背包：上轮30.225FPS，本轮32.932FPS（约+9.0%），整帧30.36ms，GPU8.83ms，主线程约98.1%。
+可比稳态关背包：上轮40.15FPS，本轮43.714FPS（约+8.9%），整帧22.88ms，GPU8.55ms，主线程约98.4%。
+冷藏handler EWMA开背包12.846→10.190ms；关背包12.307→10.065ms（约减少18.2%），尚未达到减半目标。这是回调耗时估计，不是5秒累计总账。
+缓存稳态命中99.9959%／99.9969%，稳态invalidations不再增长。关背包每Tick恰571次结算；不存在持续多倍全量。启动大量失效属于加载阶段，不能当持续问题。开背包约706次/Tick，比关背包多135次，严格Cooling约140.75次/Tick；显示复用没启用时仍有额外UI结算。
+这是手动同场景近似对比，不是严格受控A/B；预热和细小场景差异使全部FPS差值不能精确归到单项优化。暂停后的EWMA为旧值，实际计数和世界时间已停止。
+
+发现与修复
+本轮display_enabled=false且display_reuses=0。旧显示门禁只接受42.21.0；真实Core.getVersionNumber()返回42.21，getGameAndBuildVersion()才返回42.21.0，因而误停用。此项属于上一版实现的版本API格式假设错误。
+perf.4只修显示版本门禁并同步餐盒精确兼容版本：getVersionNumber必须为42.21或42.21.0，getGameAndBuildVersion必须为42.21.0，拒绝邻近版本、其他build和未知后缀，查询异常保留真实错误。两个方法均已真实读取且确认为public非static、Core已暴露到Lua。
+函数来源也按拥有者代码核实：LuaManager绝对路径→RunLua→FuncState.currentfullFile→prototype.filename，PZO预编译会保留绝对路径。未放宽原来源白名单。成功时新增ASCII ready/compat/game/build/source日志，compatRevision=core-version-api-2。
+47场景157断言通过；四个Cold支持版本的餐盒门禁各17场景534断言，原生组合13场景2181断言通过。所有这些都是离线验证，修正版实际启用与FPS尚待新游戏启动。
+
+当前部署与保护
+冷藏1.0.0-rc.2-perf.4，餐盒0.1.0-rc.8-perf.4已本地部署。
+冷藏仅Core版本、Display、mod.info和README.txt四文件变化；Runtime与StateCache逐字节不变。餐盒仅Core精确版本门禁、mod.info和commonREADME三文件变化。共7文件覆盖，完整冻结包27／43成员SHA读回通过。
+存档、沙盒、启用名单、画质、启动器、本批缓存与食品结算代码、既有临时采样脚本部署前后哈希不变。未启动游戏、未提交Git、未上传工坊。
+本轮新日志已保存：D:\steam\steamapps\common\ProjectZomboid\CodexAssets\CoolingStateCache_20261107_0237\capture_20261107_030151
+当前数据只证明perf.3的效果，不能算作perf.4 FPS已验证。
+
+下一次验证
+采样仍为luaProfile+overlayLog及只读logger，原配置备份与撤除标记保留在上一交付diagnostics目录。照常启动原存档、同地点/缩放/F9，开背包约50秒、关背包约50秒、暂停30秒后正常退出。先查Display ready和display_enabled=true、display_reuses增长，再比较新帧时间。采集后保存输出并精确移除临时标记块和logger，不清理永久模块。
+
+恢复
+before/installed仅有本次7份覆盖文件，逐文件校验。回退前正常退出、核对当前hash并保留后来编辑，再只恢复这7项；不还原存档、不整份覆盖配置、不删除永久Cache/Display文件。具体包、hash和保护文件见deployment.json。此材料不是完整存档备份。
+
+English
+The measured perf.3 run improved comparable open/closed inventory intervals from30.225/40.15 to32.932/43.714FPS (about9%). Closed cooling-handler EWMA fell12.307→10.065ms (18.2%), short of the half-cost goal. Runtime cache hits exceed99.995%; food counts remain571. These manual scene comparisons are not a strict A/B experiment.
+Display reuse never activated because the old guard confused Core.getVersionNumber (42.21) with getGameAndBuildVersion (42.21.0). Personally deployed perf.4 accepts only the two equivalent version strings and exact build42.21.0, preserves real API failures and source gates, and adds explicit ready evidence.47 focused cases/157 assertions pass with native Core readback; bridge gates and13 native combination cases pass. Food settlement and StateCache are unchanged.
+Only7 installed files changed and all package members were verified. Saves, lists, graphics and loader settings were preserved; no game/world operation, Git commit or Workshop upload occurred. This capture measures perf.3 only; perf.4 activation/FPS awaits user startup. Existing temporary diagnostics remain for the next same-scene open/close/pause capture and should be removed precisely afterwards.

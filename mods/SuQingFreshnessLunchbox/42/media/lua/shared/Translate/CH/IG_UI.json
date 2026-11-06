@@ -6,8 +6,8 @@
   "IGUI_SFL_Off": "此餐盒返鲜已关闭。",
   "IGUI_SFL_GlobalOff": "沙盒设置中的返鲜总开关已关闭。",
   "IGUI_SFL_Rate": "每 %1 游戏小时恢复一个完整新鲜期。",
-  "IGUI_SFL_Capacity": "当前容器基础容量：%1。",
-  "IGUI_SFL_TimeScope": "仅处理盒内直接放入的合格食品。补算前校验游戏时间记录；退出游戏期间的现实时间不计入。",
+  "IGUI_SFL_Capacity": "目前容量：%1。",
+  "IGUI_SFL_TimeScope": "僅處理盒內食品，不計退出遊戲的現實時間。",
   "IGUI_SFL_CraftRejected": "餐盒制作已在扣料前取消：%1",
   "IGUI_SFL_CraftReason_source": "原料餐盒不符合要求",
   "IGUI_SFL_CraftReason_not_empty": "请先清空原料餐盒",
@@ -25,5 +25,8 @@
   "IGUI_SFL_RottenRemovalLimit": "当前世界启用原版腐坏食品移除或该设置未知；本盒不处理已变质食品。",
   "IGUI_SFL_Unavailable": "餐盒返鲜未能加载，请重新载入存档。",
   "IGUI_SFL_Stopped": "餐盒返鲜已暂停，重新进入存档后会恢复。",
-  "IGUI_SFL_Error": "餐盒返鲜因错误已停止，请保存后重新载入存档。"
+  "IGUI_SFL_Error": "餐盒返鲜因错误已停止，请保存后重新载入存档。",
+  "IGUI_SFL_AttachmentReady": "返鲜餐盒已接入 %1 个现有背包底部挂点。",
+  "IGUI_SFL_AttachmentSkipped": "返鲜餐盒挂点适配已跳过：%1。原有挂点保持不变。",
+  "IGUI_SFL_AttachedGuardUnavailable": "餐盒挂点兼容暂不可用（%1 %2）。"
 }

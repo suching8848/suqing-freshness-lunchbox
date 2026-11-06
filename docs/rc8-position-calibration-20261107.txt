@@ -1,0 +1,31 @@
+返鲜餐盒rc.8：普通背包底部挂点位置校准
+2026-11-07，北京时间
+
+用户反馈与目标
+用户rc.7截图显示餐盒已能挂载并显示，但离背包底部过远；用户确认背包为“传奇背包（水）”。水是流体内容后缀，当前10色传奇背包均提供普通BedrollBottom；纹理附加包只替换PNG，不改变网格、骨骼或挂点。本次按该背包校准普通底部位。
+
+位置改动
+只将专用StaticModel的bedroll_bottom偏移从(0,-0.035,-0.12605)改为(0,-0.035,-0.04605)，即slot+Z上提0.08模型单位。朝向90/-90/0、模型scale0.4、深度Y=-0.035保持；Big和ALICE没有本次实机证据，参数保持原样。
+该参数属于共用的普通BedrollBottom，因此其他使用同一普通槽的背包也会采用新高度；不是只识别传奇背包的专属替换。不会新增槽位或更换背包原件。
+
+推导与限制
+截图中背包下缘／下垂带末端约y418–426，餐盒提把顶部约y469，餐盒整体高约72像素，原间隙约43–51像素。现有模型上方向尺寸约0.126128模型单位；0.08上提相当于其约63%，按这张图的自身尺寸估算约44–46像素，目标留少量间隔。
+当前RotateXYZ将餐盒mesh的+Y提把向上映射到slot+Z；两者再经过相同父矩阵，所以本次移动沿餐盒自身向上方向。没有根据截图猜测身体深度或缩放。
+像素范围是这张透视截图的估计，不是新版本的实机测量；遮挡、姿态、相机、人物模型和运动会影响结果。离线变换通过也不能证明不穿模。用户需重启后用同一背包确认贴合程度。
+
+保留内容
+rc.7车辆HashSet扫描修复、模型块注释注册修复、简短中英悬浮说明、食品返鲜、容器入口、升级／还原保护、实付账本、原物品ID、沙盒、手持／地面模型和所有贴图保持。
+物品脚本及全部Runtime／挂点／容器桥接与rc.7相同；Core只更新版本号。没有重新绘画、修改网格、改变水容量、负重或玩法参数。
+
+验证与交付
+完整原生模型文件注册／查找、三组attachment变换及普通位前后delta由离线工具核对；全部Lua编译、翻译键／占位符、与rc.7差异范围和冻结包内容校验。历史rc.7冻结包不回写。
+候选冻结与个人部署按各自回执记录，不能用准备时installed=false代替之后状态。用户最初要求先候选暂不部署，随后确认游戏退出并授权校验完成后直接部署。实际安装前还需复核进程与当前文件；部署不改启用名单、存档或配置，不上传工坊。
+源修改前归档：D:\GameBackups\ProjectZomboid\返鲜餐盒挂点位置校准_20261107_013444\source-rc7-before.zip，45文件逐成员SHA读回一致，SHA-256 1e8ef8e2158e43f82c9bbbe88e02881493bb370c5d47e2539e8ddc6fedf7751e。
+
+用户验收
+重启原正式档，确认新日志为rc.8；用同一传奇背包、同一视角重新挂载餐盒，比较背包底部和提把的间隙。检查正后方、侧面、走跑和蹲伏是否穿模；再确认容器取放、返鲜与升级记录保持。原版外挂负重、先卸下清空再升级／还原的要求不变。
+
+English
+rc.8 raises only the shared regular BedrollBottom lunchbox attachment by0.08 model units, calibrated from the user's Legendary Backpack screenshot. Depth, rotation, scale and the Big/ALICE profiles remain. The water suffix is fluid display, not another backpack or slot.
+The screenshot suggests a43–51px gap with a72px-tall box; the proposed delta corresponds roughly to44–46px in that image. This is an estimate, not a new game screenshot or guaranteed fit. Full native model registration/transform and file-preservation checks are offline only. Freshness, the vehicle Set fix, compact tooltips, inventory access, upgrade protection, IDs, meshes, textures and gameplay values remain.
+After authorized deployment and normal restart, compare the same backpack/view, then check side views, movement/crouch clipping and retained food/upgrade state. No game/world/UI acceptance is performed by the collaborator. Workshop upload is separate and not performed.

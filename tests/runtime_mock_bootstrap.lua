@@ -14,6 +14,19 @@ local function list()
         remove=function(self,item) for n,v in ipairs(self.items) do if v==item then table.remove(self.items,n);return true end end return false end}
 end
 Mock.list=list
+-- IsoCell.getVehicles is a Set in B42.21: deliberately expose no get(index).
+local function vehicleSet()
+    local result=list()
+    result.get=nil
+    result.iterator=function(self)
+        local i=0
+        return {hasNext=function() return i<#self.items end,
+            next=function() i=i+1;return self.items[i] end}
+    end
+    local add=result.add
+    result.add=function(self,item) if not self:contains(item) then add(self,item) end end
+    return result
+end
 function Mock.inventory(containing,parent)
     return {items=list(),capacity=4,containing=containing,parent=parent,
         getItems=function(self) return self.items end,getContainingItem=function(self) return self.containing end,
@@ -103,7 +116,7 @@ function Mock.vehicle(square)
     local p={vehicle=v,getVehicle=function(self) return self.vehicle end,getItemContainer=function(self) return self.inventory end}
     p.inventory=Mock.inventory();p.inventory.part=p;v.parts={p};Mock.vehicles:add(v);return v,p
 end
-Mock.process=list();Mock.vehicles=list()
+Mock.process=list();Mock.vehicles=vehicleSet()
 Mock.cell={getGridSquare=function(self,x,y,z) return Mock.grid[x] end,
     getProcessItems=function() return Mock.process end,getVehicles=function() return Mock.vehicles end,
     addToProcessItems=function(self,item) if not Mock.process:contains(item) then Mock.process:add(item) end end}
@@ -124,7 +137,7 @@ end}
 SandboxVars={DaysForRottenFoodRemoval=-1,SuQingFreshnessLunchbox={Enabled=true,BaseCapacity=4,RestoreHours=10,AllowRotten=true}}
 function Mock.reset()
     if SuQingFreshnessLunchbox and SuQingFreshnessLunchbox.Runtime then SuQingFreshnessLunchbox.Runtime.Stop() end
-    Mock.clock=100;Mock.paused=false;Mock.data={};Mock.grid={};Mock.players={};Mock.process=list();Mock.vehicles=list()
+    Mock.clock=100;Mock.paused=false;Mock.data={};Mock.grid={};Mock.players={};Mock.process=list();Mock.vehicles=vehicleSet()
     SandboxVars.DaysForRottenFoodRemoval=-1
     SandboxVars.SuQingFreshnessLunchbox={Enabled=true,BaseCapacity=4,RestoreHours=10,AllowRotten=true}
     if SuQingFreshnessLunchbox then SuQingFreshnessLunchbox.pending=setmetatable({}, {__mode="k"}) end

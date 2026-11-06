@@ -1,0 +1,33 @@
+Lua采样结果与第一轮性能修复 / Lua sample analysis and first performance fix
+2026-11-07，北京时间；个人部署完成时间01:51:09。
+
+采样证据
+用户约50秒开背包、50秒关背包、30秒暂停，之后正常退出。实际采样01:42:08至01:44:31，共2033个Lua命中；逐条计数之和2033，无每秒Top40截断。正常运行区间01:42:08–01:44:00为1946个Lua命中，其中冷藏调用链1413个，占72.61%。这是Lua命中的采样份额，不是CPU总占用、调用次数或精确毫秒。
+推定开背包内部区间01:42:10–01:43:07：冷藏737/1042=70.73%，12.71命中/秒；推定关闭区间01:43:10–01:43:59：628/838=74.94%，12.56命中/秒，InventoryPane调用从121降至0。说明UI减少后冷藏热路径仍在。没有点击时间戳，背包切换界线属于采样推断。暂停区间01:44:02–01:44:27冷藏命中0，且日志帧号f4077固定。
+返鲜冰箱正常段仅2命中，返鲜餐盒Runtime31命中。不能把同名Core.lua及其调用者重复相加；最多3层调用链也限制了入口归属。
+
+修复范围
+当前冷藏升级1.0.0-rc.2-perf.1每次结算都会经过返鲜餐盒兼容wrapper。旧版对没有餐盒记录的普通冷藏食品仍查容器、餐盒状态、完整桥接链，并pcall/pack分配结果表。新餐盒0.1.0-rc.8-perf.1让不建立写入作用域的调用直接委托原函数；真正的餐盒作用域仍使用protected call并恢复原scope。
+保留懒捕获、版本门禁、嵌套恢复、参数和含nil的返回值及异常传播。快速路径报错少一次wrapper重新抛出的行号前缀，没有吞错。未改冷藏主逻辑或结算频率，没有跨帧缓存。保鲜、温度、返鲜、原物品/存档结构、rc.8挂点、模型和贴图保持。
+这是已观察热点中的一项明确额外开销；不能据此宣称冷藏主体成本消失或承诺FPS涨幅。
+
+离线验证
+完整运行/组合回归：7个Lua编译、48场景、2472断言PASS，包含模拟运行和真实Food方法级组合；没有启动客户端、创建/载入世界或代做玩法测试。
+专项回归：候选12场景283断言PASS；旧rc.8基线12场景258断言PASS，覆盖无记录/非活动/busy、坏链/版本/归属、多返回、错误、已有/嵌套scope、懒捕获。
+1000次普通食品委托：getContainer、getContainingItem、BoxState、CoolingBridgeReady、pcall由各1000次变为0；FoodRecord查询和真实前置委托仍各1000次。这是调用计数，不是实机FPS。
+
+状态与恢复
+源码：D:\steam\steamapps\common\ProjectZomboid\CodexRepos\suqing-freshness-lunchbox
+个人运行：C:\Users\15792\Zomboid\mods\SuQingFreshnessLunchbox
+仅改运行包3文件：42/media/lua/shared/SuQingFreshnessLunchbox/Core.lua、42/mod.info、common/README.txt；其余40文件哈希不变。冷藏升级及返鲜冰箱文件、名单、存档配置、启动器和画质配置在部署前后核对不变。没有覆盖用户后来完成的rc.8挂点调整。
+临时luaProfile已移除，PZO options.ini字节哈希与采样前原件完全一致。新采样保留在本记录父目录的capture_20261107_014500。未提交Git，未上传工坊。
+冻结包、逐文件哈希和校验回执在本目录，deployment.json记录精确部署内容。before/deployed仅为这3个文件的恢复材料，不是完整存档。需要回退时正常退出，先核对当前文件是否已有后续修改，再精确恢复对应3文件；不恢复旧存档或整份旧配置。
+
+用户复测
+照常进入同一存档、同一地点与缩放，按F9查看，分别开背包/关背包运行约30–50秒。比较稳定FPS及p50帧时间，再检查冷藏/返鲜正常。无需重新跑Benchmark。实际FPS与玩法验收待用户反馈；后续若仍低，再针对剩余主结算成本采样与优化。
+
+English
+The current capture contains2033 Lua hits, with all listed counts preserved. Cooling chains account for1413/1946 (72.61%) of unpaused Lua hits, and persist after inventory panes disappear. These are sampled stack shares, not total CPU percentages or exact timing. Inventory transition times are inferred; pause is corroborated by the fixed game frame counter.
+The first conservative fix is in the lunchbox cooling bridge: calls that establish no lunchbox write scope delegate directly. Actual scoped calls retain protected execution/restoration, gates, lazy capture, errors and nil return values. The cooling mod, settlement cadence, food rules, save schema and rc.8 attachment assets remain unchanged.
+Full offline checks pass7 Lua files,48 cases and2472 assertions. Focused checks pass12 cases/283 assertions for the candidate and12/258 for the reference. For1000 ordinary calls, unrelated container/bridge/protected-call operations fall from1000 each to0, while original delegation remains1000. These counts do not predict FPS.
+Personal rc.8-perf.1 is deployed:3 files replaced and40 preserved, with frozen ZIP member hashes read back. No game/world test, Git commit or Workshop upload was performed. The temporary luaProfile key is removed and the PZO config exactly matches its original hash. Recovery materials cover only the3 changed mod files, never the save. Same-scene user FPS and food-behavior acceptance remain pending.

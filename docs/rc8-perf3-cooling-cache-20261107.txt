@@ -1,0 +1,41 @@
+冷藏性能优化交付 / Cooling performance delivery
+2026-11-07，北京时间；正式模组部署02:53:26，复测采样准备时间见diagnostics/preparation-receipt.json。
+
+当前版本与路径
+冷藏升级：1.0.0-rc.2-perf.3
+源码：E:\code\suqing-refrigeration-upgrade
+个人运行：C:\Users\15792\Zomboid\mods\SuQingRefrigerationUpgrade_4221
+返鲜餐盒：0.1.0-rc.8-perf.3，仅同步已审阅冷藏版本门禁及说明，保留rc.8挂点和既有修复。
+源码：D:\steam\steamapps\common\ProjectZomboid\CodexRepos\suqing-freshness-lunchbox
+个人运行：C:\Users\15792\Zomboid\mods\SuQingFreshnessLunchbox
+
+实现
+1. 直接容器分组缓存完整冷藏状态，最多1游戏分钟。公开Cooling、ScanItem、ScanContainer、转移、Toggle及保存仍使用严格入口；已知状态变化即时失效。缓存不保存到ModData。
+2. 每Tick仍执行必要nativeAge、年龄封顶、冻结／解冻和lastAged保护，但共享本批配置与相同起止时段的积分，不再每食品重复完整查背包与支付凭据。
+3. 物品栏纯绘制在已审阅原版／CleanUI2.10.4及配套包装器范围内，可复用同世界时刻已结算结果。年龄、热量、lastAged、容器、record标量和epoch全相同，期限最多500真实ms；实际操作/未知来源严格即时。以后renderer替换或版本未知则停用复用，不覆盖他人新函数。
+4. 兜底发现每真实秒尝试发起，pending队列不重启，按每帧32项或约1ms预算前进；加载前process列表变化的严格保护保留。
+5. 放入／取出及整包子树在转移前后清算；转移失败也尝试结清实际落点，并传播原错误。保存强制清算，失败报告且恢复完成时间，batch/busy/memo在异常路径清理。
+
+测试证据与边界
+旧冷藏业务／制作32场景365断言、原生配方36断言及真实Food240世界时间方法推进全部通过（7个Lua模块加载/编译，未启动客户端）。
+StateCache17场景654断言；显示context30场景112断言；Runtime新特性14场景91断言；独立review13场景61断言；三个支持版本的餐盒门禁各17场景501断言。餐盒组合mock31/267、三模组组合4/24、原生方法13/2181通过。详细原报告路径见validation-index.json。
+571食品／6容器／8历史／8Tick的真实当前PZO解释器模型：nativeAge4568→4568，完整Cooling4568→6，Config4576→8，Integral4568→8；全部571项Age/Heat/LastAged最大差0。这里是方法／模型计数，不是游戏FPS实测。
+原生0/2.5/20/100%、冷冻、保存读回与20h时间跳变可执行输出与perf1一致。删除策略的无世界方法探针在双方移出容器后触及相同边界；完整世界删除、玩法和UI仍待用户验收。
+未知外部代码绕过事件修改背包状态，最多在一分钟复核时更新；公共严格查询仍即时。轮询不能证明未知转移时点，不宣称全面外部模组兼容。模型计数不能推断具体涨帧。
+
+部署与保护
+冷藏27文件逐项匹配冻结包：覆盖4文件、新增StateCache/Display两Lua，其余21不变。餐盒43文件匹配：覆盖Core/mod.info/commonREADME三文件，其余40不变。
+原存档、两份启用名单、沙盒、启动器、画质和返鲜冰箱文件部署前后哈希保持。没有启动或操作游戏，没有提交Git或上传工坊；已有其他源码脏改保留。
+临时采样为下一次用户验收准备：luaProfile=true、overlayLog=true，另加一个只读临时logger，记录缓存命中/严格查询、显示复用是否启用、EWMA/食品数量。它不在冻结包/发行源码中，不包装结算函数；13场景170断言通过，实际输出待用户启动。
+
+复测
+照常启动原档，同一地点和缩放，显示F9；稳定约10秒后开背包50秒、关背包50秒、暂停30秒并正常退出，告知协作者读取新日志。随后可检查取放1件食物、冷藏开关与保存重进。实机FPS和游戏功能均由用户操作验收。
+
+恢复
+before/installed含仅7份被覆盖模组文件；两新增永久Lua的原状态为不存在。backup收据不是完整存档备份。回退须正常退出，核对deployment.json与当前hash，先保留后续改动，再仅恢复对应7文件并移除本次2个新增Lua；不套用旧存档/配置/名单。
+临时采样有独立before配置和hash；采集后只移除其标记块与临时logger，不能把永久StateCache/Display一起清理。后续已有修改时按内容精确处理，不盲跑旧回滚脚本。
+
+English
+Cold perf.3 and lunchbox rc.8-perf.3 are personally deployed and frozen, with exact member/hash readback. State checks are cached per container for one game minute and invalidated by known events; native per-Tick food protection remains. Transfers/actions/save use strict settlement. Audited display-only requests may reuse an unchanged same-world-time settlement for at most500ms. Discovery is bounded to32 entries/about1ms per frame without restarting pending work.
+The571-food model keeps4568 native calls while reducing full Cooling4568→6, Config4576→8 and Integral4568→8, with zero Age/Heat/LastAged difference. Offline unit, event, native-method and combination checks pass; this is not a measured FPS result. Full-world deletion/UI/gameplay acceptance remains with the user. Unknown foreign state edits can take up to the state-review interval to appear.
+Only7 installed files were overwritten and2 permanent Lua files added; unrelated mod assets, lists, saves and graphics were preserved. No client/world test, Git commit or Workshop upload occurred. Temporary post-deployment diagnostics are separately prepared and excluded from release packages. Recovery is limited to the exact changed files and hashes; never restore a save or unrelated settings. User should repeat the same scene/open-close-pause capture, then remove only the temporary instrumentation after preserving outputs.

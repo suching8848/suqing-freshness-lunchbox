@@ -1,0 +1,49 @@
+蘇清的返鲜餐盒：背包底部挂点候选 / Backpack Bottom Attachment Candidate
+版本 / Version: 0.1.0-rc.6 — 2026-11-07，北京时间 / BJT
+
+当前状态
+按用户要求完成开发、离线验证及候选准备；未部署个人目录，未修改启用名单、存档或用户配置，未Git提交／推送，未上传工坊。
+个人安装和最近已核验的私有工坊上传仍为rc.5；本包是新的rc.6离线候选，不能把rc.5上传回执当作rc.6已发布证明。
+源码：D:\steam\steamapps\common\ProjectZomboid\CodexRepos\suqing-freshness-lunchbox
+个人目录（本轮未写入）：C:\Users\15792\Zomboid\mods\SuQingFreshnessLunchbox
+源码变更前完整归档：D:\GameBackups\ProjectZomboid\返鲜餐盒挂点开发_20261107_005123\source-before.zip
+原始文件与ZIP逐成员SHA-256读回一致；归档SHA-256：A11664B297F31BF7CA23D088983BC6BB4E772B4E8F7BDC0321E51C5567C2CE0D。
+
+本候选功能
+只使用已有普通／大型／ALICE背包底部睡袋与帐篷位（BedrollBottom、BedrollBottomBig、BedrollBottomALICE）。当前传奇背包和BackpackSystem提供相应位置时可用；未提供底部位的背包不增加槽。餐盒与原帐篷或睡袋共用位置，槽位替换和卸下由原生热栏处理。
+独立餐盒AttachmentType及StaticModel，复用原有网格／材质，新增三个物品侧锚点；左右手模型、地面模型、轮廓和美术保持。位置参数来自实际网格尺寸与原生锚点离线校准，尤其大型／ALICE的实际穿模仍待实机。
+只有人物主物品栏里真实挂载的餐盒获得容器按钮；卸下、换包和刷新不会产生重复入口。盒内食品和原物品保持，返鲜继续按原有时间与所有权规则工作。
+普通容器升级1.0.3新增餐盒挂载状态保护：挂着时不能强化或还原；必须先卸下、移出双手并清空。其他容器和EX严格制作链不变，原材料、实付账本和50%返料规则保留。
+外挂负重按当前原生普通挂载路径计算，通常为（餐盒自重＋食品重量）×0.7；这一路径不使用手持／穿戴容器的减重参数，也不叠加背包减重。已有升级容量及减重数值不丢失，但挂载时不会因此获得额外减重优惠。
+已有餐盒重载后从当前脚本获得外挂类型与模型，无需重新制作或迁移ModData。外部模组已显式设置的staticModel/modelIndex覆盖按原生规则保留，不强行改写。
+
+离线验证边界
+包括当前Kahlua编译与真实热栏定义、三类位置及幂等／缺失／冲突边界、容器入口与所有权、原生已装备／外挂差异、真实普通升级API及付款前重检、既有EX严格制作链、三组模型TRS与原生Item.Load／ModelScript解析、中英资源和未涉及文件保留。
+结果位于：D:\steam\steamapps\common\ProjectZomboid\CodexAssets\SuQingFreshnessLunchbox_Attachments_20261107\validation
+模型推导与明确标为离线的示意位于同目录下model-study。
+未启动游戏／世界／角色／OpenGL，也未操作用户当前游戏。离线通过不等于原生装卸、渲染、动画、负重显示或存档重载已实测。
+
+后续游戏内验收（由用户操作；本轮不部署）
+1. 后续获准部署时先正常退出游戏，按当前安装重新确认同ID发现来源。首次启动核对日志版本为rc.6；如果仍显示旧版，先排查同ID的Workshop上传准备目录，不反复覆盖存档或重制物品。
+2. 穿有底部挂点的背包，在原生热栏／挂载菜单选择返鲜餐盒。分别试普通、大型、ALICE槽；无对应位置的背包不应凭空出现挂点。
+3. 先挂帐篷／睡袋，再换餐盒，确认原挂件按原生流程卸下且没有丢失或重复。再反向替换。
+4. 挂载餐盒装入食品，确认容器按钮只有一个，可正常取放食品、切换返鲜；经过游戏时间后食品年龄按原机制变化。
+5. 检查静止、走路、跑步、蹲伏及普通／Viewpoint一三人称下的方向、大小、穿模。三种背包分别确认。
+6. 空餐盒挂着时尝试普通强化／还原，应拒绝且不扣料、不改账本。卸下并清空后强化应正常；再次挂上容量和已有记录保留。
+7. 更换／卸下背包、改为左右手提握、放地面后取回，确认餐盒、食品、返鲜开关和容器入口正确。
+8. 记录挂载前后负重，按原生外挂规则判断，不将手持状态减重比例套到外挂状态。
+9. 保存并正常退出、重进，核对挂载位置、食品、返鲜状态和升级账本保留；顺带确认原有手持与地面轮廓。
+
+Current state
+Development, offline verification and candidate preparation only. Not deployed to personal mods, not uploaded, no enable-list/save/settings changes and no Git commit/push. The personal and latest verified private Workshop versions remain rc.5; this is an rc.6 offline candidate.
+
+Behavior
+Uses existing normal, large and ALICE backpack bottom bedroll/tent slots only. Shares the original slot with its tent/bedroll and uses native hotbar replacement/removal. No mandatory backpack mod dependency or new slot. Dedicated attachment type and attached model reuse current geometry/material with three calibrated anchors; existing hand/ground assets remain.
+An actually attached, main-inventory-owned lunchbox gains one container button for food access and its existing freshness restoration. Ordinary Container Upgrades 1.0.3 requires detaching, unhanding and emptying before upgrading/restoring; payment records, other containers and the EX crafting chain remain.
+Current native attached weight normally uses (box weight + contents weight) * 0.7. It does not apply hand/worn-container WeightReduction or stack backpack reduction. Paid capacity/reduction values stay recorded. Existing boxes obtain current script attachment/model declarations on reload without recrafting or data migration; explicit foreign model overrides remain respected.
+
+Acceptance
+After a separately authorized deployment and normal exit/restart, confirm rc.6 in the new log. Test the three bottom slot types, existing tent/bedroll replacement, one usable container button, food access/freshness, detach-before-upgrade with no payment on rejection, backpack changes, both hands, ground pickup and save/reload. Check normal/Viewpoint visuals and movement/crouch clipping. Offline parser/geometry/mock results do not establish gameplay or rendering acceptance. No game/world/character/OpenGL was started for these checks.
+
+Recovery
+Personal installation was not changed, so no personal rollback is required. Source recovery material is the verified source-before.zip above. Before restoring source, inspect later changes and extract to an independent directory; do not overwrite later progress or copy this source archive over user saves/configuration. Historical rc.5 releases remain untouched.

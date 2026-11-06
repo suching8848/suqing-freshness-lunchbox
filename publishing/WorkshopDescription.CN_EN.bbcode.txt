@@ -24,7 +24,12 @@
 左右手与地面模型由原版餐盒资源独立衍生，封面和小图标为分别制作的系列美术。
 [b]Mod ID：SuQingFreshnessLunchbox[/b]
 
-[hr][/hr]
+[h2]0.1.0-rc.8-perf.8 更新[/h2]
+合并已部署的背包底部挂点、车辆Set迭代、模型注册和简短提示修复，并保留普通底部位上提0.08的rc.8校准。使用背包已有普通／大型／ALICE睡袋或帐篷位，与原物品共用，不新增槽位或强制背包前置。挂载时保留食品取放与返鲜；普通容器升级／还原前须卸下并清空。精确支持已审冷藏perf.1–8，普通冷藏食品跳过无关餐盒写入scope，保留需要保护的食品及全部钩子身份检查。
+
+原生模型与车辆集合、挂点及冷藏组合离线检查已通过；用户已反馈rc.7模型可显示。rc.8精确贴合、动画、Viewpoint、特殊装备转换与完整保存重进仍需用户验收。餐盒返鲜规则、ID、保存记录和已选封面／图标保持，不新增Java依赖；可选原生接管属于冷藏主模组的独立补丁。
+
+[hr]
 
 [h1]SuQing's Freshness Lunchbox[/h1]
 Smells good—dig in! A portable food container that gradually restores freshness. Carry it in either hand or keep it in a bag, furniture, vehicle or loaded ground storage. No batteries or power are needed. Eligible food restores together.
@@ -51,3 +56,8 @@ Capacity 4, weight 1.0, weight reduction 50%. Separate settings: restoration ena
 [/list]
 Held and ground models are independently derived from vanilla lunchbox assets. Cover and small icons are separately created series artwork.
 [b]Mod ID: SuQingFreshnessLunchbox[/b]
+
+[h2]0.1.0-rc.8-perf.8 update[/h2]
+Includes the deployed backpack-bottom attachment, vehicle Set iteration, model-registration and concise-tooltip fixes, retaining rc.8’s0.08 upward adjustment of the regular bottom slot. Uses an existing normal/large/ALICE bedroll or tent slot, shared with its original item, without new slots or a mandatory backpack mod. Attached food access/restoration remain; detach and empty before ordinary upgrades/restoration. Supports exactly audited Coolingperf.1–8, avoiding unrelated lunchbox write scopes for ordinary cold food while preserving protected-food scopes and every hook-identity check.
+
+Offline native model/vehicle-collection, attachment and Cooling combination checks pass; the user reported the rc.7 model displaying. Exact rc.8 fit, animations, Viewpoint, special equipment conversion and complete save/reload still need user acceptance. Lunchbox restoration rules, IDs, save records and selected cover/icon remain; no Java dependency is added. Optional native takeover belongs to the refrigeration base’s separate companion.

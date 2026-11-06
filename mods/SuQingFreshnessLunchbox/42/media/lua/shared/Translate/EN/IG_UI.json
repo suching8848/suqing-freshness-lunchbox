@@ -6,8 +6,8 @@
   "IGUI_SFL_Off": "Freshness restoration is disabled for this lunchbox.",
   "IGUI_SFL_GlobalOff": "Freshness restoration is disabled in sandbox settings.",
   "IGUI_SFL_Rate": "One fresh-life interval per %1 game hours.",
-  "IGUI_SFL_Capacity": "Current base container capacity: %1.",
-  "IGUI_SFL_TimeScope": "Only eligible directly stored food is restored. Recorded game-time intervals are verified before catch-up; real-world offline time is not counted.",
+  "IGUI_SFL_Capacity": "Capacity: %1.",
+  "IGUI_SFL_TimeScope": "Box contents only; real time outside the game never counts.",
   "IGUI_SFL_CraftRejected": "Lunchbox crafting cancelled before payment: %1",
   "IGUI_SFL_CraftReason_source": "invalid source lunchbox",
   "IGUI_SFL_CraftReason_not_empty": "empty the source lunchbox first",
@@ -25,5 +25,8 @@
   "IGUI_SFL_RottenRemovalLimit": "This world enables native rotten-food removal or its value is unknown; this box does not restore already rotten food.",
   "IGUI_SFL_Unavailable": "Lunchbox freshness restoration could not load. Reload the save.",
   "IGUI_SFL_Stopped": "Lunchbox freshness restoration is paused. It resumes when the save is loaded again.",
-  "IGUI_SFL_Error": "Lunchbox freshness restoration stopped after an error. Save and reload to try again."
+  "IGUI_SFL_Error": "Lunchbox freshness restoration stopped after an error. Save and reload to try again.",
+  "IGUI_SFL_AttachmentReady": "Freshness lunchbox supports %1 existing backpack bottom attachment types.",
+  "IGUI_SFL_AttachmentSkipped": "Freshness lunchbox attachment integration skipped: %1. Existing attachment slots are unchanged.",
+  "IGUI_SFL_AttachedGuardUnavailable": "Lunchbox attachment compatibility is unavailable (%1 %2)."
 }

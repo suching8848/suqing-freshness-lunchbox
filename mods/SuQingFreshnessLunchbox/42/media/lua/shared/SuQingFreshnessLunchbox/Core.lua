@@ -3,7 +3,7 @@ SuQingFreshnessLunchbox=SuQingFreshnessLunchbox or {}
 local C=SuQingFreshnessLunchbox
 if C.coreLoaded then return C end
 C.coreLoaded=true
-C.version="0.1.0-rc.5"
+C.version="0.1.0-rc.8-perf.8"
 C.FullType="SuQingFreshnessLunchbox.FreshnessLunchbox"
 C.boxKey="SuQingFreshnessLunchbox"
 C.foodKey="SuQingFreshnessLunchboxFood"
@@ -150,12 +150,18 @@ end
 -- The audited optional refrigeration mod uses Lua setAge even when applying
 -- ordinary forward aging. Its exact supported version and captured hook slots
 -- delimit this narrow scope; unrelated setters still mark an external edit.
+local function supportedCoolingVersion(version)
+    return version=="1.0.0-rc.2-perf.1" or version=="1.0.0-rc.2-perf.2"
+        or version=="1.0.0-rc.2-perf.3" or version=="1.0.0-rc.2-perf.4"
+        or version=="1.0.0-rc.2-perf.5" or version=="1.0.0-rc.2-perf.6"
+        or version=="1.0.0-rc.2-perf.7" or version=="1.0.0-rc.2-perf.8"
+end
 function C.CoolingBridgeReady()
     local b=C.coolingBridge
     if not b then return false end
     local cold=SuQingRefrigeration
     local r=cold and cold.Runtime
-    return cold==b.core and cold.version=="1.0.0-rc.2-perf.1" and r==b.runtime
+    return cold==b.core and supportedCoolingVersion(cold.version) and r==b.runtime
         and r.Settle==b.wrapper and r.ready==true and r.hooksInstalled==true
         and b.index.updateAge==r.ageWrapper and r.ageWrapper==b.ageWrapper
         and r.nativeAge==b.nativeAge and C.AgeHookReady() or false
@@ -173,7 +179,7 @@ function C.InstallCoolingBridge()
     local cold=SuQingRefrigeration
     local r=cold and cold.Runtime
     if not cold or not r then return false,"absent" end
-    if cold.version~="1.0.0-rc.2-perf.1" or type(r.Settle)~="function" or type(r.Cooling)~="function"
+    if not supportedCoolingVersion(cold.version) or type(r.Settle)~="function" or type(r.Cooling)~="function"
         or type(r.SyncConfig)~="function" or type(r.Integral)~="function" or type(r.busy)~="table" then
         return false,"unsupported_cooling_version"
     end
@@ -188,16 +194,22 @@ function C.InstallCoolingBridge()
         if not b.ageWrapper and r.ready and r.hooksInstalled and index.updateAge==r.ageWrapper then
             b.ageWrapper=r.ageWrapper;b.nativeAge=r.nativeAge
         end
-        local previous=C.coolingWrites[food]
         local record=C.FoodRecord(food)
-        local inventory=C.IsFood(food) and food:getContainer()
+        -- Ordinary cold-bag food has no lunchbox record and needs no write
+        -- scope. Delegate without container checks or a protected result table;
+        -- any enclosing scope is left untouched, including on errors.
+        if not record or not record.active or r.busy[food] then
+            return b.prior(food,time,...)
+        end
+        local inventory=food:getContainer()
         local box=inventory and inventory.getContainingItem and inventory:getContainingItem()
         local state=C.BoxState(box)
-        if C.CoolingBridgeReady() and not r.busy[food] and record and record.active and state
-            and C.IsDirectFood(food,box) and record.boxId==state.id
-            and record.boxItemId==tostring(box:getID()) then
-            C.coolingWrites[food]={record=record,box=box,entryAge=food:getAge()}
+        if not state or not C.CoolingBridgeReady() or not C.IsDirectFood(food,box)
+            or record.boxId~=state.id or record.boxItemId~=tostring(box:getID()) then
+            return b.prior(food,time,...)
         end
+        local previous=C.coolingWrites[food]
+        C.coolingWrites[food]={record=record,box=box,entryAge=food:getAge()}
         local result=pack(pcall(b.prior,food,time,...))
         C.coolingWrites[food]=previous
         if not result[1] then error(result[2]) end
