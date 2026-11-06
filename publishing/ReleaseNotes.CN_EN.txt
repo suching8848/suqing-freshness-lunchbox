@@ -1,0 +1,6 @@
+0.1.0-rc.5 — 待发布 / Prepared, not published
+中文：独立食品返鲜餐盒、两条原生配方、单手提握与独立沙盒。保留普通容器升级的可选支持；本候选增加按实际模型投影的地面备用贴图，保留背包图标。新轮廓仅离线核对，旋转与相机贴合仍待用户验收。已有餐盒重进即可，无需重做。
+English: Portable freshness-restoring food container with two native recipes, either-hand appearance and separate sandbox settings. Optional ordinary Container Upgrades support is retained. This candidate adds a model-projected fallback ground sprite while keeping the inventory icon. The new outline is checked offline; rotation/camera alignment needs user acceptance. Existing boxes need only a normal reload.
+
+发布资料修订：同步用户修改的中英开场文案，运行代码未变。
+Publication copy revision: synchronized the user-edited opening copy in both languages; runtime code unchanged.

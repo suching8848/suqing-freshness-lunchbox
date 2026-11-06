@@ -1,0 +1,7 @@
+{
+  "tool": "built-in imagegen",
+  "prompt": "Use case: precise-object-edit. Asset type: transparent inventory-item icon for SuQing's Freshness Lunchbox. Use the input image as the exact lunchbox design target. Isolate ONLY the ivory-and-lavender handled lunchbox with its gold clasp and gold time emblem, preserve the object's shape, perspective, white/lavender colors and crisp game-item illustration. Remove the red apple, separate upper-right floating rewind clock badge, purple background, border and background shadows entirely. Output one centered complete lunchbox cutout on genuinely transparent background, generous safe padding, no text or numerals or watermark, no additional props. Strong clean silhouette readable at48/64 pixels. Do not crop handle or corners. Preserve only the subtle object's own shading, no ground plane.",
+  "generated_original": "C:\\Users\\15792\\.codex\\generated_images\\01a1abf3-a00f-72f1-a96a-93db4fce4ecc\\exec-666a95d2-6b73-442e-81ca-e23ff4a3ac5e.png",
+  "project_source": "art/item-icon-source.png",
+  "purpose": "Transparent item icon derived from the independently generated dedicated lunchbox design; not a cover thumbnail."
+}

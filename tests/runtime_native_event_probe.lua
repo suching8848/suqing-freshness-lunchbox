@@ -1,0 +1,12 @@
+local C=SuQingFreshnessLunchbox;local R=C.Runtime
+assert(type(triggerEvent)=='function','actual native event dispatcher')
+triggerEvent('OnGameStart')
+print('NATIVE_EVENT_AFTER_START','ready',tostring(R.ready),'errors',tostring(R.stats.errors),'timeline',type(R.timeline))
+assert(R.ready,'runtime should start on actual native OnGameStart')
+triggerEvent('OnTickEvenPaused')
+assert(R.ready,'runtime should survive native tick event')
+triggerEvent('OnMainMenuEnter')
+assert(not R.ready,'runtime stops at native main-menu event')
+triggerEvent('OnGameStart')
+assert(R.ready,'runtime restarts at native game-start event')
+print('NATIVE_EVENT_LIFECYCLE PASS')

@@ -1,0 +1,7 @@
+{
+  "tool": "imagegen",
+  "reference": "art/lunchbox-texture-final-v2.png",
+  "prompt": "Use case: precise-object-edit. Target is the flat game UV texture atlas. Make only a tiny edge-bleed correction to the LOWER-LEFT CLOCK PANEL: extend its pale lavender outer border all the way to the LEFT CANVAS EDGE and BOTTOM CANVAS EDGE, eliminating the remaining black margin beside and below that panel. Precise original128px UV coordinates: fill x0..3,y88..127 with neighboring pale lavender, and fill y126..127,x0..65 with neighboring pale lavender, connecting seamlessly to the existing panel border. Do not shift, crop, resize or redraw the gold clock face or any other design. Keep the gold clock, ivory center, all upper panels and handle, right rewind badge, and lavender lower-right island unchanged. The lower-left clock panel should have no black gap between its outer lavender edge and the left/bottom image edges. Keep dark unused background in the upper half exactly as is. Output the exact same flat square atlas coordinate layout, no scene, no text, no UV lines.",
+  "output": "art/lunchbox-texture-final-v3.png",
+  "generated_source": "C:/Users/15792/.codex/generated_images/01a1abf3-a00f-72f1-a96a-93db4fce4ecc/exec-82e5a901-e419-44ad-8a27-503efc17e1dc.png"
+}

@@ -1,0 +1,132 @@
+[
+  {
+    "file": "art/cover-source.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "format": "PNG",
+    "mode": "RGB",
+    "sha256": "2b5eadda8952ee914e5de108da1cc4a4c5e80ab9f113f9cc8ab776a968d59a6a"
+  },
+  {
+    "file": "art/item-icon-source.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "format": "PNG",
+    "mode": "RGBA",
+    "sha256": "3274659dce481886032c0b826ab7608ce5520b9e5b67a176b43a4c35ec9bed26"
+  },
+  {
+    "file": "art/lunchbox-texture-final-v2.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "format": "PNG",
+    "mode": "RGB",
+    "sha256": "45b638387b4a32bf321d1877bce849bd7fc0f741f3f3f9708c16d7eb39125f66"
+  },
+  {
+    "file": "art/lunchbox-texture-final-v3.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "format": "PNG",
+    "mode": "RGB",
+    "sha256": "fa0bd5c1c2276ebbccf9b55cec07d108636803df1871eba0215e5acc87bcca47"
+  },
+  {
+    "file": "art/lunchbox-texture-final.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "format": "PNG",
+    "mode": "RGB",
+    "sha256": "4d26c10a3c82c0594f84a53ac67dc787edc044101beb7d66b54097c965a87903"
+  },
+  {
+    "file": "art/lunchbox-texture-source.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "format": "PNG",
+    "mode": "RGB",
+    "sha256": "14da61d3eea683fb675d68afa94940ef41a6562ccd87cbd9df4505d4b7f429aa"
+  },
+  {
+    "file": "art/mod-icon-source.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "format": "PNG",
+    "mode": "RGB",
+    "sha256": "5c68b0b83f628c3ebc9e6ea2e493a06f3f82c686707a47629a644ad315409f2c"
+  },
+  {
+    "file": "art/icon-exports/item-icon-128.png",
+    "size": [
+      128,
+      128
+    ],
+    "format": "PNG",
+    "mode": "RGBA",
+    "sha256": "c361c64b87cdecc55bf67f1c46a7497e6ef1523be93b052700446087701abca7"
+  },
+  {
+    "file": "art/icon-exports/item-icon-32.png",
+    "size": [
+      32,
+      32
+    ],
+    "format": "PNG",
+    "mode": "RGBA",
+    "sha256": "e20b8887a7b7dac431d4836fdf2d6948b8c6e66a4f60feb38da3436636ae673e"
+  },
+  {
+    "file": "art/icon-exports/item-icon-64.png",
+    "size": [
+      64,
+      64
+    ],
+    "format": "PNG",
+    "mode": "RGBA",
+    "sha256": "828614d170f00beb5f28665e871bde3ff205d89b290039514a75a80835649651"
+  },
+  {
+    "file": "art/icon-exports/mod-icon-128.png",
+    "size": [
+      128,
+      128
+    ],
+    "format": "PNG",
+    "mode": "RGBA",
+    "sha256": "bea52933c046e7e0d9099bd6d7145e8d2273140a639c772baea06c59910d1d00"
+  },
+  {
+    "file": "art/icon-exports/mod-icon-256.png",
+    "size": [
+      256,
+      256
+    ],
+    "format": "PNG",
+    "mode": "RGBA",
+    "sha256": "3d3d32d8444a00e3ee1a34e61b28349c5b416f1f87a64048d0af9196cc3aabcd"
+  },
+  {
+    "file": "art/icon-exports/mod-icon-64.png",
+    "size": [
+      64,
+      64
+    ],
+    "format": "PNG",
+    "mode": "RGBA",
+    "sha256": "0ef0606f18aaa9c243f0c612b81df2309d388669aa54b1e1946d4c0630b4da36"
+  }
+]

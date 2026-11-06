@@ -1,0 +1,17 @@
+蘇清的返鲜餐盒 / SuQing's Freshness Lunchbox 0.1.0-rc.5
+地面轮廓修正验收 / Ground-outline acceptance
+
+本轮只修地面回退图像。背包icon、模型/骨骼/纹理、物品ID、配方、Lua返鲜和容器升级规则不变。
+Only the ground fallback image changes. Inventory art, models, item IDs, recipes, freshness Lua and upgrade rules are retained.
+
+1. 正常重启游戏，读取原正式档。使用已有餐盒，无需重新制作。
+   Restart normally and load the existing save; keep the existing lunchbox.
+2. 将餐盒放地，鼠标悬停/选中，检查轮廓是否更接近薄餐盒，而非原正面提手箱图标；检查尺寸、落地点、边缘是否明显偏移。
+   Drop and highlight it. Compare the thin-case silhouette, size, ground anchor and edge alignment.
+3. 使用摆放/旋转后再比较，必要时保存重进。固定yaw=0回退图不保证所有旋转、扩展摆放与相机偏移均逐像素吻合；记录实际未贴合角度。
+   Compare rotated/extended placements and reload. The fixed-yaw fallback is approximate; note any remaining angle/camera mismatch.
+4. 背包icon保持原样。确认餐盒仍可单手提握、食品正常返鲜、升级容量保留。
+   Confirm the inventory icon, single-handed appearance, restoration and upgraded capacity are retained.
+
+离线检查不等同于游戏内画面验收；由用户操作游戏。
+Offline checks do not replace the user's gameplay/visual acceptance.

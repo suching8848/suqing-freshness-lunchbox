@@ -1,0 +1,17 @@
+{
+  "cover_source": "D:\\steam\\steamapps\\common\\ProjectZomboid\\CodexRepos\\suqing-freshness-lunchbox\\art\\cover-source.png",
+  "cover_source_sha256": "2b5eadda8952ee914e5de108da1cc4a4c5e80ab9f113f9cc8ab776a968d59a6a",
+  "preview": {
+    "file": "preview.png",
+    "size": [
+      512,
+      512
+    ],
+    "bytes": 621554
+  },
+  "icon_source": "D:\\steam\\steamapps\\common\\ProjectZomboid\\CodexRepos\\suqing-freshness-lunchbox\\art\\mod-icon-source.png",
+  "independent_icon": true,
+  "cover_content_changed": false,
+  "cover_text_game_version": false,
+  "exports_only_no_image_regeneration": true
+}

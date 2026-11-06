@@ -1,0 +1,49 @@
+{
+  "registered_on_bjt": "2026-11-06",
+  "title_zh": "蘇清的返鲜餐盒",
+  "title_en": "SuQing's Freshness Lunchbox",
+  "source_path": "D:/steam/steamapps/common/ProjectZomboid/CodexRepos/suqing-freshness-lunchbox",
+  "artifact_path": "D:/steam/steamapps/common/ProjectZomboid/CodexAssets/SuQingFreshnessLunchbox_20261106_rc4",
+  "main_mod_id": "SuQingFreshnessLunchbox",
+  "main_dependencies": [],
+  "mod_ids": [
+    "SuQingFreshnessLunchbox"
+  ],
+  "optional_integration": {
+    "provider_mod_id": "SuQingContainerUpgrade_4221",
+    "provider_candidate_version": "1.0.3",
+    "implementation": "Built into ordinary Container Upgrades main mod 1.0.3; no separate lunchbox compatibility submod",
+    "required_for_lunchbox": false,
+    "personal_installation": "Ordinary Container Upgrades 1.0.3 is already installed in its original local directory and is not replaced by the rc.4 lunchbox-only hotfix. Global default and existing world/configuration files remain unchanged."
+  },
+  "version": "0.1.0-rc.4",
+  "game_target": "Project Zomboid 42.21.0 single-player",
+  "organization": "Independent single-Mod-ID lunchbox source. Current rc.4 artifact addresses the lunchbox hotfix; installed ordinary Container Upgrades 1.0.3 stays unchanged.",
+  "candidate_compatibility": "rc.4 adds clothing GUID registration, a 32x32 item icon for native outline dimensions, and compatibility with ISA deferred transfer wrappers plus accurate runtime status. Retains the rc.3 HavenFall EX crafting-chain correction. User rc.4 gameplay acceptance is pending.",
+  "git_initialized": false,
+  "remote_repository": null,
+  "installed": true,
+  "enabled": true,
+  "in_game_accepted": false,
+  "workshop_id": null,
+  "note": "Development registration only. Does not revise the dated 2026-11-03 global source/Workshop snapshot or claim its counts are current.",
+  "personal_environment": {
+    "installed_lunchbox_version": "0.1.0-rc.4",
+    "ordinary_container_version": "1.0.3",
+    "save": "C:\\Users\\15792\\Zomboid\\Saves\\Sandbox\\2026-10-09_18-19-22",
+    "installed": true,
+    "enabled": true,
+    "world_and_config_unchanged": true,
+    "in_game_fix_acceptance": false
+  },
+  "historical_rc3_deployment": {
+    "deployed_at_bjt": "2026-11-06T14:53:53.752746+08:00",
+    "deployed_save": "C:\\Users\\15792\\Zomboid\\Saves\\Sandbox\\2026-10-09_18-19-22",
+    "deployment_record": "D:\\GameBackups\\ProjectZomboid\\返鲜餐盒正式档部署_20261106_144445\\deployment.json",
+    "complete_save_backup": "D:\\GameBackups\\ProjectZomboid\\返鲜餐盒正式档部署_20261106_144445\\personal-save.zip"
+  },
+  "deployed_at_bjt": "2026-11-06T15:56:41.794667+08:00",
+  "deployed_save": "C:\\Users\\15792\\Zomboid\\Saves\\Sandbox\\2026-10-09_18-19-22",
+  "deployment_record": "D:\\GameBackups\\ProjectZomboid\\返鲜餐盒三项修复_20261106_154348\\deployment.json",
+  "hotfix_mod_backup": "D:\\GameBackups\\ProjectZomboid\\返鲜餐盒三项修复_20261106_154348\\lunchbox-rc3-before.zip"
+}

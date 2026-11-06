@@ -1,0 +1,154 @@
+{
+  "version": "0.1.0-rc.4",
+  "game": "Project Zomboid 42.21 single-player",
+  "source": "D:\\steam\\steamapps\\common\\ProjectZomboid\\CodexRepos\\suqing-freshness-lunchbox",
+  "artifact": "D:\\steam\\steamapps\\common\\ProjectZomboid\\CodexAssets\\SuQingFreshnessLunchbox_20261106_rc4",
+  "mod_id": "SuQingFreshnessLunchbox",
+  "item_id": "SuQingFreshnessLunchbox.FreshnessLunchbox",
+  "name_CN": "蘇清的返鲜餐盒",
+  "name_EN": "SuQing's Freshness Lunchbox",
+  "mod_ids": [
+    "SuQingFreshnessLunchbox"
+  ],
+  "required_mods": [],
+  "initial_stats": {
+    "capacity": 4,
+    "weight": 1.0,
+    "weight_reduction": 50,
+    "max_item_size": 1.0
+  },
+  "sandbox": {
+    "Enabled": {
+      "default": true
+    },
+    "BaseCapacity": {
+      "default": 4,
+      "min": 1,
+      "max": 30,
+      "applies": "Only first initialization of a new lunchbox; an existing baseline and upgrade records are never overridden by later sandbox changes."
+    },
+    "RestoreHours": {
+      "default": 10,
+      "min": 0.25,
+      "max": 1000,
+      "unit": "Observed effective game hours per one native fresh-life interval, not per complete food recovery."
+    },
+    "AllowRotten": {
+      "default": true
+    }
+  },
+  "operation": {
+    "power": "Permanent operation with per-box switch; no ongoing battery drain",
+    "positions": [
+      "player inventory",
+      "nested carried inventory",
+      "left hand",
+      "right hand",
+      "ground",
+      "furniture",
+      "vehicle"
+    ],
+    "food_scope": "Directly contained native Food with supported lifetime; no inner-box recursion or duplicate ownership",
+    "catchup": "Only existing valid food records with proven same box identity, state and enabled-session/policy coverage may earn unloaded game-time credit. Unknown histories reanchor without credit.",
+    "real_offline_time": "Never credited",
+    "disabled_mod_time": "Never credited",
+    "existing_fridge": "Unchanged",
+    "history_segments_max": 128,
+    "native_rotten_removal": "Already-rotten restoration requires a reliable negative DaysForRottenFoodRemoval value. Nonnegative/unknown values skip rotten food and show a tooltip; never modify world settings.",
+    "cooling_bridge": "Optional narrow scope for audited SuQingRefrigeration 1.0.0-rc.2-perf.1; preserves the prior chain and treats unknown writers conservatively.",
+    "crafting_chain": "Retains the rc.3 load-time crafting-preflight correction preserving the current HavenFall EX outer guard, recipes and ledger protections. rc.4 separately fixes the deferred ISA transfer-wrapper interaction; user gameplay acceptance is pending.",
+    "runtime_status": "Distinguish initialization, active operation and error-disabled state; a valid forwarding outer transfer wrapper is not itself evidence of hook loss."
+  },
+  "upgrade": {
+    "provider": "SuQingContainerUpgrade_4221 main mod 1.0.3 includes exact-item support; no separate lunchbox compatibility submod",
+    "provider_candidate_version": "1.0.3",
+    "optional_for_lunchbox": true,
+    "standalone_behavior": "Crafting, storage and freshness restoration remain available without ordinary Container Upgrades.",
+    "personal_installation": "Ordinary Container Upgrades 1.0.3 is already installed and is not replaced in this hotfix. The installed lunchbox remains rc.3 until the root verifies rc.4 and backs up the 38 installed lunchbox files. Preserve the existing Mod ID, paid records and configuration.",
+    "candidate_package": "Current artifact focuses on the independent lunchbox 0.1.0-rc.4 hotfix. Ordinary Container Upgrades 1.0.3 remains a separate installed main mod with unchanged mechanisms; no lunchbox compatibility submod.",
+    "unrelated_compatibility": "Codex_SuQingWearableCompat_4221 retains other duties including HavenFall EX; retain existing optional enablement.",
+    "tiers": [
+      12,
+      20,
+      30,
+      40,
+      49
+    ],
+    "weight_reduction_targets": [
+      90,
+      93,
+      95,
+      97,
+      99
+    ],
+    "preserve": [
+      "same item",
+      "weight",
+      "lunchbox switch and UID",
+      "food filter",
+      "paid ledger",
+      "restore baseline",
+      "native refund rules"
+    ],
+    "excluded": [
+      "automatic EX registration",
+      "automatic Auto registration",
+      "changes to other containers"
+    ]
+  },
+  "art": "Original Lunchbox-derived left/right skinned X and ground FBX, separate runtime paths and texture; series character cover, independently generated small icon and transparent item icon.",
+  "validation": "rc.3 has user-reported failures. rc.4 source/offline checks and root verification must be recorded separately; no rc.4 personal deployment or user gameplay acceptance is claimed yet.",
+  "delivery_authorized": {
+    "source_and_offline_candidate": true,
+    "install_or_enable": true,
+    "game_operation": false,
+    "git_commit_or_publish": false
+  },
+  "recipes": [
+    {
+      "id": "MakeFreshnessLunchboxFromLunchbox",
+      "inputs": {
+        "empty_unupgraded_vanilla_lunchbox": 1,
+        "pocket_watch": 1,
+        "digital_watch": 1,
+        "classic_analog_watch": 1,
+        "electric_wire": 2
+      },
+      "retained_tool": "screwdriver"
+    },
+    {
+      "id": "MakeFreshnessLunchboxFromMetal",
+      "inputs": {
+        "small_metal_sheet": 2,
+        "pocket_watch": 1,
+        "digital_watch": 1,
+        "classic_analog_watch": 1,
+        "electric_wire": 2
+      },
+      "retained_tool": "screwdriver"
+    }
+  ],
+  "user_reported_rc3_issues": [
+    "Held lunchbox model invisible",
+    "Ground item outline abnormal",
+    "Context status remains initializing"
+  ],
+  "rc4_revision_scope": {
+    "clothing": "Independent clothing GUID registration for the retained left/right native hand assets",
+    "item_icon": "32x32 transparent runtime item icon matching vanilla original dimensions; high-resolution master retained; ground 3D scale remains 0.4",
+    "runtime": "Preserve and accommodate ISA deferred transfer delegation, with accurate initialization/operation/error status",
+    "preserved": [
+      "Mod ID and FullType",
+      "both recipes and costs",
+      "sandbox defaults and ranges",
+      "ordinary Container Upgrades 1.0.3",
+      "world and configuration files"
+    ]
+  },
+  "current_candidate_state": {
+    "version": "0.1.0-rc.4",
+    "installed": false,
+    "in_game_accepted": false,
+    "pending": "Root validation, verified backup of the 38 installed lunchbox files, then lunchbox-only hotfix deployment"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "result": "PASS",
+  "timestamp": "2026-11-06T07:49:08.134465+00:00",
+  "game_started": false,
+  "world_cell_created": false,
+  "world_loaded": false,
+  "results": [
+    {
+      "name": "kahlua_rc3_repro",
+      "result": "PASS",
+      "cases": 0,
+      "assertions": 4
+    },
+    {
+      "name": "kahlua_queue_before_runtime",
+      "result": "PASS",
+      "cases": 4,
+      "assertions": 35
+    },
+    {
+      "name": "kahlua_queue_after_runtime",
+      "result": "PASS",
+      "cases": 4,
+      "assertions": 35
+    },
+    {
+      "name": "kahlua_queue_added_at_game_start",
+      "result": "PASS",
+      "cases": 4,
+      "assertions": 35
+    },
+    {
+      "name": "native_rc3_repro",
+      "result": "PASS",
+      "cases": 0,
+      "assertions": 4
+    },
+    {
+      "name": "native_queue_before_runtime",
+      "result": "PASS",
+      "cases": 4,
+      "assertions": 35
+    },
+    {
+      "name": "native_queue_after_runtime",
+      "result": "PASS",
+      "cases": 4,
+      "assertions": 35
+    },
+    {
+      "name": "native_queue_added_at_game_start",
+      "result": "PASS",
+      "cases": 4,
+      "assertions": 35
+    }
+  ],
+  "isa_original_sha256": {
+    "D:\\steam\\steamapps\\workshop\\content\\108600\\3781944805\\mods\\ImmersiveSolarArrays\\42\\media\\lua\\shared\\ImmersiveSolarArrays\\Utilities.lua": "7eb2ffb49ead88bad66773c99e0e375189456cc7987f66ba4e8cf015a4bbee7c",
+    "D:\\steam\\steamapps\\workshop\\content\\108600\\3781944805\\mods\\ImmersiveSolarArrays\\42\\media\\lua\\client\\ImmersiveSolarArrays\\Patches.lua": "2db9478171ac4d0cd1f25ff5ff402a0658a2b8d519d054b7a34e4eabad800c81"
+  },
+  "rc3_runtime_sha256": "b4f1698f7bc57e253fbc081d88c6e4b060ac31b2c4a6c70004795f6dc7c340cc",
+  "candidate_runtime_sha256": "014e1c9b4efdefd2d8f63d6c55f6356df729fbf29ff8ed3d0daa2e2c862d8888",
+  "scope": "Full unchanged installed ISA Utilities.lua and Patches.lua, actual queueFunction Add/Remove, pre-world and normal event order, battery forwarding, menu/reentry and unknown outer hook.",
+  "limits": [
+    "Native modes use actual Event Add/Remove/trigger and native item/ModData APIs, without an IsoWorld cell or player; mocks cover loaded ownership and aging separately.",
+    "Native Event.trigger is called directly to make each ordered event dispatch deterministic rather than claiming wall-clock optimizer scheduling or full game-loop validation.",
+    "ISA UI, power-bank server and author world objects are dependency shells; original battery command routing is observed. User gameplay acceptance remains required."
+  ]
+}

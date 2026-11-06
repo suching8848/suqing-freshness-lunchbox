@@ -1,0 +1,141 @@
+Steam Workshop 文案草稿 / Workshop copy draft
+核对日期：2026-11-06（北京时间）
+状态：仅供审阅，未上传或发布。适用源码元数据：0.1.0-rc.5。
+建议标题：蘇清的返鲜餐盒 / SuQing's Freshness Lunchbox
+
+================ 中文介绍（Steam BBCode） ================
+
+[h1]蘇清的返鲜餐盒[/h1]
+让旅途中的食物慢慢恢复新鲜。
+
+这是一只可直接收纳食品、也可用左手或右手单手提握的独立餐盒。把合格食品放进盒内，开启返鲜，便会按照每件食品原本的新鲜期逐渐恢复；多份食品同时处理，不需要排队，也不消耗电池或持续供电。
+
+[h2]怎样制作[/h2]
+在原生制作菜单的“蘇清的返鲜餐盒”分类中制作。两条路线得到相同的返鲜餐盒：
+[list]
+[*][b]改造餐盒：[/b]原版空餐盒 ×1、怀表 ×1、电子表 ×1、经典腕表 ×1、电线 ×2。
+[*][b]金属板制作：[/b]小金属板 ×2、怀表 ×1、电子表 ×1、经典腕表 ×1、电线 ×2。
+[/list]
+两条路线都需要一把可用的螺丝刀，工具保留不消耗。电子表和经典腕表支持配方列出的原版左右手及颜色款式；怀表、电子表、经典腕表须为三件不同实物。无需学习配方。
+
+请先卸下并取消收藏待消耗的材料。用于改造的原版餐盒须清空、移出双手、取消收藏，并且没有容器升级或制冷升级记录；已有升级请先按对应模组规则还原。也可以直接选择金属板路线。
+
+[h2]怎样使用[/h2]
+[list]
+[*]将食品直接放入餐盒。新制餐盒默认开启返鲜，右键餐盒可开关，并查看当前状态、恢复时间和容量。
+[*]可随身携带、放进背包，或存放在地面、家具容器和车辆容器中；处于有效加载状态时工作，不必一直拿在手里。
+[*]默认每经过 [b]10 个有效游戏小时[/b]，每件食品减少相当于其自身一个完整新鲜期的年龄，最低为 0。深度腐坏食品可能需要更长时间，返鲜并非立刻重置。
+[*]取出后仍是原来的食品，继续按照正常规则使用；返鲜不补回已经吃掉的份量，不改变生熟状态，也不清除毒素或污染。
+[/list]
+
+[h2]默认规格与独立设置[/h2]
+[list]
+[*][b]容量 4、自重 1.0、基础减重 50%。[/b]
+[*]独立沙盒设置：返鲜总开关、基础容量、恢复时间、允许变质食品。
+[*]基础容量可设为 1–30，默认 4，只在新餐盒首次初始化时采用；后续调整不会重写已有餐盒或升级成果。
+[*]恢复时间可设为 0.25–1000 游戏小时，默认 10；“允许变质食品”默认开启。
+[*]仅收纳标准 Food 类型物品，保留原版餐盒的单件尺寸限制（MaxItemSize=1）；提高容量不会取消该限制。
+[/list]
+
+[h2]可选：普通容器升级[/h2]
+[b]蘇清的普通容器升级（SuQingContainerUpgrade_4221）1.0.3[/b] 已内置对本餐盒完整物品 ID 的精准支持，无需另开餐盒兼容子模组。它是可选搭配；返鲜餐盒本身可独立制作、收纳和返鲜。
+
+搭配支持版本后，沿用普通升级的材料、技能和还原规则：五档目标容量为 12 / 20 / 30 / 40 / 49，减重为 90 / 93 / 95 / 97 / 99%，并保留实际付款记录、精确还原和已付材料 50% 返还。升级或还原前请清空并移出双手。返鲜功能不会把升级容量改回 4；此支持不会自动加入 EX 或 Auto 升级体系。
+
+[h2]返鲜范围与时间规则[/h2]
+[list]
+[*]只处理[b]直接放在本盒内[/b]、有有效保鲜期的标准可腐坏 Food。烧焦食品、受精蛋和没有有效保鲜期的食品不处理。
+[*]变质返鲜还要求当前世界原版“移除腐坏食品”（DaysForRottenFoodRemoval）为[b]负值[/b]。非负或无法可靠读取时，本盒跳过已经变质的食品，右键提示会说明；模组不会代改世界参数。
+[*]离开区域后，只有原食品、原餐盒和连续启用时段记录足够可靠，重新加载时才补算对应游戏时间。[b]退出游戏期间的现实时间不计入[/b]，手动关闭或模组停用的时间也不补算。
+[*]新放入、换盒、记录缺失、历史超出保留范围或其他模组改龄导致记录无法确认时，会重新开始计时，不领取过去的返鲜时间。
+[/list]
+
+[h2]支持范围与当前状态[/h2]
+适用 Project Zomboid [b]B42.21 单人模式[/b]。当前版本未提供联机返鲜支持。
+
+简体中文与英文共用一个 Mod ID、同一套逻辑和设置，无需分别启用语言版本。
+
+用户已反馈除地面轮廓贴合外功能正常；这不等于所有模组组合和使用场景均已验证。当前 [b]0.1.0-rc.5[/b] 为地面轮廓修正候选：调整了地面显示的备用贴图，返鲜逻辑、配方和升级规则保持。该项仅完成离线核对，仍待用户重进游戏验收；固定方向的备用贴图不保证任意旋转、扩展摆放或相机角度均完全贴合。
+
+其他食品模组、改龄模组和 Viewpoint 的具体组合仍以实际测试为准。左右手及地面模型基于 Project Zomboid 原版餐盒资源独立衍生。
+
+[b]Mod ID：[/b]SuQingFreshnessLunchbox
+[b]物品 ID：[/b]SuQingFreshnessLunchbox.FreshnessLunchbox
+
+================ English description (Steam BBCode) ================
+
+[h1]SuQing's Freshness Lunchbox[/h1]
+Let your food gradually regain its freshness while you travel.
+
+A separate food container that can also be carried in either hand. Place eligible food directly inside and keep restoration switched on. Each item gradually recovers according to its own original fresh-life interval. All foods are processed together, with no queue, batteries or continuous power required.
+
+[h2]How to craft[/h2]
+Use the native crafting menu under “SuQing's Freshness Lunchbox.” Both recipes produce the same lunchbox:
+[list]
+[*][b]Convert a lunchbox:[/b] 1 empty vanilla lunchbox, 1 pocket watch, 1 digital watch, 1 classic wristwatch and 2 electric wires.
+[*][b]Build from metal:[/b] 2 small metal sheets, 1 pocket watch, 1 digital watch, 1 classic wristwatch and 2 electric wires.
+[/list]
+Both recipes require a usable screwdriver, which is kept. Digital and classic wristwatches accept the vanilla left/right and color variants listed in the recipe. The pocket watch, digital watch and classic wristwatch must be three separate physical items. No recipe learning is required.
+
+Unequip and unfavorite materials that will be consumed. A vanilla lunchbox used for conversion must be empty, out of both hands, unfavorited and free of container-upgrade or refrigeration-upgrade records. Restore any existing upgrades through their own mod first, or use the metal-sheet recipe instead.
+
+[h2]How to use[/h2]
+[list]
+[*]Place food directly inside. Newly crafted lunchboxes have restoration enabled. Right-click the lunchbox to toggle it and check its status, restoration time and capacity.
+[*]Keep it on your character, inside a bag, on the ground, in furniture storage or in vehicle storage. It works while its location is valid and loaded; you do not need to keep holding it.
+[*]By default, every [b]10 effective game hours[/b] subtracts one of each food's own complete fresh-life intervals from its age, down to 0. Deeply rotten food may take longer; restoration is gradual.
+[*]Food remains the original item when removed. Restoration does not refill eaten portions, change cooking state, or remove poison or contamination.
+[/list]
+
+[h2]Defaults and separate sandbox settings[/h2]
+[list]
+[*][b]Capacity 4, weight 1.0 and base weight reduction 50%.[/b]
+[*]Separate settings for the master switch, initial base capacity, restoration hours and rotten-food support.
+[*]Base capacity ranges from 1–30, default 4, and applies only when a new lunchbox is first initialized. Later setting changes do not overwrite existing boxes or their upgrades.
+[*]Restoration time ranges from 0.25–1000 game hours, default 10. Rotten-food support is enabled by default.
+[*]Accepts standard Food items only and retains the vanilla lunchbox's item-size limit (MaxItemSize=1). More capacity does not remove that limit.
+[/list]
+
+[h2]Optional: ordinary Container Upgrades[/h2]
+[b]SuQing's ordinary Container Upgrades (SuQingContainerUpgrade_4221) 1.0.3[/b] includes precise support for this lunchbox's full item ID. No separate lunchbox compatibility submod is needed. This is optional: the lunchbox can be crafted, store food and restore freshness on its own.
+
+With a supporting version enabled, ordinary upgrade materials, skills and restoration rules are retained. The five capacity targets are 12 / 20 / 30 / 40 / 49, with weight reduction targets of 90 / 93 / 95 / 97 / 99%. Paid-material records, precise restoration and 50% paid-material refunds are preserved. Empty the lunchbox and remove it from both hands before upgrading or restoring. Freshness restoration never resets an upgraded box to capacity 4. This support does not automatically add the box to EX or Auto upgrades.
+
+[h2]Food and time limits[/h2]
+[list]
+[*]Only eligible standard perishable Food placed [b]directly inside this lunchbox[/b] is processed. Burnt food, fertilized eggs and food without a valid fresh-life interval are excluded.
+[*]Restoring already rotten food also requires the world's vanilla “Rotten Food Removal” setting (DaysForRottenFoodRemoval) to be [b]negative[/b]. When it is nonnegative or cannot be read reliably, already rotten food is skipped and the context tooltip explains why. The mod does not change this world setting.
+[*]When you return to an unloaded area, restoration is credited only when the original food, original lunchbox and continuous enabled game-time records can be verified. [b]Real time while the game is closed never counts.[/b] Switched-off periods and sessions with the mod disabled earn no restoration either.
+[*]Newly inserted food, changed boxes, missing or expired history, and unverified age changes from other mods start a new timing point without claiming past restoration.
+[/list]
+
+[h2]Support and current status[/h2]
+For Project Zomboid [b]B42.21 single-player[/b]. The current version does not provide multiplayer freshness restoration.
+
+Simplified Chinese and English share one Mod ID, the same logic and the same settings. Separate language mods are not needed.
+
+The user has reported normal functionality apart from ground-outline alignment; this does not establish exhaustive compatibility testing. Current [b]0.1.0-rc.5[/b] is a ground-outline correction candidate. It changes the fallback ground image while retaining freshness logic, recipes and upgrade rules. This change has only been checked offline and still needs in-game acceptance after a normal reload. The fixed-direction fallback does not promise exact alignment at every rotation, extended-placement state or camera angle.
+
+Specific combinations with other food mods, age-changing mods and Viewpoint remain subject to actual testing. Held and ground models are independently derived from Project Zomboid's vanilla lunchbox assets.
+
+[b]Mod ID:[/b] SuQingFreshnessLunchbox
+[b]Item ID:[/b] SuQingFreshnessLunchbox.FreshnessLunchbox
+
+================ 候选更新说明 / Candidate change notes ================
+
+标题建议 / Suggested heading: 0.1.0-rc.5 — 地面轮廓修正候选 / Ground-outline correction candidate
+
+中文：
+调整返鲜餐盒的地面备用贴图，使其轮廓与实际薄餐盒模型更接近；保留库存图标、左右手/地面模型、返鲜逻辑、配方和普通容器升级规则。已有餐盒正常重进后读取新资源，无需重做。当前仅完成离线核对，仍待游戏内验收；不保证任意旋转或相机角度均完全贴合。
+
+English:
+Adjusts the lunchbox's fallback ground image to better match its slim physical model. Inventory art, held/ground models, freshness logic, recipes and ordinary upgrade rules are retained. Existing lunchboxes read the new asset after a normal reload; no recrafting is needed. Checked offline only; in-game acceptance is pending. Exact alignment at every rotation or camera angle is not promised.
+
+================ 仅供维护者审阅，不粘贴进产品介绍 ================
+
+- 已核对：README.md、README.en.md、当前 mod.info、sandbox-options.txt、items/recipes、Core.lua、Runtime.lua、UI.lua、Crafting.lua 和 CN 右键提示文本。
+- 当前沙盒默认 RestoreHours=10，0.25 是下限而非默认值，未写入个人设置。
+- 当前配方无学习要求，材料通过 IsNotWorn/收藏/升级记录等前置检查；专门补足了 README 首段材料说明未逐项展开的条件。
+- Core.version 仍标为 0.1.0-rc.4，而 mod.info/README 为 0.1.0-rc.5；rc.5 声明为纯资源候选，草稿未修改该日志标签或任何代码。
+- 普通容器升级 1.0.3 的可选支持和五档数值来自本仓库当前双语 README 及任务提供的已核对现状；本次没有访问外部服务或运行升级模组验证。
+- 没有访问 Steam 接口、上传/发布、Git 提交、运行 Java 或启动/操作游戏；本任务只新增此文本草稿。

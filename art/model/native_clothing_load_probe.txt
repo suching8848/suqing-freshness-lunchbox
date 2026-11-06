@@ -1,0 +1,4 @@
+NATIVE_CLOTHING_BEFORE missing_guid_table both_assets_null=true PASS
+NATIVE_CLOTHING_AFTER RHand state=READY model=media/models_X/Skinned/BackPacks/SuQingFreshnessLunchbox_RHand.x PASS
+NATIVE_CLOTHING_AFTER LHand state=READY model=media/models_X/Skinned/BackPacks/SuQingFreshnessLunchbox_LHand.x PASS
+NATIVE_CLOTHING_SUMMARY assertions=15 failures=0 game_started=false world_created=false gl_context=false async_asset_loader=true

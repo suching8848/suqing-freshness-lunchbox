@@ -1,0 +1,9 @@
+module Base
+{
+    model SuQingFreshnessLunchbox_Ground
+    {
+        mesh = WorldItems/SuQingFreshnessLunchbox/SuQingFreshnessLunchbox_Ground,
+        texture = Clothes/Bag/SuQingFreshnessLunchbox,
+        scale = 0.4,
+    }
+}

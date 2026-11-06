@@ -1,0 +1,59 @@
+{
+  "checkedAt": "2026-11-06T15:38:25.999109+08:00",
+  "source": "Local original Project Zomboid Lunchbox assets, derived with independent names and materials.",
+  "originals": {
+    "D:\\steam\\steamapps\\common\\ProjectZomboid\\media\\textures\\Clothes\\Bag\\PlasticLunchBox_01.png": {
+      "sha256": "95c22ad69a68cb81536001871f73cc6fef64507b20632cb6e964b64f253e4728",
+      "bytes": 3789
+    },
+    "D:\\steam\\steamapps\\common\\ProjectZomboid\\media\\scripts\\generated\\items\\container.txt": {
+      "sha256": "4904a61c83411b4c41d196e517097f5981b2a76c300bc33abc78c86e721f65da",
+      "bytes": 210880
+    },
+    "D:\\steam\\steamapps\\common\\ProjectZomboid\\media\\scripts\\generated\\models_items.txt": {
+      "sha256": "dda8aad64503778d679bcfd0fd2b7cc6f8a53faaa3e311f60f9da55aea3c541e",
+      "bytes": 316931
+    },
+    "D:\\steam\\steamapps\\common\\ProjectZomboid\\media\\models_X\\Skinned\\BackPacks\\PlasticLunchBox_RHand.x": {
+      "sha256": "374734d805d8c42c69865a4000e5ab60a472afe0248e7e5e9883a725e897a046",
+      "bytes": 96753
+    },
+    "D:\\steam\\steamapps\\common\\ProjectZomboid\\media\\clothing\\clothingItems\\Bag_Lunchbox_RHand.xml": {
+      "sha256": "d1eff94669592286d0f71d7a8484ab79bc8bb98e83221f72fc3da590de14dc8e",
+      "bytes": 525
+    },
+    "D:\\steam\\steamapps\\common\\ProjectZomboid\\media\\models_X\\Skinned\\BackPacks\\PlasticLunchBox_LHand.x": {
+      "sha256": "423eb18373fc47e635561c5d8f9f708503832d6934b6723cdf37d1e0ff8d8d2f",
+      "bytes": 96281
+    },
+    "D:\\steam\\steamapps\\common\\ProjectZomboid\\media\\clothing\\clothingItems\\Bag_Lunchbox_LHand.xml": {
+      "sha256": "a461c56e895e3757f91b84c0b29dc2d316ae2cfb91da65a5f25515a20dee327c",
+      "bytes": 525
+    },
+    "D:\\steam\\steamapps\\common\\ProjectZomboid\\media\\fileGuidTable.xml": {
+      "sha256": "2dd35f787d87e5e039654970f62e4f6e58e7df8974c3c5f7e8668b48c4bb0edc",
+      "bytes": 252438
+    },
+    "D:\\steam\\steamapps\\common\\ProjectZomboid\\media\\models_X\\WorldItems\\Clothing\\PlasticLunchBox_Ground.fbx": {
+      "sha256": "dc747871cbec8ac1f53bbbdaf63f7c5be1c4905d441602fa1ec14fd78fbc3e29",
+      "bytes": 38640
+    }
+  },
+  "modifications": [
+    "Independent XML names/GUIDs and texture references.",
+    "Replacement clothing GUIDs registered in the mod's media/fileGuidTable.xml for OutfitManager loading.",
+    "Hand X geometry, skeleton, UVs, weights and bind matrices retained; only the embedded texture name changes.",
+    "Independent ground FBX copy, unchanged geometry; distinct ModelScript/texture and native 0.4 scale.",
+    "Production texture is a separately ImageGen-edited atlas; this script only exports its size.",
+    "Independent ImageGen item icon master is exported at native 32px for world-outline fallback sizing; mod icon and cover are separate."
+  ],
+  "original_files_written": false,
+  "texture_input": "D:\\steam\\steamapps\\common\\ProjectZomboid\\CodexRepos\\suqing-freshness-lunchbox\\art\\lunchbox-texture-final-v3.png",
+  "texture_source_sha256": "fa0bd5c1c2276ebbccf9b55cec07d108636803df1871eba0215e5acc87bcca47",
+  "item_icon_input": "D:\\steam\\steamapps\\common\\ProjectZomboid\\CodexRepos\\suqing-freshness-lunchbox\\art\\item-icon-source.png",
+  "item_icon_master_sha256": "3274659dce481886032c0b826ab7608ce5520b9e5b67a176b43a4c35ec9bed26",
+  "item_icon_size": [
+    32,
+    32
+  ]
+}

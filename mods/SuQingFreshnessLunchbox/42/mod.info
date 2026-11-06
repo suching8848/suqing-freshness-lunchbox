@@ -1,0 +1,10 @@
+name=SuQing's Freshness Lunchbox
+id=SuQingFreshnessLunchbox
+author=SuQing
+modversion=0.1.0-rc.5
+versionMin=42.21
+versionMax=42.21
+icon=icon.png
+poster=poster.png
+loadModAfter=SuQingFreshnessFridge,SuQingRefrigerationUpgrade_4221,SuQingContainerUpgrade_4221,CleanUI,Neat_Crafting
+description=0.1.0-rc.5 single-player ground-outline candidate: a separate world sprite rendered from the actual ground mesh replaces the inventory-icon fallback. The inventory icon, held/ground models, freshness logic and upgrades are retained. This fixed-yaw fallback improves shape and size; arbitrary rotation and camera alignment require user gameplay acceptance. A single-handed, real food container with gradual freshness restoration and its own sandbox settings. Starts at vanilla lunchbox capacity 4, weight 1 and weight reduction 50%. Supports both hands, inventory, bags and loaded world storage. Valid recorded food can earn game-time catch-up when reloaded; real-world offline time is never counted. The newer ordinary Container Upgrades main mod includes optional upgrade support. No compatibility submod or ordinary-upgrade dependency is required for the lunchbox itself. This candidate preserves the current HavenFall EX crafting chain and ledger checks. Single-player candidate; in-game acceptance remains pending.

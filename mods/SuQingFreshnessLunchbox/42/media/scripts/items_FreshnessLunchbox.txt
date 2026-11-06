@@ -1,0 +1,25 @@
+module SuQingFreshnessLunchbox
+{
+    item FreshnessLunchbox
+    {
+        DisplayCategory = Container,
+        ItemType = base:container,
+        Weight = 1.0,
+        Capacity = 4,
+        WeightReduction = 50,
+        CanHaveHoles = false,
+        MaxItemSize = 1.0,
+        AcceptItemFunction = SuQingFreshnessLunchbox.AcceptFood,
+        Icon = SuQingFreshnessLunchbox,
+        UseWorldItem = true,
+        ScaleWorldIcon = 1.0,
+        CloseSound = CloseSmallMetalBox,
+        OpenSound = OpenSmallMetalBox,
+        PutInSound = StoreItemSmallMetalBox,
+        MetalValue = 15.0,
+        ReplaceInPrimaryHand = SuQingFreshnessLunchbox_RHand holdingbagright,
+        ReplaceInSecondHand = SuQingFreshnessLunchbox_LHand holdingbagleft,
+        WorldStaticModel = SuQingFreshnessLunchbox_Ground,
+        Tooltip = Tooltip_SFL_Item,
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "tool": "built-in imagegen",
+  "prompt": "Use case: precise-object-edit. This is a flat model UV texture atlas, not an object image. Make one precise seam correction to the input atlas. The LOWER-RIGHT lavender rectangular panel must extend upward continuously until it touches the ivory rewind-badge panel above it, with NO black strip or black seam remaining between them. In original128px UV coordinates, fully cover x64..127, y98..127 in pale lavender plastic; this includes the thin bevel strip near y100..105, not merely the existing large bottom rectangle. Keep the circular rewind badge and status dots above this region intact; preserve the lower-left analog clock panel and all other panels/handle exactly. The main goal is color bleed around the lower-right UV-island top edge: no black horizontal gap between the badge panel and lavender bottom panel, and lavender should reach the canvas right and bottom edges. Keep the flat square atlas layout and exact scale, do not move/crop/rotate islands or add labels/UV lines. Unused dark background in the upper half remains unchanged. Match neighboring lavender, with a subtle lavender bevel edge, never a dark/black line.",
+  "edit_target": "art/lunchbox-texture-final.png",
+  "generated_original": "C:\\Users\\15792\\.codex\\generated_images\\01a1abf3-a00f-72f1-a96a-93db4fce4ecc\\exec-1b84ecac-4f64-4726-9ec5-9874e1c40944.png",
+  "project_source": "art/lunchbox-texture-final-v2.png",
+  "purpose": "Color bleed over required right-lower UV bevel to avoid a black seam; preceding attempts retained."
+}

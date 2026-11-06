@@ -1,0 +1,40 @@
+{
+  "result": "PASS",
+  "checked_utc": "2026-11-06T07:48:54.425064+00:00",
+  "game_started": false,
+  "world_created": false,
+  "in_game_tested": false,
+  "world_cell_created": false,
+  "world_loaded": false,
+  "native_singleton_initialized": true,
+  "game_jar": "D:\\steam\\steamapps\\common\\ProjectZomboid\\projectzomboid.jar",
+  "game_jar_sha256": "e1a69eb743ede60b213a0fe7f8b83d4fcab773036d256cc4543a336f3b058a33",
+  "lua_compiled": 5,
+  "mock_cases": 31,
+  "mock_assertions": 267,
+  "native_cases": 13,
+  "native_assertions": 2181,
+  "combination_sources": {
+    "cooling": {
+      "C:\\Users\\15792\\Zomboid\\mods\\SuQingRefrigerationUpgrade_4221\\42\\media\\lua\\shared\\SuQingRefrigeration\\Core.lua": "34b90a69d41c9d6be1e04d50bfd2d852b18be6af87669f7d0073ca105798cb39",
+      "C:\\Users\\15792\\Zomboid\\mods\\SuQingRefrigerationUpgrade_4221\\42\\media\\lua\\client\\SuQingRefrigeration_Runtime.lua": "a393a8edaf30a1737d6afe8fac25d27dfee1a62a980e5acabeb81ff5de0e866f"
+    },
+    "fridge": {
+      "C:\\Users\\15792\\Zomboid\\mods\\SuQingFreshnessFridge\\42\\media\\lua\\shared\\SuQingFreshnessFridge\\Core.lua": "6b967d32d3eb1e3bcf2f8d174e780a120dca8b349009644f5ce543eb216ee769",
+      "C:\\Users\\15792\\Zomboid\\mods\\SuQingFreshnessFridge\\42\\media\\lua\\client\\SuQingFreshnessFridge_Runtime.lua": "c8244b7c48e2284dc4d936eca677913d0c81c8190fab834872ea1e169a157f1c"
+    }
+  },
+  "combination_mock_cases": 4,
+  "combination_mock_assertions": 24,
+  "limits": [
+    "Only single-player method-level and simulated ownership tests; user must perform in-game acceptance.",
+    "Current negative native rotten-removal policy uses true Age; enabled/unknown removal refuses unsafe rotten restoration.",
+    "Uncovered/disabled/truncated gameplay history reanchors conservatively, without retroactive restoration.",
+    "Unrecognized Java code changing both Age and lastAged cannot be reliably distinguished from native aging."
+  ],
+  "logs": "D:\\steam\\steamapps\\common\\ProjectZomboid\\CodexRepos\\suqing-freshness-lunchbox\\tests\\runtime_validation",
+  "source_sha256": {
+    "mods\\SuQingFreshnessLunchbox\\42\\media\\lua\\shared\\SuQingFreshnessLunchbox\\Core.lua": "412ba150c1a8c570727a74b8047e8dda40ee297b0529b33ada63d2650de02d5f",
+    "mods\\SuQingFreshnessLunchbox\\42\\media\\lua\\client\\SuQingFreshnessLunchbox_Runtime.lua": "014e1c9b4efdefd2d8f63d6c55f6356df729fbf29ff8ed3d0daa2e2c862d8888"
+  }
+}

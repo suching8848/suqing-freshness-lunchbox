@@ -1,0 +1,119 @@
+{
+  "timestamp": "2026-11-06T07:48:53.871347+00:00",
+  "result": "PASS",
+  "passed": true,
+  "game_started": false,
+  "world_created": false,
+  "world_cell_created": false,
+  "world_loaded": false,
+  "native_singleton_initialized": true,
+  "installed": false,
+  "enabled": false,
+  "game_jar_sha256": "e1a69eb743ede60b213a0fe7f8b83d4fcab773036d256cc4543a336f3b058a33",
+  "scope": "native parser plus actual vanilla Lua completion and actual ordinary upgrade Core/Refund with deterministic object shells",
+  "native_parser_assertions": 322,
+  "crafting_ui_cases": 16,
+  "crafting_ui_assertions": 142,
+  "legacy_unsupported_cases": 2,
+  "legacy_unsupported_assertions": 14,
+  "builtin_upgrade_model_cases": 4,
+  "builtin_upgrade_model_assertions": 90,
+  "builtin_upgrade_native_cases": 3,
+  "builtin_upgrade_native_assertions": 460,
+  "shipped_lua_compiled": 5,
+  "limitations": [
+    "No full native HandcraftLogic inventory transaction or game UI/world load executed; actual vanilla completion Lua uses deterministic recipe-data shells.",
+    "Native upgrade tests use actual InventoryContainer/ItemContainer/material/Thread objects with actor and kept-input shells; native Core/Refund methods execute unchanged.",
+    "Native recipe tests use parsed Item/CraftRecipe objects registered in an isolated ScriptManager fixture, then the actual post-dictionary cache resolver; no full mod loader or save is initialized.",
+    "The verified legacy 1.0.0 comparison intentionally lacks lunchbox support; a preserved deployment recovery copy is not the current personal installation. Source 1.0.3 provides built-in support without an adapter.",
+    "User must validate both recipe routes, rendering, inventory movement and save/reload in game."
+  ],
+  "results": [
+    {
+      "name": "native_parsers",
+      "passed": true,
+      "detail": "LOG  [pzopt] loaded override zombie.scripting.ScriptParser (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.scripting.objects.Item (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override se.krka.kahlua.j2se.KahluaTableImpl (target revision 4a0e9546ec, active)\nINTEGRATION_NATIVE assertions=322 failures=0 game_started=false world_created=false"
+    },
+    {
+      "name": "production_lua_compile",
+      "passed": true,
+      "detail": "LOG  [pzopt] loaded override se.krka.kahlua.j2se.KahluaTableImpl (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override se.krka.kahlua.luaj.compiler.LuaCompiler (target revision 4a0e9546ec, active)\nINTEGRATION_COMPILE files=5 failures=0"
+    },
+    {
+      "name": "crafting_ui",
+      "passed": true,
+      "detail": "LOG  [pzopt] loaded override se.krka.kahlua.j2se.KahluaTableImpl (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override se.krka.kahlua.luaj.compiler.LuaCompiler (target revision 4a0e9546ec, active)\nINTEGRATION bootstrap ready\nINTEGRATION_CRAFT_UI cases=16 assertions=142 failures=0; actual vanilla Lua completion path, deterministic native-logic shells"
+    },
+    {
+      "name": "container_upgrade_legacy_1_0_0_unsupported",
+      "passed": true,
+      "detail": "LOG  [pzopt] loaded override se.krka.kahlua.j2se.KahluaTableImpl (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override se.krka.kahlua.luaj.compiler.LuaCompiler (target revision 4a0e9546ec, active)\nINTEGRATION bootstrap ready\nINTEGRATION_UPGRADE core=1.0.0 cases=2 assertions=14 failures=0; personal version intentionally unsupported; no adapter injection"
+    },
+    {
+      "name": "container_upgrade_source_1_0_3_builtin",
+      "passed": true,
+      "detail": "LOG  [pzopt] loaded override se.krka.kahlua.j2se.KahluaTableImpl (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override se.krka.kahlua.luaj.compiler.LuaCompiler (target revision 4a0e9546ec, active)\nINTEGRATION bootstrap ready\nINTEGRATION_UPGRADE core=1.0.3 cases=4 assertions=90 failures=0; source built-in Core and Refund; deterministic actor and inventory shells"
+    },
+    {
+      "name": "container_upgrade_source_native_items",
+      "passed": true,
+      "detail": "LOG  [pzopt] loaded override se.krka.kahlua.j2se.KahluaTableImpl (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override se.krka.kahlua.luaj.compiler.LuaCompiler (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.Lua.LuaEventManager (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.buildingRooms.BuildingRoomsEditor (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.scripting.objects.Item (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.characters.ecs.ECSEntity (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.iso.IsoMovingObject (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.characters.IsoGameCharacter (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.characters.IsoPlayer (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.core.properties.PropertyContainer (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.iso.IsoChunk (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.characters.IsoZombie (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.characters.animals.IsoAnimal (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.GameTime (target revision 4a0e9546ec, active, logged late)\nLOG  [pzopt] loaded override zombie.iso.objects.IsoLightSwitch (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.iso.IsoChunkMap (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.iso.IsoMetaGrid (target revision 4a0e9546ec, active, logged late)\nLOG  [pzopt] loaded override zombie.ai.State (target revision 4a0e9546ec, active, logged late)\nLOG  [pzopt] loaded override zombie.ai.states.WalkTowardState (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.iso.PlayerCamera (target revision 4a0e9546ec, active, logged late)\nLOG  [pzopt] loaded override zombie.gameStates.GameLoadingState (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.gameStates.MainScreenState (target revision 4a0e9546ec, active, logged late)\nLOG  [pzopt] loaded override zombie.iso.IsoPuddles (target revision 4a0e9546ec, active)\nLOG  [pzopt] loaded override zombie.iso.IsoCamera (target revision 4a0e9546ec, active, logged late)\nLOG  [pzopt] loaded override zombie.iso.IsoWorld (target revision 4a0e9546ec, active, logged late)\nLOG  [pzopt] loaded override zombie.iso.worldgen.WorldGenUtils (target revision 4a0e9546ec, active, logged late)\nLOG  [pzopt] loaded override zombie.fileSystem.FileSystemImpl (target revision 4a0e9546ec, active)\nLOG  [pzopt] file system: 26 worker threads, 128 tasks in flight\nNATIVE_PROFILE game_started=false world_loaded=false world_cell_created=false singleton_initialized=true\nINTEGRATION_NATIVE_UPGRADE core=1.0.3 cases=3 assertions=460 failures=0; actual InventoryContainer, ItemContainer, InventoryItem, DrainableComboItem and ordinary Core/Refund; actor and kept-input shells only\nINTEGRATION_NATIVE_PROFILE game_started=false world_loaded=false world_cell_created=false singleton_initialized=true"
+    },
+    {
+      "name": "translation_coverage_SuQingFreshnessLunchbox",
+      "passed": true,
+      "detail": "6 JSON categories; CN/CH/EN exact key and placeholder parity"
+    },
+    {
+      "name": "vanilla_material_ids",
+      "passed": true,
+      "detail": "19 current native item definitions verified; no batteries or electronics scrap"
+    },
+    {
+      "name": "reference_source_preservation",
+      "passed": true,
+      "detail": "13 referenced ordinary-upgrade Lua/recipe files unchanged"
+    }
+  ],
+  "references": {
+    "current_personal_installation": {
+      "core": "C:\\Users\\15792\\Zomboid\\mods\\SuQingContainerUpgrade_4221_Local\\42\\media\\lua\\shared\\SuQingContainerUpgrade",
+      "version": "1.0.3"
+    },
+    "legacy_unsupported_control": {
+      "core": "C:\\Users\\15792\\Zomboid\\CodexDeploymentRecovery\\返鲜餐盒正式档部署_20261106_144445\\previous-container-1.0.0\\42\\media\\lua\\shared\\SuQingContainerUpgrade",
+      "version": "1.0.0",
+      "kind": "deployment_recovery_copy",
+      "is_current_personal_installation": false,
+      "deployment_receipt": "D:\\steam\\steamapps\\common\\ProjectZomboid\\CodexAssets\\SuQingFreshnessLunchbox_20261106_rc3_CU103\\deployment-task.json",
+      "core_sha256": "bcaf4e0a025318ad11b2f0fe04bbf8294e6cb2ae3c2778325286fe9b977697de"
+    },
+    "source_builtin_control": {
+      "core": "E:\\code\\suqing-container-upgrade\\SuQingContainerUpgrade\\42\\media\\lua\\shared\\SuQingContainerUpgrade",
+      "version": "1.0.3"
+    }
+  },
+  "reference_source_hashes": {
+    "current_personal": {
+      "C:\\Users\\15792\\Zomboid\\mods\\SuQingContainerUpgrade_4221_Local\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Compatibility.lua": "0b9a1fff6d5cb0b80e3429ef6eaa69d4942a6a9b97cf5c97e60f2c4bf13099f9",
+      "C:\\Users\\15792\\Zomboid\\mods\\SuQingContainerUpgrade_4221_Local\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Core.lua": "dc2d2daf97bc8e3daecb8b909cd34e6a72edcc83c742dea33f542d186e444d54",
+      "C:\\Users\\15792\\Zomboid\\mods\\SuQingContainerUpgrade_4221_Local\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Dynamic.lua": "b6991ecc78c556379a97172716ffae37146575f87046435bb85faeafe50601b0",
+      "C:\\Users\\15792\\Zomboid\\mods\\SuQingContainerUpgrade_4221_Local\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Refund.lua": "42750c2fa84e02a7bb9b4c8c2c67e8c0888ee519b08cacc1bf45db17f9c10dcb"
+    },
+    "legacy_control": {
+      "C:\\Users\\15792\\Zomboid\\CodexDeploymentRecovery\\返鲜餐盒正式档部署_20261106_144445\\previous-container-1.0.0\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Compatibility.lua": "e70f6c2be5e4c9d29ed1a53b3414f3a46f25e1e72bbda7cc94f89b2d82985c65",
+      "C:\\Users\\15792\\Zomboid\\CodexDeploymentRecovery\\返鲜餐盒正式档部署_20261106_144445\\previous-container-1.0.0\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Core.lua": "bcaf4e0a025318ad11b2f0fe04bbf8294e6cb2ae3c2778325286fe9b977697de",
+      "C:\\Users\\15792\\Zomboid\\CodexDeploymentRecovery\\返鲜餐盒正式档部署_20261106_144445\\previous-container-1.0.0\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Dynamic.lua": "b6991ecc78c556379a97172716ffae37146575f87046435bb85faeafe50601b0",
+      "C:\\Users\\15792\\Zomboid\\CodexDeploymentRecovery\\返鲜餐盒正式档部署_20261106_144445\\previous-container-1.0.0\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Refund.lua": "42750c2fa84e02a7bb9b4c8c2c67e8c0888ee519b08cacc1bf45db17f9c10dcb"
+    },
+    "source": {
+      "E:\\code\\suqing-container-upgrade\\SuQingContainerUpgrade\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Compatibility.lua": "0b9a1fff6d5cb0b80e3429ef6eaa69d4942a6a9b97cf5c97e60f2c4bf13099f9",
+      "E:\\code\\suqing-container-upgrade\\SuQingContainerUpgrade\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Core.lua": "dc2d2daf97bc8e3daecb8b909cd34e6a72edcc83c742dea33f542d186e444d54",
+      "E:\\code\\suqing-container-upgrade\\SuQingContainerUpgrade\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Dynamic.lua": "b6991ecc78c556379a97172716ffae37146575f87046435bb85faeafe50601b0",
+      "E:\\code\\suqing-container-upgrade\\SuQingContainerUpgrade\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Refund.lua": "42750c2fa84e02a7bb9b4c8c2c67e8c0888ee519b08cacc1bf45db17f9c10dcb"
+    }
+  },
+  "reference_recipe_hashes": {
+    "E:\\code\\suqing-container-upgrade\\SuQingContainerUpgrade\\42\\media\\scripts\\SuQingContainerUpgrade.txt": "0a41b431208e361f22dbbb5612b7f0c3ab2d882b539f867f97dca0077a2b1d47"
+  }
+}

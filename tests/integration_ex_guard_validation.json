@@ -1,0 +1,68 @@
+{
+  "timestamp": "2026-11-06T07:49:21.335457+00:00",
+  "result": "PASS",
+  "game_started": false,
+  "world_cell_created": false,
+  "world_loaded": false,
+  "native_singleton_initialized": true,
+  "installed": false,
+  "enabled": false,
+  "results": [
+    {
+      "name": "kahlua_rc2_repro",
+      "passed": true,
+      "cases": 0,
+      "assertions": 4
+    },
+    {
+      "name": "kahlua_lunchbox_file_first",
+      "passed": true,
+      "cases": 5,
+      "assertions": 56
+    },
+    {
+      "name": "kahlua_havenfall_file_first",
+      "passed": true,
+      "cases": 5,
+      "assertions": 56
+    },
+    {
+      "name": "native_rc2_repro",
+      "passed": true,
+      "cases": 0,
+      "assertions": 4
+    },
+    {
+      "name": "native_lunchbox_file_first",
+      "passed": true,
+      "cases": 5,
+      "assertions": 56
+    },
+    {
+      "name": "native_havenfall_file_first",
+      "passed": true,
+      "cases": 5,
+      "assertions": 56
+    }
+  ],
+  "source_reference_hashes": {
+    "C:\\Users\\15792\\Zomboid\\mods\\ExSuQingBackpackSuperUpgrade_4221\\42\\media\\lua\\shared\\ExSuQingBackpackSuperUpgrade\\Core.lua": "358b4e6b83ca675f9b5b084af4a60a5f7392c0414fec45b71dc5a1af62d63a8a",
+    "C:\\Users\\15792\\Zomboid\\mods\\ExSuQingBackpackSuperUpgrade_4221\\42\\media\\lua\\shared\\ExSuQingBackpackSuperUpgrade\\Capacity.lua": "59d1ac6901b764db6ef75a7607e934558de1a1b36d370914ec4653ffe440dce7",
+    "C:\\Users\\15792\\Zomboid\\mods\\ExSuQingBackpackSuperUpgrade_4221\\42\\media\\lua\\shared\\ExSuQingBackpackSuperUpgrade\\Refund.lua": "5996ba43cb97ee24523b13908bc9c8018e65867ed9e871c5892ee4b36e80105e",
+    "C:\\Users\\15792\\Zomboid\\mods\\ExSuQingBackpackSuperUpgrade_4221\\42\\media\\lua\\client\\ExSuQingBackpackSuperUpgrade_Crafting.lua": "d62a2a57fa4f6cdd9b13ad4e4c88b8672acb89bebacf430651aa670efa1bbfcd",
+    "C:\\Users\\15792\\Zomboid\\mods\\Codex_SuQingWearableCompat_4221\\42\\media\\lua\\client\\Codex_SuQingHavenFallEX.lua": "c6714c71d22335e4c419110cfba241231e7d5472c1197e7296ed06929c38ca13",
+    "E:\\code\\suqing-container-upgrade\\SuQingContainerUpgrade\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Compatibility.lua": "0b9a1fff6d5cb0b80e3429ef6eaa69d4942a6a9b97cf5c97e60f2c4bf13099f9",
+    "E:\\code\\suqing-container-upgrade\\SuQingContainerUpgrade\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Core.lua": "dc2d2daf97bc8e3daecb8b909cd34e6a72edcc83c742dea33f542d186e444d54",
+    "E:\\code\\suqing-container-upgrade\\SuQingContainerUpgrade\\42\\media\\lua\\shared\\SuQingContainerUpgrade\\Refund.lua": "42750c2fa84e02a7bb9b4c8c2c67e8c0888ee519b08cacc1bf45db17f9c10dcb",
+    "E:\\code\\suqing-container-upgrade\\SuQingContainerUpgrade\\42\\media\\lua\\client\\SuQingContainerUpgrade_Crafting.lua": "2e9291f99da9ee4830e7f8bd3a4c834606050d27777f7027188ea1ffb4512140",
+    "E:\\code\\suqing-container-upgrade\\SuQingContainerUpgrade\\42\\media\\lua\\client\\SuQingContainerUpgrade_Variant.lua": "41d0ac28c196edfbd453b68dc0ad30ca9c42c4324afa242da2ca1c73bd132b9a",
+    "C:\\Users\\15792\\Zomboid\\mods\\ExSuQingBackpackSuperUpgrade_4221\\42\\media\\scripts\\ExSuQingBackpackSuperUpgrade.txt": "9367bbb892235f948cf1d6eef3713b2571aa7af96ba339f8b9a4decbe17e6670"
+  },
+  "candidate_crafting_sha256": "d5587968b3738ccac1042788f7f8eafdaa034af42ef9d224e26817f915195133",
+  "rc2_original_crafting_sha256": "38c90b0399999844c53b70d18328c16d58567f493277a3c0350a518cfa70dfea",
+  "limitations": [
+    "Real installed EX Core/Capacity/Refund/Crafting and HavenFall bridge are unchanged; ordinary guard/variant and vanilla completion Lua execute unchanged.",
+    "Native mode uses actual native InventoryContainer, ItemContainer, Item, CraftRecipe and material objects. Actor, loaded script manager, author capacity baseline and native HandcraftLogic selection/transaction remain deterministic fixtures.",
+    "Guard identity, denial on an unknown outer wrapper, original EX action routing, native conversion protection, both lunchbox routes and repeated startup are tested; no game UI/world/save is opened."
+  ]
+}

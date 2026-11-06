@@ -1,0 +1,164 @@
+{
+  "status": "TEXTURE_EXPORTED",
+  "checkedAt": "2026-11-06T15:38:26.018115+08:00",
+  "interface": {
+    "primary": "SuQingFreshnessLunchbox_RHand holdingbagright",
+    "secondary": "SuQingFreshnessLunchbox_LHand holdingbagleft",
+    "world_static_model": "SuQingFreshnessLunchbox_Ground",
+    "texture": "Clothes/Bag/SuQingFreshnessLunchbox"
+  },
+  "outputs": {
+    "models_X/Skinned/BackPacks/SuQingFreshnessLunchbox_RHand.x": {
+      "bytes": 96761,
+      "sha256": "fc5f195e211159ec4bd5e4aace97173f82dbdcc0a67f0ae3bf6ab005fa1e67dc"
+    },
+    "clothing/clothingItems/SuQingFreshnessLunchbox_RHand.xml": {
+      "bytes": 530,
+      "sha256": "8b93e70e0d1db92b64ead0d530f34b5029ce14e6087f15e053c209c2ec9f60d4"
+    },
+    "models_X/Skinned/BackPacks/SuQingFreshnessLunchbox_LHand.x": {
+      "bytes": 96289,
+      "sha256": "55f10e31f7ec674919896235b1897b96d582c5177060a56e08c0285d1b825da3"
+    },
+    "clothing/clothingItems/SuQingFreshnessLunchbox_LHand.xml": {
+      "bytes": 530,
+      "sha256": "6a1b26e4dae58b9d84c5862fdce299d85bb03abc38e604b148ca5b232274d0e9"
+    },
+    "fileGuidTable.xml": {
+      "bytes": 415,
+      "sha256": "85e6c8dfdf6eac7ac5b8514d6446ef8f59e4937061817b34e6d5dce643f0e72c"
+    },
+    "models_X/WorldItems/SuQingFreshnessLunchbox/SuQingFreshnessLunchbox_Ground.fbx": {
+      "bytes": 38640,
+      "sha256": "dc747871cbec8ac1f53bbbdaf63f7c5be1c4905d441602fa1ec14fd78fbc3e29"
+    },
+    "scripts/models_FreshnessLunchbox.txt": {
+      "bytes": 236,
+      "sha256": "dd2326dd77eb244d5d40eee2f490aeffca32e7be8a076bea82b000e2a68e10a6"
+    },
+    "textures/Clothes/Bag/SuQingFreshnessLunchbox.png": {
+      "bytes": 59463,
+      "sha256": "0060a604a6ec16dc8e151ec2057182195b876b6ab88d8d9d7a9e3ce1d143ebff"
+    },
+    "textures/Item_SuQingFreshnessLunchbox.png": {
+      "bytes": 2266,
+      "sha256": "e20b8887a7b7dac431d4836fdf2d6948b8c6e66a4f60feb38da3436636ae673e"
+    }
+  },
+  "models": {
+    "RHand": {
+      "format": "DirectX text 0303 / float32",
+      "vertices": 176,
+      "faces": 148,
+      "triangles": 148,
+      "bounds": [
+        [
+          -0.840838,
+          -0.172539,
+          -0.139213
+        ],
+        [
+          -0.783473,
+          -0.031902,
+          -0.012423
+        ]
+      ],
+      "uv_count": 176,
+      "uv_bounds": [
+        [
+          0.0,
+          0.062638
+        ],
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      "skin": [
+        {
+          "bone": "Bip01_R_Hand",
+          "vertices": 64
+        },
+        {
+          "bone": "Bip01_Prop1",
+          "vertices": 112
+        }
+      ],
+      "bone_count": 36
+    },
+    "LHand": {
+      "format": "DirectX text 0303 / float32",
+      "vertices": 176,
+      "faces": 148,
+      "triangles": 148,
+      "bounds": [
+        [
+          0.423685,
+          0.605595,
+          -0.028597
+        ],
+        [
+          0.547292,
+          0.714005,
+          0.121418
+        ]
+      ],
+      "uv_count": 176,
+      "uv_bounds": [
+        [
+          0.0,
+          0.062638
+        ],
+        [
+          1.0,
+          1.0
+        ]
+      ],
+      "skin": [
+        {
+          "bone": "Bip01_L_Forearm",
+          "vertices": 64
+        },
+        {
+          "bone": "Bip01_Prop2",
+          "vertices": 112
+        }
+      ],
+      "bone_count": 36
+    },
+    "Ground": {
+      "format": "FBX Binary",
+      "vertices": 80,
+      "faces": 148,
+      "triangles": 148,
+      "bounds": [
+        [
+          -2.872861385345459,
+          -7.036246299743652,
+          -0.007182121276855469
+        ],
+        [
+          2.8761544227600098,
+          7.036246299743652,
+          11.344350814819336
+        ]
+      ],
+      "uv_count": 116,
+      "uv_bounds": [
+        [
+          0.0,
+          -0.0
+        ],
+        [
+          1.0,
+          0.9373624920845032
+        ]
+      ],
+      "skin": [],
+      "bone_count": 0
+    }
+  },
+  "game_started": false,
+  "in_game_tested": false,
+  "viewpoint": "Static audit: native character ModelSlot/skin palette path; user visual acceptance required."
+}

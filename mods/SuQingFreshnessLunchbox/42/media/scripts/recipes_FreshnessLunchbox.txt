@@ -1,0 +1,55 @@
+module SuQingFreshnessLunchbox
+{
+    craftRecipe MakeFreshnessLunchboxFromLunchbox
+    {
+        Icon = Item_SuQingFreshnessLunchbox,
+        timedAction = MakingElectrical,
+        Time = 60,
+        NeedToBeLearn = False,
+        AllowBatchCraft = False,
+        Tags = InHandCraft,
+        category = SuQingFreshnessLunchbox,
+        ToolTip = Tooltip_SFL_CraftLunchbox,
+        OnTest = SuQingFreshnessLunchbox.Crafting.TestItem,
+        OnCreate = SuQingFreshnessLunchbox.Crafting.OnCreate,
+        inputs
+        {
+            item 1 [Base.Lunchbox;Base.Lunchbox2] mode:destroy flags[IsEmptyContainer;IsNotWorn;InheritCondition;ItemCount],
+            item 1 [Base.WristWatch_Left_DigitalBlack;Base.WristWatch_Right_DigitalBlack;Base.WristWatch_Left_DigitalRed;Base.WristWatch_Right_DigitalRed;Base.WristWatch_Left_DigitalDress;Base.WristWatch_Right_DigitalDress] mode:destroy flags[IsNotWorn;ItemCount],
+            item 1 [Base.Pocketwatch] mode:destroy flags[IsNotWorn;ItemCount],
+            item 1 [Base.WristWatch_Left_ClassicBlack;Base.WristWatch_Right_ClassicBlack;Base.WristWatch_Left_ClassicBrown;Base.WristWatch_Right_ClassicBrown;Base.WristWatch_Left_ClassicGold;Base.WristWatch_Right_ClassicGold;Base.WristWatch_Left_ClassicMilitary;Base.WristWatch_Right_ClassicMilitary] mode:destroy flags[IsNotWorn;ItemCount],
+            item 2 [Base.ElectricWire] mode:destroy flags[ItemCount],
+            item 1 tags[base:screwdriver] mode:keep flags[AllowFavorite;NoBrokenItems],
+        }
+        outputs
+        {
+            item 1 SuQingFreshnessLunchbox.FreshnessLunchbox,
+        }
+    }
+    craftRecipe MakeFreshnessLunchboxFromMetal
+    {
+        Icon = Item_SuQingFreshnessLunchbox,
+        timedAction = MakingElectrical,
+        Time = 60,
+        NeedToBeLearn = False,
+        AllowBatchCraft = False,
+        Tags = InHandCraft,
+        category = SuQingFreshnessLunchbox,
+        ToolTip = Tooltip_SFL_CraftMetal,
+        OnTest = SuQingFreshnessLunchbox.Crafting.TestItem,
+        OnCreate = SuQingFreshnessLunchbox.Crafting.OnCreate,
+        inputs
+        {
+            item 2 [Base.SmallSheetMetal] mode:destroy flags[ItemCount],
+            item 1 [Base.WristWatch_Left_DigitalBlack;Base.WristWatch_Right_DigitalBlack;Base.WristWatch_Left_DigitalRed;Base.WristWatch_Right_DigitalRed;Base.WristWatch_Left_DigitalDress;Base.WristWatch_Right_DigitalDress] mode:destroy flags[IsNotWorn;ItemCount],
+            item 1 [Base.Pocketwatch] mode:destroy flags[IsNotWorn;ItemCount],
+            item 1 [Base.WristWatch_Left_ClassicBlack;Base.WristWatch_Right_ClassicBlack;Base.WristWatch_Left_ClassicBrown;Base.WristWatch_Right_ClassicBrown;Base.WristWatch_Left_ClassicGold;Base.WristWatch_Right_ClassicGold;Base.WristWatch_Left_ClassicMilitary;Base.WristWatch_Right_ClassicMilitary] mode:destroy flags[IsNotWorn;ItemCount],
+            item 2 [Base.ElectricWire] mode:destroy flags[ItemCount],
+            item 1 tags[base:screwdriver] mode:keep flags[AllowFavorite;NoBrokenItems],
+        }
+        outputs
+        {
+            item 1 SuQingFreshnessLunchbox.FreshnessLunchbox,
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+  "tool": "built-in imagegen",
+  "prompt": "Use case: stylized-concept. Asset type: independently designed small game-mod icon for 「蘇清的返鲜餐盒 / SuQing's Freshness Lunchbox」. Create one finished square raster icon with a compact handled lunchbox as the large dominant silhouette. The object is a small hard-shell rectangular lunchbox with gently rounded corners, hinged lid and one arched single-hand carry handle, ivory white body, pale lavender lid and deep lavender trim, tiny gold time-restoration emblem. Add one simple purple rewind-arrow clock badge at upper right and one bright red apple with a green leaf at lower left, clear separated silhouettes. Premium crisp pixel-art-influenced anime game-item illustration, broad readable shapes and controlled highlights, white/lavender and purple/gold series palette. Flat deep plum square background with a restrained thin gold border. Must remain clear at 64px/128px; keep the lunchbox filling about 75% of canvas, safe padding, simplified details. NO TEXT, NO LETTERS, NO NUMERALS, NO title, no character, no room, no scenery, no watermark. Do not make a refrigerator or cooler chest; this is a single-hand carry lunchbox.",
+  "generated_original": "C:\\Users\\15792\\.codex\\generated_images\\01a1abf3-a00f-72f1-a96a-93db4fce4ecc\\exec-3cbf41d4-f976-4295-bf1b-98552367f1ec.png",
+  "project_source": "art/mod-icon-source.png",
+  "purpose": "Independently generated small mod icon; never a resized cover.",
+  "runtime_exports": [
+    "mods/SuQingFreshnessLunchbox/42/icon.png",
+    "mods/SuQingFreshnessLunchbox_ContainerUpgrade/42/icon.png"
+  ],
+  "shared_companion_art": true
+}

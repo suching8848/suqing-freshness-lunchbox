@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<fileGuidTable>
+    <files>
+        <path>media/clothing/clothingItems/SuQingFreshnessLunchbox_RHand.xml</path>
+        <guid>cb0d4e69-bafd-5d52-af74-e164a95929d4</guid>
+    </files>
+    <files>
+        <path>media/clothing/clothingItems/SuQingFreshnessLunchbox_LHand.xml</path>
+        <guid>4558539f-3072-562f-a229-48f79f4ae9d7</guid>
+    </files>
+</fileGuidTable>

@@ -1,0 +1,33 @@
+VERSION = 1,
+option SuQingFreshnessLunchbox.Enabled
+{
+    type = boolean,
+    default = true,
+    page = SuQingFreshnessLunchbox,
+    translation = SFL_Enabled,
+}
+option SuQingFreshnessLunchbox.BaseCapacity
+{
+    type = integer,
+    min = 1,
+    max = 30,
+    default = 4,
+    page = SuQingFreshnessLunchbox,
+    translation = SFL_BaseCapacity,
+}
+option SuQingFreshnessLunchbox.RestoreHours
+{
+    type = double,
+    min = 0.25,
+    max = 1000.0,
+    default = 10.0,
+    page = SuQingFreshnessLunchbox,
+    translation = SFL_RestoreHours,
+}
+option SuQingFreshnessLunchbox.AllowRotten
+{
+    type = boolean,
+    default = true,
+    page = SuQingFreshnessLunchbox,
+    translation = SFL_AllowRotten,
+}

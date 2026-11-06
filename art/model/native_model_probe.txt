@@ -1,0 +1,5 @@
+NATIVE_MODEL models_X/Skinned/BackPacks/SuQingFreshnessLunchbox_RHand.x vertices=444 faces=148 bones=2 PASS
+NATIVE_MODEL models_X/Skinned/BackPacks/SuQingFreshnessLunchbox_LHand.x vertices=444 faces=148 bones=2 PASS
+NATIVE_MODEL models_X/WorldItems/SuQingFreshnessLunchbox/SuQingFreshnessLunchbox_Ground.fbx vertices=444 faces=148 bones=0 PASS
+NATIVE_MODEL_SCRIPT mesh/texture/scale PASS
+NATIVE_ASSET_SUMMARY assertions=6685 failures=0 game_started=false world_created=false gl_context=false
