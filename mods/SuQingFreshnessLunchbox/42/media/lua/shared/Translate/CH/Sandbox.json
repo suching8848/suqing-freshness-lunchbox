@@ -1,11 +1,11 @@
 {
   "Sandbox_SuQingFreshnessLunchbox": "蘇清的返鲜餐盒",
   "Sandbox_SFL_Enabled": "开启返鲜功能",
-  "Sandbox_SFL_Enabled_tooltip": "保留餐盒和内容物，关闭期间不累计返鲜时间。",
+  "Sandbox_SFL_Enabled_tooltip": "關閉後無法開啟新批次，已封盒的批次會繼續。",
   "Sandbox_SFL_BaseCapacity": "新餐盒首次初始化容量",
   "Sandbox_SFL_BaseCapacity_tooltip": "默认4，范围1–30。每个餐盒只设置一次；之后更改沙盒不会覆盖已有餐盒、强化容量或首次规格还原。",
-  "Sandbox_SFL_RestoreHours": "恢复一个完整新鲜期所需游戏小时",
-  "Sandbox_SFL_RestoreHours_tooltip": "默认10，范围0.25–1000，越小越快。按各食品自身的原生新鲜期计算，不表示所有食品都在同一固定时间归零。",
   "Sandbox_SFL_AllowRotten": "允许变质食品返鲜",
-  "Sandbox_SFL_AllowRotten_tooltip": "逐渐恢复仍存在的变质食品。烧焦、受精蛋和没有标准保鲜期的食品不处理；不去毒素或污染。"
+  "Sandbox_SFL_AllowRotten_tooltip": "允許仍存在的腐壞食物進行批次返鮮。",
+  "Sandbox_SFL_BatchHours": "批次返鮮時間（遊戲小時）",
+  "Sandbox_SFL_BatchHours_tooltip": "預設12，範圍0.25–24。開始時固定本批次時間。"
 }

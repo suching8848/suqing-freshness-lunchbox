@@ -1,4 +1,4 @@
-require "SuQingFreshnessLunchbox/Core"
+require "SuQingFreshnessLunchbox/Batch"
 local C=SuQingFreshnessLunchbox
 C.Crafting=C.Crafting or {}
 local F=C.Crafting
@@ -30,6 +30,7 @@ end
 -- used, so food from other mods may retain their own display categorization.
 function C.AcceptFood(container,item)
     return item~=nil and type(instanceof)=="function" and instanceof(item,"Food")
+        and not C.Batch.IsLockedContainer(container)
 end
 
 function F.SourceAllowed(item,character)

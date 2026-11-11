@@ -1,42 +1,58 @@
-require "SuQingFreshnessLunchbox/Core"
+require "SuQingFreshnessLunchbox/Batch"
+require "SuQingFreshnessLunchbox_Lock"
 local C=SuQingFreshnessLunchbox
-local function addBox(context,item,seen)
+local B=C.Batch
+local function remaining(batch)
+    if type(batch)~="table" or not C.Finite(batch.endsAt) then return nil end
+    return math.max(0,math.ceil((batch.endsAt-getGameTime():getWorldAgeHours())*60))
+end
+
+local function addBox(context,item,seen,playerIndex)
     if not C.IsBox(item) or seen[item] then return end
     seen[item]=true
-    local state=C.EnsureBox(item)
-    if not state then return end
-    local key=state.on and 'IGUI_SFL_TurnOff' or 'IGUI_SFL_TurnOn'
-    local option=context:addOption(getText(key),item,function(box)
-        if C.Runtime and C.Runtime.Toggle then C.Runtime.Toggle(box) end
-    end)
-    local available=C.Runtime and C.Runtime.ready and C.Runtime.operational==true
-    if not available then option.notAvailable=true end
-    if ISToolTip then
-        local cfg=C.Config()
-        local status
-        if not C.Runtime or type(C.Runtime.Toggle)~='function' then status='IGUI_SFL_Unavailable'
-        elseif C.Runtime.failed or C.Runtime.status=='error' then status='IGUI_SFL_Error'
-        elseif not available then status=C.Runtime.status=='stopped' and 'IGUI_SFL_Stopped' or 'IGUI_SFL_Starting'
-        else status=not cfg.enabled and 'IGUI_SFL_GlobalOff' or (state.on and 'IGUI_SFL_On' or 'IGUI_SFL_Off') end
-        local tip=ISToolTip:new();tip:initialise();tip:setVisible(false)
-        tip.description=getText(status)..' <LINE> '..
-            getText('IGUI_SFL_Rate',tostring(cfg.restoreHours))..' <LINE> '..
-            getText('IGUI_SFL_Capacity',tostring(item:getInventory():getCapacity()))..' <LINE> '..
-            getText('IGUI_SFL_TimeScope')
-        local runtimeStatus=C.GetStatus(item)
-        if cfg.allowRotten and not runtimeStatus.removalSafe then
-            tip.description=tip.description..' <LINE> '..getText('IGUI_SFL_RottenRemovalLimit')
-        end
-        option.toolTip=tip
+    local sealed=B.IsSealed(item)
+    local runtime=C.Runtime
+    local available=runtime and runtime.CanStartBatch and runtime.CanStartBatch()
+    local enabled=C.Config().enabled
+    local minutes=sealed and remaining(B.Get(item))
+    local label=getText('IGUI_SFL_SealBatch')
+    if sealed then
+        label=not minutes and getText('IGUI_SFL_BatchSealed')
+            or minutes==0 and getText('IGUI_SFL_BatchReady')
+            or getText('IGUI_SFL_BatchRemaining',tostring(minutes))
     end
+    local option=context:addOption(label,item,function(box)
+        if not runtime or not runtime.StartBatch then return end
+        local ok,reason=runtime.StartBatch(box)
+        if ok then return end
+        local player=getSpecificPlayer(playerIndex)
+        local reasonText=getTextOrNull('IGUI_SFL_BatchReason_'..tostring(reason))
+        if player then
+            player:Say(reasonText or getText('IGUI_SFL_BatchRejected'))
+        end
+    end)
+    option.notAvailable=sealed or not available or not enabled
+    if not ISToolTip then return end
+    local status
+    if sealed then status=getText('IGUI_SFL_BatchLocked')
+    elseif not enabled then status=getText('IGUI_SFL_GlobalOff')
+    elseif runtime and (runtime.failed or runtime.status=='error') then status=getText('IGUI_SFL_Error')
+    elseif runtime and runtime.operational and not available then
+        status=getText('IGUI_SFL_BatchReason_lock_unavailable')
+    elseif not available then status=getText('IGUI_SFL_Starting')
+    else status=getText('IGUI_SFL_BatchInfo',tostring(B.Hours())) end
+    local tip=ISToolTip:new();tip:initialise();tip:setVisible(false)
+    tip.description=status..' <LINE> '..
+        getText('IGUI_SFL_Capacity',tostring(item:getInventory():getCapacity()))
+    option.toolTip=tip
 end
 local function inventoryMenu(playerIndex,context,items)
     if not C.SP() then return end
     local seen={}
     for _,entry in ipairs(items) do
         if type(entry)=='table' and entry.items then
-            for _,item in ipairs(entry.items) do addBox(context,item,seen) end
-        else addBox(context,entry,seen) end
+            for _,item in ipairs(entry.items) do addBox(context,item,seen,playerIndex) end
+        else addBox(context,entry,seen,playerIndex) end
     end
 end
 local function worldMenu(playerIndex,context,objects,test)
@@ -48,7 +64,9 @@ local function worldMenu(playerIndex,context,objects,test)
         return
     end
     local seen={}
-    for _,object in ipairs(objects) do if object.getItem then addBox(context,object:getItem(),seen) end end
+    for _,object in ipairs(objects) do
+        if object.getItem then addBox(context,object:getItem(),seen,playerIndex) end
+    end
 end
 Events.OnFillInventoryObjectContextMenu.Add(inventoryMenu)
 Events.OnFillWorldObjectContextMenu.Add(worldMenu)

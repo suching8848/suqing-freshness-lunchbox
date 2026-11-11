@@ -1,4 +1,4 @@
 {
   "name": "SuQing's Freshness Lunchbox",
-  "description": "Moves the regular bottom attachment upward toward the Legendary Backpack base. Fixes B42.21 vehicle Set iteration, attached model registration and long item tooltips. 0.1.0-rc.8 single-player backpack-bottom attachment candidate. Uses existing normal, large or ALICE bedroll/tent slots, shared with their original items; adds no slots or mandatory backpack dependency. A dedicated attached model reuses the current mesh and texture. Attached boxes retain container access, food storage and freshness restoration. Ordinary Container Upgrades 1.0.3 requires detaching and emptying before upgrades/restoration. Retains either-hand carrying, food restrictions, starting capacity 4/weight 1/reduction 50%, sandbox settings, upgrade records and the rc.5 ground outline. Item IDs and foods stay intact. Offline candidate only; positioning, animations, Viewpoint and save/reload require user acceptance."
+  "description": "Load perishable food and start a batch from the lunchbox context menu. It stays sealed until the food is fresh. B42.22.2 single-player test build."
 }

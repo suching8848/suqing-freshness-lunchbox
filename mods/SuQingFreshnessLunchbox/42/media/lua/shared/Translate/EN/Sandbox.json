@@ -1,11 +1,11 @@
 {
   "Sandbox_SuQingFreshnessLunchbox": "SuQing's Freshness Lunchbox",
   "Sandbox_SFL_Enabled": "Enable freshness restoration",
-  "Sandbox_SFL_Enabled_tooltip": "Preserves the lunchbox and contents. Disabled intervals do not earn restoration credit.",
+  "Sandbox_SFL_Enabled_tooltip": "Disabling this prevents new batches. Sealed batches continue.",
   "Sandbox_SFL_BaseCapacity": "Starting capacity of newly initialized lunchboxes",
   "Sandbox_SFL_BaseCapacity_tooltip": "Default 4, range 1–30. Applied only once to each new lunchbox. Existing boxes, upgrades and original-stat restoration are never overwritten by later sandbox changes.",
-  "Sandbox_SFL_RestoreHours": "Game hours to restore one full fresh-life interval",
-  "Sandbox_SFL_RestoreHours_tooltip": "Default 10, range 0.25–1000. Lower is faster. Each food uses its own native fresh-life threshold; this is not a fixed completion duration for every item.",
   "Sandbox_SFL_AllowRotten": "Allow restoration of rotten food",
-  "Sandbox_SFL_AllowRotten_tooltip": "Allows gradual recovery of rotten food that still exists. Burnt food, fertilized eggs and unsupported shelf-life types are excluded. Does not remove poison or contamination."
+  "Sandbox_SFL_AllowRotten_tooltip": "Allows batches containing rotten food that still exists.",
+  "Sandbox_SFL_BatchHours": "Batch restoration duration (game hours)",
+  "Sandbox_SFL_BatchHours_tooltip": "Default 12, range 0.25–24. Each batch keeps the duration selected at the start."
 }

@@ -1,5 +1,5 @@
 {
-  "Tooltip_SFL_Item": "Food only; restores freshness while enabled. Fits a backpack bottom tent slot. Detach and empty before upgrades or restoration.",
+  "Tooltip_SFL_Item": "Food only. Right-click to seal and restore freshness. Contents unlock when finished.",
   "Tooltip_SFL_CraftLunchbox": "Requires one empty, unmodified vanilla lunchbox, one pocket watch, one digital watch, one classic analog wristwatch and two electric wires. Screwdriver retained. Unfavorite materials and remove the source lunchbox and watches from equipped slots. No batteries or electronic scrap.",
   "Tooltip_SFL_CraftMetal": "Requires two small metal sheets, one pocket watch, one digital watch, one classic analog wristwatch and two electric wires. Screwdriver retained. Three separate watch objects are consumed. No batteries or electronic scrap."
 }

@@ -30,14 +30,21 @@ def execute(label,command,home):
     return output
 
 def main():
-    global GAME
+    global GAME, LOGS, REPORT
     parser=argparse.ArgumentParser()
     parser.add_argument('--game',type=Path,default=GAME)
     parser.add_argument('--javac',type=Path)
     parser.add_argument('--mock-only',action='store_true')
-    parser.add_argument('--cooling-root',type=Path,default=Path(os.environ.get('USERPROFILE','~'))/'Zomboid'/'mods'/'SuQingRefrigerationUpgrade_4221'/'42')
-    parser.add_argument('--fridge-root',type=Path,default=Path(os.environ.get('USERPROFILE','~'))/'Zomboid'/'mods'/'SuQingFreshnessFridge'/'42')
+    parser.add_argument('--output',type=Path,default=TESTS,
+                        help='Directory for reports, logs, helper classes and isolated profiles')
+    parser.add_argument('--legacy-core',action='store_true',
+                        help='Also exercise the retained pre-batch Core API with native Food objects')
     args=parser.parse_args()
+    if args.mock_only and args.legacy_core:
+        parser.error('--legacy-core requires native testing')
+    output=args.output.resolve()
+    LOGS=output/'runtime_validation'
+    REPORT=output/'runtime_validation.json'
     game=args.game.resolve()
     GAME=game
     jar=game/'projectzomboid.jar'
@@ -49,53 +56,58 @@ def main():
     if not jar.is_file() or not java.is_file() or not javac or not javac.is_file():
         raise RuntimeError('Current game JAR/runtime and a local javac are required')
     LOGS.mkdir(parents=True,exist_ok=True)
-    classes=TESTS/'runtime_classes';classes.mkdir(exist_ok=True)
+    classes=output/'runtime_classes';classes.mkdir(exist_ok=True)
     sources=sorted((ROOT/'tools').glob('runtime_*.java'))
-    execute('javac',[javac,'-encoding','UTF-8','-d',classes,*sources],TESTS/'runtime_compile_home')
+    execute('javac',[javac,'-encoding','UTF-8','-d',classes,*sources],output/'runtime_compile_home')
     cp=os.pathsep.join(str(v) for v in (classes,game,jar,game/'*'))
-    def jcmd(name,home,*files): return [java,f'-Duser.home={home}', '-cp',cp,name,*files]
+
+    def run(label, runner, *files):
+        home=output/f'runtime_{label}_home'
+        return execute(label,[java,'-XX:-UsePerfData','--enable-native-access=ALL-UNNAMED',
+                              f'-Duser.home={home}','-cp',cp,runner,*files],home)
+
     lua=sorted((ROOT/'mods').rglob('*.lua'))
-    compile_log=execute('compile',jcmd('runtime_LuaCompile',TESTS/'runtime_compile_home',*lua),TESTS/'runtime_compile_home')
-    core=ROOT/'mods'/'SuQingFreshnessLunchbox'/'42'/'media'/'lua'/'shared'/'SuQingFreshnessLunchbox'/'Core.lua'
-    runtime=ROOT/'mods'/'SuQingFreshnessLunchbox'/'42'/'media'/'lua'/'client'/'SuQingFreshnessLunchbox_Runtime.lua'
-    mock_log=execute('mock',jcmd('runtime_KahluaAudit',TESTS/'runtime_mock_home',TESTS/'runtime_mock_bootstrap.lua',core,runtime,TESTS/'runtime_mock_cases.lua'),TESTS/'runtime_mock_home')
-    m=re.search(r'RUNTIME_MOCK cases=(\d+) assertions=(\d+) PASS',mock_log)
-    if not m: raise RuntimeError('Missing mock summary')
-    n=None
-    combination={}
-    combination_mock=None
+    run('compile','runtime_LuaCompile',*lua)
+    mod_lua=ROOT/'mods'/'SuQingFreshnessLunchbox'/'42'/'media'/'lua'
+    shared=mod_lua/'shared'/'SuQingFreshnessLunchbox'
+    core=shared/'Core.lua'
+    batch=shared/'Batch.lua'
+    craft=shared/'Crafting.lua'
+    runtime=mod_lua/'client'/'SuQingFreshnessLunchbox_Runtime.lua'
+    lock=mod_lua/'client'/'SuQingFreshnessLunchbox_Lock.lua'
+    mock_bootstrap=TESTS/'runtime_mock_bootstrap.lua'
+    mock_log=run('mock','runtime_KahluaAudit',mock_bootstrap,core,batch,craft,runtime,
+                 TESTS/'runtime_batch_cases.lua')
+    mock=re.search(r'RUNTIME_BATCH cases=(\d+) assertions=(\d+) failures=0',mock_log)
+    if not mock:
+        raise RuntimeError('Missing batch mock summary')
+    lock_log=run('lock','runtime_KahluaAudit',mock_bootstrap,core,batch,craft,lock,
+                 TESTS/'runtime_batch_lock_cases.lua')
+    lock_result=re.search(r'RUNTIME_BATCH_LOCK assertions=(\d+) PASS',lock_log)
+    if not lock_result:
+        raise RuntimeError('Missing batch lock summary')
+    native=None
+    legacy=None
     if not args.mock_only:
-        native_files=[TESTS/'runtime_native_bootstrap.lua',core,TESTS/'runtime_native_cases.lua']
-        cold_files=[args.cooling_root/'media'/'lua'/'shared'/'SuQingRefrigeration'/'Core.lua',args.cooling_root/'media'/'lua'/'client'/'SuQingRefrigeration_Runtime.lua']
-        fridge_file=args.fridge_root/'media'/'lua'/'shared'/'SuQingFreshnessFridge'/'Core.lua'
-        fridge_runtime=args.fridge_root/'media'/'lua'/'client'/'SuQingFreshnessFridge_Runtime.lua'
-        if all(p.is_file() for p in cold_files):
-            native_files.extend(cold_files)
-            combination['cooling']={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in cold_files}
-            if fridge_file.is_file():
-                native_files.append(fridge_file)
-                combination['fridge']={str(fridge_file):hashlib.sha256(fridge_file.read_bytes()).hexdigest()}
-            if fridge_file.is_file() and fridge_runtime.is_file():
-                combination['fridge'][str(fridge_runtime)]=hashlib.sha256(fridge_runtime.read_bytes()).hexdigest()
-                combination_log=execute('combination_mock',jcmd('runtime_KahluaAudit',TESTS/'runtime_combination_home',TESTS/'runtime_mock_bootstrap.lua',core,runtime,*cold_files,fridge_file,fridge_runtime,TESTS/'runtime_mock_combination.lua'),TESTS/'runtime_combination_home')
-                combination_mock=re.search(r'RUNTIME_COMBINATION_MOCK cases=(\d+) assertions=(\d+) PASS',combination_log)
-                if not combination_mock: raise RuntimeError('Missing combination runtime mock summary')
-            native_files.append(TESTS/'runtime_native_combination.lua')
-        native_log=execute('native',jcmd('runtime_NativeProbe',TESTS/'runtime_native_home',*native_files),TESTS/'runtime_native_home')
-        n=re.search(r'RUNTIME_NATIVE(?:_BASE)? cases=(\d+) assertions=(\d+) PASS',native_log)
-        all_native=list(re.finditer(r'RUNTIME_NATIVE(?:_BASE)? cases=(\d+) assertions=(\d+) PASS',native_log))
-        if all_native: n=all_native[-1]
-        if not n: raise RuntimeError('Missing native summary')
+        native_bootstrap=TESTS/'runtime_native_bootstrap.lua'
+        native_log=run('native','runtime_NativeProbe',native_bootstrap,core,batch,TESTS/'runtime_batch_native_cases.lua')
+        native=re.search(r'RUNTIME_BATCH_NATIVE cases=(\d+) assertions=(\d+) PASS',native_log)
+        if not native:
+            raise RuntimeError('Missing native batch summary')
+        if args.legacy_core:
+            legacy_log=run('legacy_native','runtime_NativeProbe',native_bootstrap,core,TESTS/'runtime_native_cases.lua')
+            legacy=re.search(r'RUNTIME_NATIVE_BASE cases=(\d+) assertions=(\d+) PASS',legacy_log)
+            if not legacy:
+                raise RuntimeError('Missing retained native Core summary')
     report={'result':'PASS','checked_utc':datetime.now(timezone.utc).isoformat(),'game_started':False,'world_created':False,'in_game_tested':False,
-        'world_cell_created':False,'world_loaded':False,'native_singleton_initialized':bool(n),
+        'world_cell_created':False,'world_loaded':False,'native_singleton_initialized':bool(native),
         'game_jar':str(jar),'game_jar_sha256':hashlib.sha256(jar.read_bytes()).hexdigest(),'lua_compiled':len(lua),
-        'mock_cases':int(m[1]),'mock_assertions':int(m[2]),'native_cases':int(n[1]) if n else 0,'native_assertions':int(n[2]) if n else 0,'combination_sources':combination,
-        'combination_mock_cases':int(combination_mock[1]) if combination_mock else 0,'combination_mock_assertions':int(combination_mock[2]) if combination_mock else 0,
-        'limits':['Only single-player method-level and simulated ownership tests; user must perform in-game acceptance.',
-          'Current negative native rotten-removal policy uses true Age; enabled/unknown removal refuses unsafe rotten restoration.',
-          'Uncovered/disabled/truncated gameplay history reanchors conservatively, without retroactive restoration.',
-          'Unrecognized Java code changing both Age and lastAged cannot be reliably distinguished from native aging.'],
-        'logs':str(LOGS),'source_sha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [core,runtime]}}
+        'mock_cases':int(mock[1]),'mock_assertions':int(mock[2]),'lock_assertions':int(lock_result[1]),
+        'native_cases':int(native[1]) if native else 0,'native_assertions':int(native[2]) if native else 0,
+        'legacy_native_cases':int(legacy[1]) if legacy else 0,'legacy_native_assertions':int(legacy[2]) if legacy else 0,
+        'limits':['Single-player method-level and simulated ownership tests only.',
+                  'Inventory UI, full save reload and frame-time acceptance require the game.'],
+        'logs':str(LOGS),'source_sha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [core,batch,craft,runtime,lock]}}
     REPORT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(report,ensure_ascii=False))
     return 0

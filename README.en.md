@@ -2,11 +2,15 @@
 
 Current item identity, visibility and upload status: [workshop-item.json](publishing/workshop-item.json). Frozen manifests under release/ retain their preparation-time state; an old uploaded=false value there does not describe the current Steam item.
 
-Workshop item: [the existing public item](https://steamcommunity.com/sharedfiles/filedetails/?id=3834693433). Live Steam SDK confirmed public visibility on2026-11-07. The authorized source update is pushed to Git, and native Steam SDK readback verified the public Workshop update. See publishing/publication-20261107.json for the verified publication scope. Old frozen snapshots retain their historical meaning.
+Version **0.1.0-rc.8-perf.8** was verified on public Workshop item 3834693433 on 2026-11-07. [Workshop item](https://steamcommunity.com/sharedfiles/filedetails/?id=3834693433) · [Publication record](publishing/publication-20261107.json)
 
-**0.1.0-rc.8-perf.8**, a Project Zomboid B42.21 single-player source candidate. This project contains one Mod ID: `SuQingFreshnessLunchbox`. Item: `SuQingFreshnessLunchbox.FreshnessLunchbox`.
+**0.2.0-rc.4** is a Project Zomboid B42.22.2 single-player batch restoration candidate. The mod ID is `SuQingFreshnessLunchbox` and the item ID is `SuQingFreshnessLunchbox.FreshnessLunchbox`.
 
-A separate native food container based on the vanilla lunchbox, with independent left/right one-hand appearances. Directly stored eligible Food keeps its original identity and gradually loses age according to its own native fresh-life interval. All foods are processed together. Supported positions include carried inventories, hands, ground, furniture and vehicles. Previously recorded food may earn unloaded game-time restoration only when item/box identity, switch state and actually enabled session/policy coverage remain provable. Real time outside the game, switched-off intervals and mod-disabled sessions earn no restoration.
+Preserves Loot Tracker 1.8.5 search tracking and sealed-container restrictions when they share inventory selection.
+
+The optional SuQing's Lunchbox Attached Weight Fix, `SuQingLunchboxAttachedWeight_4222`, applies the current container reduction to the contents of a backpack-bottom lunchbox. It supports B42.22.2 single-player and requires ZombieBuddy 2.3.4 and Java mod approval. The Workshop item contains both mods. Enable the weight fix separately alongside the lunchbox and ZombieBuddy, approve its Java mod, and fully restart. Disable the fix and restart to resume native attached weight. Native checks passed offline. The local game log confirms that ZombieBuddy loaded and applied the patch. Gameplay weight measurement is pending.
+
+Load eligible food and start a batch from the lunchbox context menu. The sealed box can be moved as a whole. Access to its contents stays locked while the batch runs. At the deadline, the batch restores the recorded items to fresh and unlocks. An overdue batch completes once the box is loaded again. The clock follows game time.
 
 The earlier **rc.5 ground-outline correction** follows the user's report that the remaining visible issue is outline alignment. That report does not establish exhaustive compatibility acceptance. A separate transparent 32×32 world sprite is rendered offline from the actual ground FBX, current material and native projection parameters, then selected through the native `UseWorldItem` fallback. Inventory art, models, freshness behavior, recipes, ordinary upgrades and sandbox rules are retained.
 
@@ -66,7 +70,7 @@ The development phase prepared a candidate only. The user subsequently authorize
 - Ordinary Container Upgrades 1.0.3 retains all five tiers and restoration. A narrow attached-lunchbox guard requires detaching and emptying before either operation; other targets, payment records, refunds and the existing EX crafting chain remain.
 - Weight follows the current native `getHotbarEquippedWeight`: the ordinary attached path uses approximately 70% of the lunchbox's own weight plus contents. It does not use the hand/worn container WeightReduction or stack the backpack's reduction. Paid capacity/reduction values remain stored and normal native ownership rules resume after detaching. This candidate adds no special weight discount.
 - Existing boxes obtain the current attachment type and StaticModel from the current item script when reloaded. No new item ID, recrafting, food migration or ModData conversion. Freshness calculations, sandbox options, crafting costs, food restrictions and existing art remain.
-- 42.21 single-player only. Native parser and simulated checks do not establish visuals or gameplay. Normal/Viewpoint rendering, walking/running/crouching, backpack changes/removal, slot replacement, food access and save/reload require user acceptance. Model anchors are calibrated offline; actual clipping/orientation remain unverified.
+- This section records the earlier B42.21 single-player attachment checks. Native parser and simulated checks do not establish visuals or gameplay. Normal/Viewpoint rendering, walking/running/crouching, backpack changes/removal, slot replacement, food access and save/reload require user acceptance. Model anchors are calibrated offline; actual clipping/orientation remain unverified.
 
 See `docs/attachment-candidate-20261107.txt` for the handoff. Historical frozen releases are retained. No enable lists, saves, user settings, Git commits or publication state are changed.
 
@@ -81,14 +85,11 @@ See `docs/attachment-candidate-20261107.txt` for the handoff. Historical frozen 
 ## Defaults and settings
 
 - Capacity **4**, weight **1.0**, weight reduction **50%**, based on the installed vanilla `Base.Lunchbox`.
-- Independent sandbox settings: master switch, initial base capacity, restoration hours and rotten-food support.
-- Base capacity defaults to 4, range 1–30, and applies only on a new box's first initialization. Later slider changes never overwrite an existing instance or upgrade record.
-- Restoration hours default to 10, range 0.25–1000. Every credited game hour subtracts `native fresh-life interval / RestoreHours` from age, down to 0. At 0.25, one complete fresh-life interval is recovered per 15 effective game minutes; deeply rotten food can take longer.
-- Rotten food is allowed by default. Only directly stored standard perishable Food is processed. Burnt food, fertilized eggs and unsupported lifetimes are excluded. Portions, poison, contamination and cooking state are preserved.
-
-If the world's vanilla rotten-food removal setting is nonnegative or cannot be read reliably, already rotten food is skipped and the context tooltip explains the restriction. The world setting is never changed. Rotten-food restoration requires a negative removal value; the candidate does not temporarily disguise rotten food as fresh to evade native deletion.
-
-Catch-up retains at most 128 enabled/policy segments. First insertion, changed boxes, missing history, external Lua age edits or unprovable continuity establish a new starting point without past restoration. Intervals outside retained history receive no credit. Other mods directly changing both age and timestamps through Java cannot be identified completely and remain an unverified compatibility boundary.
+- Lunchbox sandbox settings cover the master switch, initial capacity, batch duration and rotten-food permission. The fridge uses its own settings.
+- Base capacity defaults to 4, range 1–30, and applies once to new lunchboxes. Existing boxes and upgrades retain their capacity.
+- `SuQingFreshnessLunchbox.BatchHours` defaults to **12 game hours**, range **0.25–24**. Each batch keeps the deadline set when it starts. The master switch controls new batches.
+- Each batch accepts directly stored food with supported perishable lifetimes. Remove burnt food, fertilized eggs, tainted food and unsupported items before starting. Rotten-food eligibility follows the sandbox setting.
+- Completion keeps the original items, including their portions, cooking state, poison and contamination, and restores the original spoilage and cooking attributes. Finish active batches before disabling or rolling back the mod. Mods that manipulate native inventories directly require separate validation.
 
 The vanilla `MaxItemSize=1` is preserved and the container accepts standard Food only. Actual drag/drop and third-party food combinations require user acceptance; added capacity does not remove size restrictions. Continuous power and battery replacement are outside this candidate's mechanics.
 

@@ -28,5 +28,18 @@
   "IGUI_SFL_Error": "Lunchbox freshness restoration stopped after an error. Save and reload to try again.",
   "IGUI_SFL_AttachmentReady": "Freshness lunchbox supports %1 existing backpack bottom attachment types.",
   "IGUI_SFL_AttachmentSkipped": "Freshness lunchbox attachment integration skipped: %1. Existing attachment slots are unchanged.",
-  "IGUI_SFL_AttachedGuardUnavailable": "Lunchbox attachment compatibility is unavailable (%1 %2)."
+  "IGUI_SFL_AttachedGuardUnavailable": "Lunchbox attachment compatibility is unavailable (%1 %2).",
+  "IGUI_SFL_SealBatch": "Seal lunchbox and start restoration",
+  "IGUI_SFL_BatchSealed": "Lunchbox sealed",
+  "IGUI_SFL_BatchRemaining": "Restoring · %1 game minutes left",
+  "IGUI_SFL_BatchReady": "Restoration due, waiting to unseal",
+  "IGUI_SFL_BatchLocked": "The lunchbox cannot be opened or accessed while sealed.",
+  "IGUI_SFL_BatchInfo": "Sealed for %1 game hours. You can move the whole lunchbox.",
+  "IGUI_SFL_BatchRejected": "Could not start a sealed batch.",
+  "IGUI_SFL_BatchReason_empty": "Add food to restore first.",
+  "IGUI_SFL_BatchReason_unsafe_food": "Some food cannot be safely sealed, such as tainted food or fertilized eggs. Remove it and try again.",
+  "IGUI_SFL_BatchReason_guard_present": "Some food has a pending protection record. Reload the save.",
+  "IGUI_SFL_BatchReason_lock_unavailable": "The lunchbox access lock is unavailable.",
+  "IGUI_SFL_BatchReason_seal_failed": "Sealing failed. Check the lunchbox contents.",
+  "IGUI_SFL_BatchReason_recovery_required": "This batch needs recovery. Keep the save and check the log."
 }

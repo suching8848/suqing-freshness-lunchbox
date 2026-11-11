@@ -3,7 +3,7 @@ SuQingFreshnessLunchbox=SuQingFreshnessLunchbox or {}
 local C=SuQingFreshnessLunchbox
 if C.coreLoaded then return C end
 C.coreLoaded=true
-C.version="0.1.0-rc.8-perf.8"
+C.version="0.2.0-rc.4"
 C.FullType="SuQingFreshnessLunchbox.FreshnessLunchbox"
 C.boxKey="SuQingFreshnessLunchbox"
 C.foodKey="SuQingFreshnessLunchboxFood"
@@ -12,6 +12,7 @@ C.historyLimit=128
 C.ownAgeWrites=setmetatable({}, {__mode="k"})
 C.coolingWrites=setmetatable({}, {__mode="k"})
 C.pending=setmetatable({}, {__mode="k"})
+local observed=setmetatable({}, {__mode="v"})
 
 function C.Finite(value)
     return type(value)=="number" and value==value and value>-math.huge and value<math.huge
@@ -75,10 +76,15 @@ end
 function C.IsFood(food)
     return food and type(instanceof)=="function" and instanceof(food,"Food") or false
 end
-function C.IsDirectFood(food,box)
+function C.IsDirectFood(food,box,listedIndex)
     local inventory=C.GetInventory(box)
-    return C.IsFood(food) and inventory~=nil and food:getContainer()==inventory
-        and inventory:getItems():contains(food) or false
+    if not C.IsFood(food) or not inventory or food:getContainer()~=inventory then return false end
+    local items=inventory:getItems()
+    -- A hint comes from a real list enumeration, and is never an ownership cache.
+    if listedIndex~=nil and listedIndex>=0 and listedIndex<items:size() and items:get(listedIndex)==food then
+        return true
+    end
+    return items:contains(food)
 end
 function C.Identity(food)
     return food.getID and tostring(food:getID()) or "unknown",food:getFullType()
@@ -102,12 +108,15 @@ function C.RemovalPolicy()
     local n=SandboxVars and SandboxVars.DaysForRottenFoodRemoval
     return C.Finite(n) and n or nil
 end
-function C.PolicyReason(food,config)
-    local fresh,rotten=C.Eligible(food,config or C.Config())
+local function policyReason(food,fresh,rotten)
     if not fresh then return rotten end
     local removal=C.RemovalPolicy()
     if food:getAge()>=rotten and (not removal or removal>=0) then return "native_removal_policy" end
     return nil
+end
+function C.PolicyReason(food,config)
+    local fresh,rotten=C.Eligible(food,config or C.Config())
+    return policyReason(food,fresh,rotten)
 end
 local function signature(food,fresh,rotten)
     return food:getFullType()..":"..tostring(fresh)..":"..tostring(rotten)..":"
@@ -234,12 +243,15 @@ function C.RestoreFood(food)
     return true,"restored"
 end
 function C.ClearFood(food)
-    if not C.IsFood(food) then return end
+    local record=C.FoodRecord(food)
+    if not record then return end
+    local md=food:getModData()
     C.RestoreFood(food)
-    if C.FoodRecord(food) then food:getModData()[C.foodKey]=nil end
+    -- Restoring the native rule can call back into the transfer chain.
+    if md[C.foodKey]==record then md[C.foodKey]=nil end
 end
-function C.ProtectFood(food,box)
-    if not C.IsDirectFood(food,box) then return false end
+function C.ProtectFood(food,box,listedIndex)
+    if not C.IsDirectFood(food,box,listedIndex) then return false end
     local r=C.FoodRecord(food)
     local state=C.BoxState(box)
     if not r or not r.active or not state or not state.on then return false end
@@ -291,6 +303,7 @@ local function appendSegment(t,session,time,config,paused)
     return s
 end
 function C.OpenTimeline(t,time,config,paused)
+    observed[1]=nil
     if not C.Finite(time) then return nil,"invalid_clock" end
     local empty=true
     for _ in pairs(t) do empty=false;break end
@@ -305,7 +318,8 @@ function C.OpenTimeline(t,time,config,paused)
     appendSegment(t,session,time,config or C.Config(),paused)
     return session
 end
-function C.ObserveTimeline(t,session,time,config,paused)
+function C.ObserveTimeline(t,session,time,config,paused,wantContext)
+    observed[1]=nil
     if not C.ValidTimeline(t) or t.session~=session or not C.Finite(time) then return false,"invalid_timeline" end
     if time<t.lastTime then return false,"clock_reversed" end
     local current=t.segments[t.current]
@@ -316,60 +330,112 @@ function C.ObserveTimeline(t,session,time,config,paused)
     else
         -- The exact change time was not observed; leave the previous poll gap
         -- uncovered instead of backdating a setting to the whole elapsed interval.
-        appendSegment(t,session,time,config or C.Config(),paused)
+        current=appendSegment(t,session,time,config or C.Config(),paused)
+    end
+    if wantContext then
+        cfg.timeline=t;cfg.segments=t.segments;cfg.segment=current;cfg.index=t.current
+        cfg.generation=t.generation;cfg.session=session;cfg.time=time;cfg.from=current.from;cfg.floor=t.floor
+        observed[1]=cfg
+        return true,cfg
     end
     return true
 end
-function C.Coverage(t,startTime,endTime,fresh,rotten,age)
-    if not C.ValidTimeline(t) or not C.Finite(startTime) or not C.Finite(endTime) or endTime<startTime then
+local function observedSegment(t,time,observation)
+    if not observation or observation~=observed[1] or observation.invalidated
+        or observation.timeline~=t or observation.time~=time or t.schema~=1
+        or t.generation~=observation.generation or t.session~=observation.session or t.lastTime~=time
+        or t.floor~=observation.floor or t.segments~=observation.segments or t.current~=observation.index
+        or t.current~=#t.segments then return nil end
+    local current=t.segments[t.current]
+    if current~=observation.segment or current.from~=observation.from or current.to~=time
+        or current.session~=observation.session or not sameConfig(current,observation) then return nil end
+    return current
+end
+local function segmentAmount(s,duration,fresh,rotten,age)
+    if not s.enabled then return nil,"inactive_history" end
+    if age>=rotten and not s.allowRotten then return nil,"rotten_disabled_history" end
+    if age>=rotten and (s.removal=="unknown" or s.removal>=0) then return nil,"native_removal_policy" end
+    return fresh*duration/s.restoreHours
+end
+local function coverage(t,startTime,endTime,fresh,rotten,age,current)
+    if not C.Finite(startTime) or not C.Finite(endTime) or endTime<startTime then
         return nil,"invalid_history"
     end
     if startTime<(t.floor or startTime) then return nil,"truncated_history" end
     if endTime==startTime then return 0,0 end
+    if current and startTime>=current.from and endTime<=current.to then
+        local elapsed=endTime-startTime
+        local amount,reason=segmentAmount(current,elapsed,fresh,rotten,age)
+        if not amount then return nil,reason end
+        return amount,elapsed
+    end
     local cursor,amount,elapsed=startTime,0,0
     for _,s in ipairs(t.segments) do
         if s.to>cursor and s.from<endTime then
             if s.from>cursor then return nil,"uncovered_history" end
             local finish=math.min(s.to,endTime)
-            if not s.enabled then return nil,"inactive_history" end
-            local current=math.max(0,age-amount)
-            if current>=rotten and not s.allowRotten then return nil,"rotten_disabled_history" end
-            if current>=rotten and (s.removal=="unknown" or s.removal>=0) then return nil,"native_removal_policy" end
             local duration=finish-cursor
-            amount=amount+fresh*duration/s.restoreHours;elapsed=elapsed+duration;cursor=finish
+            local credit,reason=segmentAmount(s,duration,fresh,rotten,math.max(0,age-amount))
+            if not credit then return nil,reason end
+            amount=amount+credit;elapsed=elapsed+duration;cursor=finish
             if cursor==endTime then return amount,elapsed end
         end
     end
     return nil,"uncovered_history"
+end
+function C.Coverage(t,startTime,endTime,fresh,rotten,age)
+    if not C.ValidTimeline(t) then return nil,"invalid_history" end
+    return coverage(t,startTime,endTime,fresh,rotten,age)
 end
 
 local function lastAged(food)
     local n=food.getLastAged and food:getLastAged() or nil
     return C.Finite(n) and n or nil
 end
-function C.SettleFood(food,box,time,timeline,forceAnchor)
-    C.InstallCoolingBridge()
-    if not C.IsDirectFood(food,box) then C.ClearFood(food);return {active=false,reason="outside_box",elapsed=0} end
-    C.RestoreFood(food)
+local function settlementInterrupted(food,box,md,old,listedIndex)
+    if md[C.foodKey]~=old then return true end
+    if C.IsDirectFood(food,box,listedIndex) then return false end
+    C.ClearFood(food)
+    return true
+end
+local function ownershipChanged()
+    return {active=false,reason="ownership_changed",elapsed=0}
+end
+local function needsReplacementGuard(food,age,rotten)
+    if age<rotten then return false end
+    local replacement=food.getReplaceOnRotten and food:getReplaceOnRotten()
+    return type(replacement)=="string" and replacement~=""
+end
+function C.SettleFood(food,box,time,timeline,forceAnchor,observation,listedIndex)
+    if not C.coolingBridge then C.InstallCoolingBridge() end
+    if not C.IsDirectFood(food,box,listedIndex) then
+        local record=C.FoodRecord(food)
+        local previousBox=listedIndex~=nil and C.BoxState(box)
+        if listedIndex==nil or (record and previousBox and record.boxId==previousBox.id) then C.ClearFood(food) end
+        return {active=false,reason="outside_box",elapsed=0}
+    end
+    local md=food:getModData()
+    local old=md[C.foodKey]
+    local restored=C.RestoreFood(food)
+    if restored and settlementInterrupted(food,box,md,old,listedIndex) then return ownershipChanged() end
     local state=C.EnsureBox(box)
     if not state or not C.Finite(time) then return {active=false,reason="invalid_box",elapsed=0} end
     local config=C.Config()
     local fresh,rotten=C.Eligible(food,config)
-    local reason=C.PolicyReason(food,config)
+    local reason=policyReason(food,fresh,rotten)
     local active=state.on and config.enabled and fresh~=nil and reason==nil
-    local md=food:getModData()
-    local old=md[C.foodKey]
     if old~=nil and (type(old)~="table" or old.schema~=1) then return {active=false,reason="unknown_schema",elapsed=0} end
     local id,fullType=C.Identity(food)
     local sig=fresh and signature(food,fresh,rotten) or "unsupported"
     local boxItemId=box.getID and tostring(box:getID()) or "unknown"
     local actual,aged=food:getAge(),lastAged(food)
+    local current=observedSegment(timeline,time,observation)
     local trusted=not forceAnchor and active and type(old)=="table" and old.active==true
         and old.id==id and old.fullType==fullType and old.boxId==state.id and old.boxItemId==boxItemId and old.epoch==state.epoch
         and old.signature==sig and not old.externalEdit and not old.ownershipUncertain
         and C.Finite(old.logicalAge) and old.logicalAge>=0
         and C.Finite(old.age) and C.Finite(old.time) and old.time<=time
-        and C.ValidTimeline(timeline) and old.timelineGeneration==timeline.generation
+        and (current or C.ValidTimeline(timeline)) and old.timelineGeneration==timeline.generation
     local nativeAgeChange=false
     if trusted and actual~=old.age then
         -- All normal Lua setAge writers are observed. A native forward aging
@@ -379,26 +445,45 @@ function C.SettleFood(food,box,time,timeline,forceAnchor)
         if not nativeAgeChange then trusted=false;reason="external_age_edit" end
     end
     local amount,elapsed
-    if trusted then amount,elapsed=C.Coverage(timeline,old.time,time,fresh,rotten,old.logicalAge) end
+    if trusted then amount,elapsed=coverage(timeline,old.time,time,fresh,rotten,old.logicalAge,current) end
     local logicalAge
     if amount~=nil then
         logicalAge=math.max(0,old.logicalAge-amount)
+        -- Only skip a verified no-op. Rounded native age can differ from the
+        -- double-precision logical value, and a shield must still be managed.
+        if current and elapsed==0 and not restored and old.shield==nil and not nativeAgeChange
+            and logicalAge==actual and aged~=nil and aged==old.lastAged and C.AgeHookReady()
+            and not needsReplacementGuard(food,actual,rotten) then
+            return {active=true,elapsed=0,reason="restoring",nativeAgeReconciled=false}
+        end
         C.WriteAge(food,logicalAge)
+        if settlementInterrupted(food,box,md,old,listedIndex) then return ownershipChanged() end
     else
         if trusted then reason=elapsed end
         -- Never erase ordinary aging from unknown, disabled or mod-absent gaps.
         food:updateAge(false)
+        if settlementInterrupted(food,box,md,old,listedIndex) then return ownershipChanged() end
+        state=C.EnsureBox(box)
+        if not state then return {active=false,reason="invalid_box",elapsed=0} end
+        config=C.Config()
         actual=food:getAge()
         fresh,rotten=C.Eligible(food,config);sig=fresh and signature(food,fresh,rotten) or "unsupported"
-        reason=reason or C.PolicyReason(food,config)
-        active=state.on and config.enabled and fresh~=nil and C.PolicyReason(food,config)==nil
+        local currentReason=policyReason(food,fresh,rotten)
+        reason=reason or currentReason
+        active=state.on and config.enabled and fresh~=nil and currentReason==nil
         logicalAge=actual;elapsed=0
     end
     if active then food:setLastAged(time) end
+    local age=food:getAge()
     md[C.foodKey]={schema=1,id=id,fullType=fullType,boxId=state.id,boxItemId=boxItemId,epoch=state.epoch,
-        time=time,age=food:getAge(),logicalAge=logicalAge,lastAged=lastAged(food),active=active,
+        time=time,age=age,logicalAge=logicalAge,lastAged=lastAged(food),active=active,
         signature=sig,timelineGeneration=timeline and timeline.generation or 0}
-    if active then C.ProtectFood(food,box) end
+    if active then
+        -- Read the live threshold after writing Age. Fresh food cannot need a
+        -- replacement guard; uncertain and rotten food keep the full check.
+        local maxAge=listedIndex~=nil and food:getOffAgeMax()
+        if not C.Finite(maxAge) or not C.Finite(age) or age>=maxAge then C.ProtectFood(food,box,listedIndex) end
+    end
     return {active=active,elapsed=type(elapsed)=="number" and elapsed or 0,
         reason=active and (amount~=nil and "restoring" or (reason or "anchored"))
             or (not state.on and "box_off" or not config.enabled and "disabled" or reason or "unsupported_age"),

@@ -1,6 +1,6 @@
 {
   "result": "PASS",
-  "checked_utc": "2026-11-06T07:48:54.425064+00:00",
+  "checked_utc": "2026-11-06T17:48:59.256178+00:00",
   "game_started": false,
   "world_created": false,
   "in_game_tested": false,
@@ -9,7 +9,7 @@
   "native_singleton_initialized": true,
   "game_jar": "D:\\steam\\steamapps\\common\\ProjectZomboid\\projectzomboid.jar",
   "game_jar_sha256": "e1a69eb743ede60b213a0fe7f8b83d4fcab773036d256cc4543a336f3b058a33",
-  "lua_compiled": 5,
+  "lua_compiled": 7,
   "mock_cases": 31,
   "mock_assertions": 267,
   "native_cases": 13,
@@ -34,7 +34,7 @@
   ],
   "logs": "D:\\steam\\steamapps\\common\\ProjectZomboid\\CodexRepos\\suqing-freshness-lunchbox\\tests\\runtime_validation",
   "source_sha256": {
-    "mods\\SuQingFreshnessLunchbox\\42\\media\\lua\\shared\\SuQingFreshnessLunchbox\\Core.lua": "412ba150c1a8c570727a74b8047e8dda40ee297b0529b33ada63d2650de02d5f",
-    "mods\\SuQingFreshnessLunchbox\\42\\media\\lua\\client\\SuQingFreshnessLunchbox_Runtime.lua": "014e1c9b4efdefd2d8f63d6c55f6356df729fbf29ff8ed3d0daa2e2c862d8888"
+    "mods\\SuQingFreshnessLunchbox\\42\\media\\lua\\shared\\SuQingFreshnessLunchbox\\Core.lua": "ab26f02e19f9241d7e29a53dd1080c4ba07665495a83c71249a357efce46b2f5",
+    "mods\\SuQingFreshnessLunchbox\\42\\media\\lua\\client\\SuQingFreshnessLunchbox_Runtime.lua": "08f6308ebfe476c3f33615cb221d7513bd8686f53c25757bf16162412307faee"
   }
 }

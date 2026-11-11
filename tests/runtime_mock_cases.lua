@@ -170,4 +170,166 @@ test("loaded-world fallback is single attempt and errors remain stopped",functio
     for i=1,3 do for _,callback in ipairs(Events.OnTick.callbacks)do callback()end end
     check(calls==1);check(R.stats.errors==errors);ModData.getOrCreate=prior;R.Stop();MainScreen=nil
 end)
+
+local function measureLoadedBox(count)
+    Mock.reset()
+    local player = Mock.player(Mock.square(1))
+    local box = Mock.add(player.inventory, Mock.box())
+    R.Start()
+    R.NormalTick()
+    R.NormalTick()
+    for i = 1, C.historyLimit do
+        Mock.clock = Mock.clock + 0.125
+        R.Observe()
+        SandboxVars.SuQingFreshnessLunchbox.RestoreHours = 10 + i % 2
+        R.Observe()
+    end
+    check(#R.timeline.segments == 128 and R.timeline.truncated, "expected a full save history")
+
+    local foods = {}
+    for i = 1, count do
+        local food = Mock.add(box.inventory, Mock.food(3))
+        Mock.process:add(food)
+        foods[i] = food
+    end
+    R.Tick()
+
+    local validationCalls, segmentVisits, memberComparisons = 0, 0, 0
+    local list = box.inventory.items
+    local contains = list.contains
+    list.contains = function(self, item)
+        for _, member in ipairs(self.items) do
+            memberComparisons = memberComparisons + 1
+            if member == item then return true end
+        end
+        return false
+    end
+    local validate = C.ValidTimeline
+    C.ValidTimeline = function(timeline)
+        validationCalls = validationCalls + 1
+        return validate(timeline)
+    end
+    local segments = R.timeline.segments
+    local iter = ipairs
+    ipairs = function(values)
+        local nextValue, state, index = iter(values)
+        if values ~= segments then return nextValue, state, index end
+        return function(sequence, key)
+            local nextKey, value = nextValue(sequence, key)
+            if nextKey ~= nil then segmentVisits = segmentVisits + 1 end
+            return nextKey, value
+        end, state, index
+    end
+
+    local ok, message = pcall(tick, 0.25)
+    ipairs = iter
+    C.ValidTimeline = validate
+    list.contains = contains
+    if not ok then error(message) end
+
+    for _, food in ipairs(foods) do
+        near(food:getAge(), 2.875)
+        check(C.FoodRecord(food).time == Mock.clock, "every tracked food was settled")
+    end
+    print("LUNCHBOX_TICK_OPS foods="..count.." validations="..validationCalls
+        .." segmentVisits="..segmentVisits.." memberComparisons="..memberComparisons)
+    return {validations=validationCalls, segments=segmentVisits, comparisons=memberComparisons}
+end
+
+test("steady loaded-box work scales with history plus item count",function()
+    local low = measureLoadedBox(32)
+    local high = measureLoadedBox(64)
+    for _, sample in ipairs({low, high}) do
+        check(sample.validations <= 2, "whole history must be validated at most twice per tick")
+        check(sample.segments <= 2 * C.historyLimit, "each food must avoid rescanning the history prefix")
+    end
+    check(low.comparisons <= 64 and high.comparisons <= 128, "each food must avoid a linear list lookup")
+end)
+
+test("unchanged clock skips writes without missing an external age edit or a new food",function()
+    local box, food = Mock.setup(3)
+    tick(0.25)
+    local ageWrites, lastAgedWrites = 0, 0
+    local setAge, setLastAged = food.setAge, food.setLastAged
+    food.setAge = function(self, age)
+        ageWrites = ageWrites + 1
+        return setAge(self, age)
+    end
+    food.setLastAged = function(self, time)
+        lastAgedWrites = lastAgedWrites + 1
+        return setLastAged(self, time)
+    end
+    local record = C.FoodRecord(food)
+    R.Tick()
+    check(ageWrites == 0 and lastAgedWrites == 0, "no setters at the same clock")
+    check(C.FoodRecord(food) == record, "no replacement receipt at the same clock")
+    near(food:getAge(), 2.875)
+
+    Mock.paused = true
+    R.Tick()
+    ageWrites, lastAgedWrites = 0, 0
+    record = C.FoodRecord(food)
+    R.Tick()
+    check(ageWrites == 0 and lastAgedWrites == 0, "steady pause does not write")
+    check(C.FoodRecord(food) == record, "steady pause retains the receipt")
+    near(food:getAge(), 2.875)
+
+    food:setAge(7)
+    local added = Mock.add(box.inventory, Mock.food(3))
+    R.Tick()
+    near(food:getAge(), 7)
+    near(C.FoodRecord(food).logicalAge, 7)
+    check(C.FoodRecord(added).time == Mock.clock, "new food anchored while the clock was stopped")
+    Mock.paused = false
+    R.Tick()
+    tick(0.25)
+    near(food:getAge(), 6.875)
+    near(added:getAge(), 2.875)
+end)
+
+test("reentrant native container update never applies old box age to moved food",function()
+    local box, first, _, player = Mock.setup(3)
+    local moved = Mock.add(box.inventory, Mock.food(3))
+    local remains = Mock.add(box.inventory, Mock.food(3))
+    local list = box.inventory.items
+    local get = list.get
+    list.get = function(self, index)
+        if index < 0 or index >= self:size() then error("container index out of bounds") end
+        return get(self, index)
+    end
+    R.Tick()
+    local movedStamp = moved:getLastAged()
+    local updateAge = first.updateAge
+    local callbacks = 0
+    first.updateAge = function(self, ...)
+        updateAge(self, ...)
+        Mock.add(player.inventory, self)
+        Mock.add(player.inventory, moved)
+        for _, callback in ipairs(Events.OnContainerUpdate.callbacks) do
+            callback(self)
+            callbacks = callbacks + 1
+        end
+    end
+    first:setAge(4)
+    tick(0.25)
+    first.updateAge = updateAge
+    check(callbacks > 0, "native update synchronously notified Lua")
+    check(first:getContainer() == player.inventory, "settling food moved during the native call")
+    check(moved:getContainer() == player.inventory, "food moved during settlement")
+    near(first:getAge(), 4 + 0.25 / 24)
+    check(C.FoodRecord(first) == nil, "settling food did not receive an old-box receipt")
+    near(moved:getAge(), 3)
+    check(moved:getLastAged() == movedStamp, "old box did not stamp moved food")
+    near(remains:getAge(), 2.875)
+    check(C.FoodRecord(remains).boxId == C.BoxState(box).id, "shifted food kept its ownership")
+    R.Tick()
+    check(C.FoodRecord(moved) == nil, "stale ownership removed on next tick")
+
+    ISTransferAction.transferItem({}, player, moved, player.inventory, box.inventory)
+    local transferredAge = moved:getAge()
+    check(C.FoodRecord(moved).time == Mock.clock, "returning food reanchored")
+    tick(0.25)
+    near(moved:getAge(), transferredAge - 0.125)
+end)
+
 print("RUNTIME_MOCK cases="..cases.." assertions="..assertions.." PASS")

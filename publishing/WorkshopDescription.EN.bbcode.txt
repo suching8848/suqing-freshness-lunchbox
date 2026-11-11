@@ -1,30 +1,17 @@
 [h1]SuQing's Freshness Lunchbox[/h1]
-Smells good—dig in! A portable food container that gradually restores freshness. Carry it in either hand or keep it in a bag, furniture, vehicle or loaded ground storage. No batteries or power are needed. Eligible food restores together.
+Smells good. Dig in! Put eligible food directly inside, then choose Seal Lunchbox and Start Restoration from the context menu. You can carry the sealed box while access stays locked. The batch restores the food and unlocks when due. An overdue batch completes when the box is loaded again.
 
-[h2]Craft and use[/h2]
+[h2]Crafting and settings[/h2]
 [list]
-[*]Use the native crafting category “SuQing's Freshness Lunchbox.” Both recipes make the same container.
-[*]Convert: 1 empty vanilla lunchbox + 1 pocket watch + 1 digital watch + 1 classic wristwatch + 2 electric wires.
-[*]Build: 2 small metal sheets + one each of those three watch families + 2 electric wires.
-[*]Both need a screwdriver, which is kept. The source lunchbox must be empty, out of both hands, unfavorited and free of upgrade/refrigeration records. The three watches must be distinct items.
-[*]Place food directly inside; right-click for the switch and status. Loaded positions work normally. Unloaded game time is credited only with verifiable original food, box and enabled-session records. Real time outside the game never counts.
+[*]The native crafting menu offers two routes. Use an empty vanilla lunchbox or two small metal sheets, plus one pocket watch, one digital watch, one classic wristwatch and two electric wires. You keep the screwdriver.
+[*]Base capacity defaults to 4 and ranges from 1 to 30. A batch defaults to 12 game hours, with a range of 0.25–24. A separate sandbox option controls rotten food.
+[*]Load standard perishable food directly. Remove burnt food, tainted food, fertilized eggs and unsupported items. Finish active batches before disabling the mod or rolling back.
 [/list]
 
-[h2]Defaults and sandbox settings[/h2]
-Capacity 4, weight 1.0, weight reduction 50%. Separate settings: restoration enabled; initial capacity 4 (1–30); restoration time 10 game hours (0.25–1000); rotten-food support enabled. Each 10 credited hours restores one of each food's own complete fresh-life intervals; completion time varies with age. Initial capacity applies once and never overwrites existing boxes or upgrades.
+[h2]Backpack attachment and optional weight fix[/h2]
+Uses existing ordinary, large and ALICE backpack-bottom bedroll slots. Ordinary Container Upgrades 1.0.3 is optional. Detach and empty the box before upgrading or restoring it.
+The included Lunchbox Attached Weight Fix applies the current container reduction to food in an attached box. Enable [b]SuQingLunchboxAttachedWeight_4222[/b] alongside the lunchbox and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3619862853]ZombieBuddy 2.3.4[/url], approve the Java mod and restart. The main lunchbox can be enabled on its own.
 
-[h2]Compatibility and limits[/h2]
-[list]
-[*]No external mod is required. Ordinary Container Upgrades 1.0.3 onward optionally supports this box, without a separate lunchbox compatibility mod. Empty and unhand it before upgrading. This does not add EX or Auto support.
-[*]Only directly stored standard perishable Food is processed. The vanilla item-size limit remains. Burnt food, fertilized eggs and unsupported shelf lives are excluded. Portions, cooking state, poison and contamination are unchanged.
-[*]Already rotten food requires a negative world “Rotten Food Removal” setting; otherwise it is skipped with an explanation. World settings are never changed automatically.
-[*]For 42.21 single-player; multiplayer restoration is not provided. The rc.5 fallback ground outline is a fixed-direction approximation. Rotation, extended placement and Viewpoint visuals require gameplay confirmation.
-[*]Remove food and dispose of custom containers before disabling, then save and exit normally.
-[/list]
-Held and ground models are independently derived from vanilla lunchbox assets. Cover and small icons are separately created series artwork.
-[b]Mod ID: SuQingFreshnessLunchbox[/b]
-
-[h2]0.1.0-rc.8-perf.8 update[/h2]
-Includes the deployed backpack-bottom attachment, vehicle Set iteration, model-registration and concise-tooltip fixes, retaining rc.8’s0.08 upward adjustment of the regular bottom slot. Uses an existing normal/large/ALICE bedroll or tent slot, shared with its original item, without new slots or a mandatory backpack mod. Attached food access/restoration remain; detach and empty before ordinary upgrades/restoration. Supports exactly audited Coolingperf.1–8, avoiding unrelated lunchbox write scopes for ordinary cold food while preserving protected-food scopes and every hook-identity check.
-
-Offline native model/vehicle-collection, attachment and Cooling combination checks pass; the user reported the rc.7 model displaying. Exact rc.8 fit, animations, Viewpoint, special equipment conversion and complete save/reload still need user acceptance. Lunchbox restoration rules, IDs, save records and selected cover/icon remain; no Java dependency is added. Optional native takeover belongs to the refrigeration base’s separate companion.
+[h2]Compatibility[/h2]
+Lunchbox 0.2.0-rc.4 and weight fix 0.1.0-rc.1. Offline B42.22.2 single-player checks cover sealed batches, Loot Tracker 1.8.5 and native carry weight on the three backpack slots. In-game testing is pending. Held and ground models are independently derived from the vanilla lunchbox.
+[b]Main Mod ID[/b] SuQingFreshnessLunchbox

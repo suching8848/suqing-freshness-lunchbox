@@ -28,5 +28,18 @@
   "IGUI_SFL_Error": "餐盒返鲜因错误已停止，请保存后重新载入存档。",
   "IGUI_SFL_AttachmentReady": "返鲜餐盒已接入 %1 个现有背包底部挂点。",
   "IGUI_SFL_AttachmentSkipped": "返鲜餐盒挂点适配已跳过：%1。原有挂点保持不变。",
-  "IGUI_SFL_AttachedGuardUnavailable": "餐盒挂点兼容暂不可用（%1 %2）。"
+  "IGUI_SFL_AttachedGuardUnavailable": "餐盒挂点兼容暂不可用（%1 %2）。",
+  "IGUI_SFL_SealBatch": "密封餐盒並開始返鮮",
+  "IGUI_SFL_BatchSealed": "餐盒已密封",
+  "IGUI_SFL_BatchRemaining": "密封返鮮中 · 剩餘 %1 遊戲分鐘",
+  "IGUI_SFL_BatchReady": "返鮮已到期，等待開封",
+  "IGUI_SFL_BatchLocked": "密封期間無法打開餐盒或存取食物。",
+  "IGUI_SFL_BatchInfo": "密封後等待 %1 遊戲小時。可整盒搬動。",
+  "IGUI_SFL_BatchRejected": "無法開始密封返鮮。",
+  "IGUI_SFL_BatchReason_empty": "請先放入要返鮮的食品。",
+  "IGUI_SFL_BatchReason_unsafe_food": "盒內有不支援密封的食品，例如受污染食品或受精蛋。請取出後重試。",
+  "IGUI_SFL_BatchReason_guard_present": "盒內食品仍有待恢復的保護記錄，請重新載入存檔。",
+  "IGUI_SFL_BatchReason_lock_unavailable": "餐盒鎖定介面不可用。",
+  "IGUI_SFL_BatchReason_seal_failed": "餐盒密封失敗，請檢查盒內食品。",
+  "IGUI_SFL_BatchReason_recovery_required": "本批次需要恢復，請保留存檔並查看記錄。"
 }

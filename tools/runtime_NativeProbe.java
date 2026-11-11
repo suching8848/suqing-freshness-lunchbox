@@ -83,10 +83,18 @@ public class runtime_NativeProbe {
         function("ProbeNativeAge",v->{foodClass.getMethod("updateAge",boolean.class).invoke(v[0],false);return new Object[0];});
         final Method rot=foodClass.getDeclaredMethod("updateRotting",containerClass);rot.setAccessible(true);
         function("ProbeNativeRot",v->{rot.invoke(v[0],v[1]);return new Object[0];});
+        int worldVersion=Class.forName("zombie.iso.IsoWorld").getField("WorldVersion").getInt(null);
         function("ProbeRoundTrip",v->{
-            Object f=v[0];Object clone=food(((Float)foodClass.getMethod("getAge").invoke(f)).doubleValue(),(Integer)foodClass.getMethod("getOffAge").invoke(f),(Integer)foodClass.getMethod("getOffAgeMax").invoke(f),"Base.Compost");
+            Object f=v[0];
+            int cloneRotten=v.length>1 && v[1]!=null ? ((Number)v[1]).intValue()
+                    : (Integer)foodClass.getMethod("getOffAgeMax").invoke(f);
+            Object clone=food(((Float)foodClass.getMethod("getAge").invoke(f)).doubleValue(),(Integer)foodClass.getMethod("getOffAge").invoke(f),cloneRotten,"Base.Compost");
+            if(v.length>2 && v[2]!=null) set(clone,"isCookable",(Boolean)v[2]);
+            // The probe constructor forces taint for its hazard fixtures. The
+            // native load does not initialize that field from Food's payload.
+            set(clone,"isTainted",foodClass.getMethod("isTainted").invoke(f));
             ByteBuffer bytes=ByteBuffer.allocate(65536);foodClass.getMethod("save",ByteBuffer.class,boolean.class).invoke(f,bytes,false);int size=bytes.position();bytes.flip();bytes.position(3);
-            foodClass.getMethod("load",ByteBuffer.class,int.class).invoke(clone,bytes,249);
+            foodClass.getMethod("load",ByteBuffer.class,int.class).invoke(clone,bytes,worldVersion);
             if(bytes.position()!=size)throw new AssertionError("native save/load boundary mismatch "+bytes.position()+"/"+size);
             return new Object[]{clone,Double.valueOf(size)};
         });

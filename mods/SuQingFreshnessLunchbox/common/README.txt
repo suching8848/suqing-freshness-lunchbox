@@ -1,9 +1,9 @@
-蘇清的返鲜餐盒 / SuQing's Freshness Lunchbox 0.1.0-rc.8-perf.8
-B42.21 单人离线候选；个人部署以交付回执为准，本候选未上传工坊。游戏内效果待用户验证。
-接入背包已有底部睡袋／帐篷位（普通、大型、ALICE），与帐篷共用位置。挂上后仍可取放食品与返鲜；强化／还原前先卸下并清空。外挂负重按原生规则，不套用手持容器减重。
+蘇清的返鲜餐盒 / SuQing's Freshness Lunchbox 0.2.0-rc.4
+B42.22.2 单人批次候选。放入食品后右键开启返鲜，封盒期间锁住取放。到期统一恢复新鲜。餐盒独立沙盒默认12游戏小时，范围0.25–24。
+背包底部挂点仍可搬运餐盒。批次结束后再清空升级、停用或回退。
 
-B42.21 single-player offline candidate; see the delivery receipt for personal deployment. This candidate is not uploaded to Workshop. Gameplay acceptance pending.
-Uses an existing normal/large/ALICE backpack bottom bedroll/tent slot, shared with its original item. Attached food access and freshness restoration remain available. Detach and empty before upgrades/restoration. Attached weight follows native rules, without hand-container weight reduction.
+B42.22.2 single-player batch candidate. Load eligible food and start from the context menu. Contents stay sealed until completion. The separate sandbox duration defaults to 12 game hours, range 0.25–24.
+The box can still be carried on a backpack attachment. Finish batches before upgrading, disabling or rolling back.
 
 rc.7：修复车辆Set迭代与外挂模型注释注册，精简物品悬浮说明。
 rc.7: Fix vehicle Set iteration and attached-model comment parsing; shorten item tooltips.

@@ -15,14 +15,14 @@ option SuQingFreshnessLunchbox.BaseCapacity
     page = SuQingFreshnessLunchbox,
     translation = SFL_BaseCapacity,
 }
-option SuQingFreshnessLunchbox.RestoreHours
+option SuQingFreshnessLunchbox.BatchHours
 {
     type = double,
     min = 0.25,
-    max = 1000.0,
-    default = 10.0,
+    max = 24.0,
+    default = 12.0,
     page = SuQingFreshnessLunchbox,
-    translation = SFL_RestoreHours,
+    translation = SFL_BatchHours,
 }
 option SuQingFreshnessLunchbox.AllowRotten
 {
