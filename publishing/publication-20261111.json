@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "app_id": 108600,
+  "mod_id": "SuQingFreshnessLunchbox",
+  "workshop_item_id": "3834693433",
+  "workshop_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3834693433",
+  "version": "0.2.0-rc.4",
+  "mod_versions": {
+    "SuQingFreshnessLunchbox": "0.2.0-rc.4",
+    "SuQingLunchboxAttachedWeight_4222": "0.1.0-rc.1"
+  },
+  "visibility": "public",
+  "visibility_value": 0,
+  "state": "uploaded_verified_public",
+  "source_commit": "d753aa57409f502414a7240404ff10812b9e9581",
+  "workshop_updated_at_bjt": "2026-11-11T09:46:00+08:00",
+  "verified_at_bjt": "2026-11-11T09:46:30.403562+08:00",
+  "content_tree_sha256": "ece3b2add866e87a84a90e8af7a08e7175a45eb92df9eefe3cd63b47f2cfef72",
+  "content_files": 48,
+  "content_bytes": 3813180,
+  "preview_sha256": "7ae22f48c3f67a25764d39dc0a0705584ccd1385f10e83d5e8a23853f6570ced",
+  "required_workshop_ids": [],
+  "native_checks": {
+    "title": true,
+    "description": true,
+    "metadata": true,
+    "content_bytes": true,
+    "preview_policy": true,
+    "tags": true,
+    "dependencies": true
+  },
+  "native_upload_receipt_sha256": "e22e431ac28a807419c409fff58d33c48c6b5bb9ebb09a17e60140dfb24b3b54",
+  "native_readback_receipt_sha256": "30eb45d15e1448c98e2032038bb280a5a6ff227886d1f7d657d1db2543f29745",
+  "target": "Project Zomboid B42.22.2 single-player",
+  "gameplay_acceptance_changed_by_publication": false,
+  "optional_companion": {
+    "mod_id": "SuQingLunchboxAttachedWeight_4222",
+    "version": "0.1.0-rc.1",
+    "jar_sha256": "9a91de3c9d9d6ab7522b52bce4526d6db11e32b113acb1803a59878ff6698b5e",
+    "source_commit": "b9412a7c7ba198acf7529aef8d242da67095c67a",
+    "source_repository": "https://github.com/suching8848/suqing-project-zomboid-patches",
+    "required_mod_ids": [
+      "SuQingFreshnessLunchbox",
+      "ZombieBuddy"
+    ],
+    "zombie_buddy_version": "2.3.4"
+  }
+}

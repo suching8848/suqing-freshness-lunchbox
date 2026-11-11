@@ -1,6 +1,6 @@
 {
   "mod_id": "SuQingFreshnessLunchbox",
-  "version": "0.1.0-rc.8-perf.8",
+  "version": "0.2.0-rc.4",
   "files": {
     "42/icon.png": {
       "bytes": 28191,
@@ -34,93 +34,101 @@
       "bytes": 1263,
       "sha256": "d5587968b3738ccac1042788f7f8eafdaa034af42ef9d224e26817f915195133"
     },
+    "42/media/lua/client/SuQingFreshnessLunchbox_Lock.lua": {
+      "bytes": 13223,
+      "sha256": "908f670261a52428e81409e807c6f6c506499ca540318ce1b077825bacaaa363"
+    },
     "42/media/lua/client/SuQingFreshnessLunchbox_Runtime.lua": {
-      "bytes": 17696,
-      "sha256": "08f6308ebfe476c3f33615cb221d7513bd8686f53c25757bf16162412307faee"
+      "bytes": 14968,
+      "sha256": "8ddc4d6f0684329b7c271cb6bedd2e520b9670a05d1f802989305497930b987e"
     },
     "42/media/lua/client/SuQingFreshnessLunchbox_UI.lua": {
-      "bytes": 2543,
-      "sha256": "356f8cc912473be14b8377ff1363c3dd128c3aea33915d809435f1502f4e0be5"
+      "bytes": 3123,
+      "sha256": "6dbfba75f0caa488935e76f279a3da27188f368558db5d918320e3903e0eea1c"
+    },
+    "42/media/lua/shared/SuQingFreshnessLunchbox/Batch.lua": {
+      "bytes": 13190,
+      "sha256": "d9bd78dafe4f846356664a7ce97ad58db8e8725aab79225e8508edf2f57a3a41"
     },
     "42/media/lua/shared/SuQingFreshnessLunchbox/Core.lua": {
-      "bytes": 20666,
-      "sha256": "6984a2d6c4f87d9b8c49ce63f6559006ca745f65f06838d82f00fae9e5f10dd6"
+      "bytes": 24698,
+      "sha256": "9c1d98e1f01acc8ad368e3e295a0ae13edac1fa78871608162982b27941cbcfd"
     },
     "42/media/lua/shared/SuQingFreshnessLunchbox/Crafting.lua": {
-      "bytes": 5611,
-      "sha256": "1e30138c84eef1869f89261d973eff30b1e0ac66a158d9d6ab614a0be6b84bf7"
+      "bytes": 5665,
+      "sha256": "37731dabd4153cb75cfd9abb7e145bec217e3373d4bcda060b35b1091db1273e"
     },
     "42/media/lua/shared/Translate/CH/IG_UI.json": {
-      "bytes": 2315,
-      "sha256": "ea5f76e1d3756c5456a399888fedc4541bc7cf2ac4d7bf0d3ad17a26031d6a57"
+      "bytes": 3364,
+      "sha256": "48969f2e98c74bbc34a02365924c5f53d4c1342b0bb9d2b7eee769c3ec4eaeae"
     },
     "42/media/lua/shared/Translate/CH/ItemName.json": {
       "bytes": 78,
       "sha256": "d04da6a65c8dbde87185256f1cd141d4b424e74425f4ac8f1b4e3ace1deefe46"
     },
     "42/media/lua/shared/Translate/CH/Mod.json": {
-      "bytes": 789,
-      "sha256": "bfd7d1777f65acf5561dfe486c5b62bf04213f77b3a0cce6c37a3e9c330c4a51"
+      "bytes": 194,
+      "sha256": "e5787d3bdb920c5049e8dcb931e393e2e5b78f21bb506b6818574b1c73e7e474"
     },
     "42/media/lua/shared/Translate/CH/Recipes.json": {
       "bytes": 168,
       "sha256": "046b17a5a7ce0fa51a6f9ac964ecd4b4d518e6ec5c1ce9f62831f4d76c918ee7"
     },
     "42/media/lua/shared/Translate/CH/Sandbox.json": {
-      "bytes": 955,
-      "sha256": "46a5df01bf3e292d8e0e8b62f2529ffa0edebc15439f3aa1b12c92805abdec21"
+      "bytes": 773,
+      "sha256": "4b2e65543155e81db9c98369b9750474121f66d393814263c7085d9de5a87339"
     },
     "42/media/lua/shared/Translate/CH/Tooltip.json": {
-      "bytes": 597,
-      "sha256": "fb02ff099310c37f9fa4e28ce0b07c5b057e77d0c7a24d67a8ceb710bfa88017"
+      "bytes": 555,
+      "sha256": "24e6a5910771c59a87ab215537fe4cf79793d4c3882ee68a397d1a7a696317fb"
     },
     "42/media/lua/shared/Translate/CN/IG_UI.json": {
-      "bytes": 2315,
-      "sha256": "6b7c964d595868b97344f6177f894f2fd1fd53c3ec8e27777a7f3f2730c129ac"
+      "bytes": 3364,
+      "sha256": "ae14a197413980a44a5894426d012ed0f8646b3329b84f78e6c70aafc48688b2"
     },
     "42/media/lua/shared/Translate/CN/ItemName.json": {
       "bytes": 78,
       "sha256": "d04da6a65c8dbde87185256f1cd141d4b424e74425f4ac8f1b4e3ace1deefe46"
     },
     "42/media/lua/shared/Translate/CN/Mod.json": {
-      "bytes": 789,
-      "sha256": "bfd7d1777f65acf5561dfe486c5b62bf04213f77b3a0cce6c37a3e9c330c4a51"
+      "bytes": 191,
+      "sha256": "350300ae65652403745ff17620be8b34f9aa6500ecc8cd694841b99e899c4bcd"
     },
     "42/media/lua/shared/Translate/CN/Recipes.json": {
       "bytes": 168,
       "sha256": "046b17a5a7ce0fa51a6f9ac964ecd4b4d518e6ec5c1ce9f62831f4d76c918ee7"
     },
     "42/media/lua/shared/Translate/CN/Sandbox.json": {
-      "bytes": 955,
-      "sha256": "46a5df01bf3e292d8e0e8b62f2529ffa0edebc15439f3aa1b12c92805abdec21"
+      "bytes": 773,
+      "sha256": "35d0dbbda72f247c7d894a8624972c4b944fe8ababadb3063a7fe0814ea35861"
     },
     "42/media/lua/shared/Translate/CN/Tooltip.json": {
-      "bytes": 597,
-      "sha256": "815f4c94e829b35e637d049d6628ddf2cb8fb370cce5fdcd19a170e36cf96a75"
+      "bytes": 555,
+      "sha256": "983866f4dd272d1f31bce16c8588abf4448826122af69cfdf73d5517143414b2"
     },
     "42/media/lua/shared/Translate/EN/IG_UI.json": {
-      "bytes": 2611,
-      "sha256": "4bb95483c0c5f5a767259595ba59640821913f300c1abac872ae4d4cde5b57d5"
+      "bytes": 3682,
+      "sha256": "debe6a29178ebaaf2ba0a26ebe9ebd7e07dc29c060d872a297aa25ffbd38f3c6"
     },
     "42/media/lua/shared/Translate/EN/ItemName.json": {
       "bytes": 84,
       "sha256": "b377a8f70b212ca7e09e8e1c702d5e8ec13a2a107f945f3bfc52dcf66f5e64c4"
     },
     "42/media/lua/shared/Translate/EN/Mod.json": {
-      "bytes": 964,
-      "sha256": "a243bf147464160bf37001a2f120e0203f77a957b972f4f2d57835a50e22e267"
+      "bytes": 211,
+      "sha256": "022b34d7005a81e6f6ff05e11c387d7810499f6a657253e27949ae73436d763b"
     },
     "42/media/lua/shared/Translate/EN/Recipes.json": {
       "bytes": 192,
       "sha256": "772de3dd90fe27248ab949e74af9efee4e3cd1050b4a37a936e99a761c1e0a27"
     },
     "42/media/lua/shared/Translate/EN/Sandbox.json": {
-      "bytes": 1115,
-      "sha256": "7d1b88d0e6fc0a4a4f027fe4e68e54a54fa043706a53470bb635650764ed5a8a"
+      "bytes": 872,
+      "sha256": "788c5e0e362fa8906f99b5fff279e0c5367f553a89474c07ec85d8ba0024fde4"
     },
     "42/media/lua/shared/Translate/EN/Tooltip.json": {
-      "bytes": 730,
-      "sha256": "1af12920ed7a782f165eb57ee9a305fe421640aa056c65587dc605ed1db1d8ba"
+      "bytes": 687,
+      "sha256": "9639085bf00e3a1cfbd7bcda9426fe9b4a2a13ab991c51998a60bbc85007915c"
     },
     "42/media/models_X/Skinned/BackPacks/SuQingFreshnessLunchbox_LHand.x": {
       "bytes": 96289,
@@ -135,8 +143,8 @@
       "sha256": "dc747871cbec8ac1f53bbbdaf63f7c5be1c4905d441602fa1ec14fd78fbc3e29"
     },
     "42/media/sandbox-options.txt": {
-      "bytes": 698,
-      "sha256": "4fc035a4f5fe64994b13e2d7d0cb588cf7e2485d6d645e35bc2c3e7ce5fe38c0"
+      "bytes": 692,
+      "sha256": "b0d8284d42204d4d19f243edd118b10c847ad420bc2fda4d5d7140face139dae"
     },
     "42/media/scripts/items_FreshnessLunchbox.txt": {
       "bytes": 948,
@@ -163,16 +171,16 @@
       "sha256": "e20b8887a7b7dac431d4836fdf2d6948b8c6e66a4f60feb38da3436636ae673e"
     },
     "42/mod.info": {
-      "bytes": 1579,
-      "sha256": "9897a7e2111f1a3ac91b7d02b92b545ac7e22bbd3107e794b346219879929f5d"
+      "bytes": 573,
+      "sha256": "10a2641271108bc4609544c6ff7703aa8198fc1a84f0e8c1ba9aef03f5878aee"
     },
     "42/poster.png": {
       "bytes": 3369076,
       "sha256": "2b5eadda8952ee914e5de108da1cc4a4c5e80ab9f113f9cc8ab776a968d59a6a"
     },
     "common/README.txt": {
-      "bytes": 4396,
-      "sha256": "565f773604368c509a244fbb3289900b9d2ac9c54752af6d9dcab4fa73de5e1b"
+      "bytes": 4130,
+      "sha256": "4169aad1d718e831936b93a2ea64930954279f2d1be05cfba039d278f5385dd6"
     }
   },
   "byte_scope": "Windows prepared runtime bytes; Git checkout line-ending settings may differ.",

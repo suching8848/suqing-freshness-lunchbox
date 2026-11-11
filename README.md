@@ -2,7 +2,7 @@
 
 当前工坊ID、可见性与上传状态见[workshop-item.json](publishing/workshop-item.json)。release/中的冻结manifest保留准备时状态；其中历史uploaded=false不代表当前工坊状态。
 
-公开工坊条目 3834693433 的已核验版本为 **0.1.0-rc.8-perf.8**。2026-11-07 的发布状态见 [工坊条目](https://steamcommunity.com/sharedfiles/filedetails/?id=3834693433) 和 [发布记录](publishing/publication-20261107.json)。
+当前工坊公开版本为 **0.2.0-rc.4**，同包包含可选外挂减重补丁 **0.1.0-rc.1**。 [工坊条目](https://steamcommunity.com/sharedfiles/filedetails/?id=3834693433) · [发布记录](publishing/publication-20261111.json)
 
 **0.2.0-rc.4** 是 Project Zomboid B42.22.2 单人批次返鲜候选。模组 ID 为 `SuQingFreshnessLunchbox`，物品 ID 为 `SuQingFreshnessLunchbox.FreshnessLunchbox`。
 
