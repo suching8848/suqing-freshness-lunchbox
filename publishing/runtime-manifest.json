@@ -35,8 +35,8 @@
       "sha256": "d5587968b3738ccac1042788f7f8eafdaa034af42ef9d224e26817f915195133"
     },
     "42/media/lua/client/SuQingFreshnessLunchbox_Lock.lua": {
-      "bytes": 13223,
-      "sha256": "908f670261a52428e81409e807c6f6c506499ca540318ce1b077825bacaaa363"
+      "bytes": 13547,
+      "sha256": "af90fc5e024b2cc7ca2a065fa2beb166e97461ebc238e7848c035436517927e0"
     },
     "42/media/lua/client/SuQingFreshnessLunchbox_Runtime.lua": {
       "bytes": 14968,

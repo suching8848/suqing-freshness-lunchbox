@@ -1,5 +1,7 @@
 # 0.2.0-rc.4 — 2026-11-11
 
+2026-11-15 · 0.2.0-rc.4 · 适配背包 EX 的密封制作检查。 / Synchronize the sealed crafting guard with Backpack EX.
+
 与 Loot Tracker 1.8.5 共用库存选择接口时，保留搜刮记录及密封限制。
 
 Preserves Loot Tracker 1.8.5 search tracking and sealed-container restrictions when they share inventory selection.

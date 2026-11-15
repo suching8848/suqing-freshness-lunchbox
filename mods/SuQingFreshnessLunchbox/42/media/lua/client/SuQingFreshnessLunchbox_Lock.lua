@@ -123,9 +123,18 @@ local function bind(hook,prior)
         if hook.wrapper~=wrapper then return prior(...) end
         return guarded(...)
     end
-    hook.wrapper=wrapper
+    hook.wrapper,hook.prior=wrapper,prior
     hook.forwarder=nil
     hook.owner[hook.key]=wrapper
+end
+
+-- Prove the captured continuation only for this lock's current craft wrapper.
+function L.CraftGuardPrior(wrapper)
+    for _,hook in ipairs(hooks) do
+        if hook.owner==ISHandcraftAction and hook.key=="performRecipe" and hook.wrapper==wrapper then
+            return hook.prior
+        end
+    end
 end
 
 local function denyWhen(predicate)
