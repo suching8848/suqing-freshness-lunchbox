@@ -4,7 +4,7 @@
 
 Current item identity, visibility and upload status: [workshop-item.json](publishing/workshop-item.json). Frozen manifests under release/ retain their preparation-time state; an old uploaded=false value there does not describe the current Steam item.
 
-Public Workshop release **0.2.0-rc.4** includes optional attached weight fix **0.1.0-rc.1**. [Workshop item](https://steamcommunity.com/sharedfiles/filedetails/?id=3834693433) · [Publication record](publishing/publication-20261111.json)
+Public Workshop release **0.2.0-rc.4** includes optional attached weight fix **0.1.0-rc.1**. [Workshop item](https://steamcommunity.com/sharedfiles/filedetails/?id=3834693433) · [Publication record](publishing/publication-20261115.json)
 
 **0.2.0-rc.4** is a Project Zomboid B42.22.2 single-player batch restoration candidate. The mod ID is `SuQingFreshnessLunchbox` and the item ID is `SuQingFreshnessLunchbox.FreshnessLunchbox`.
 

@@ -13,11 +13,11 @@
   "upload_acknowledged": true,
   "native_readback_verified": true,
   "gameplay_acceptance_changed": false,
-  "recorded_at_bjt": "2026-11-11T09:46:30.403562+08:00",
+  "recorded_at_bjt": "2026-11-15T18:25:52.135735+08:00",
   "identity_policy": "Reuse this item for later updates; never create another item merely because a new local candidate is prepared.",
   "uploaded": true,
   "uploaded_verified_private": false,
-  "verified_at_bjt": "2026-11-11T09:46:30.403562+08:00",
+  "verified_at_bjt": "2026-11-15T18:25:52.135735+08:00",
   "verification_scope": "Native success plus exact text, metadata tree hash, content-byte total, tags and preview presence; not a remote per-file SHA download.",
   "preparation_record_policy": "Current mutable item identity/status. Historical release snapshots remain unchanged. current_update_uploaded distinguishes the newly prepared update.",
   "previous_verified_upload": {
@@ -27,14 +27,38 @@
     "recorded_at_bjt": "2026-11-06T22:12:38.901484+08:00",
     "verification_scope": "Native uploaded title, description, metadata, content bytes, tags, preview, dependencies and visibility2 read back. Gameplay acceptance unchanged."
   },
-  "live_visibility_verified_at_bjt": "2026-11-11T09:46:30.403562+08:00",
+  "live_visibility_verified_at_bjt": "2026-11-15T18:25:52.135735+08:00",
   "current_update_version": "0.2.0-rc.4",
   "current_update_uploaded": true,
   "uploaded_verified_public": true,
-  "current_publication": "publishing/publication-20261111.json",
-  "current_content_tree_sha256": "ece3b2add866e87a84a90e8af7a08e7175a45eb92df9eefe3cd63b47f2cfef72",
+  "current_publication": "publishing/publication-20261115.json",
+  "current_content_tree_sha256": "ebc176c97809d2a47393b9927d2e0cc4298901abb864492e8fedae22e6c238ff",
   "current_mod_versions": {
     "SuQingFreshnessLunchbox": "0.2.0-rc.4",
     "SuQingLunchboxAttachedWeight_4222": "0.1.0-rc.1"
+  },
+  "version": "0.2.0-rc.4",
+  "title": "蘇清的返鲜餐盒 | SuQing's Freshness Lunchbox [B42.22.2 SP]",
+  "mod_versions": {
+    "SuQingFreshnessLunchbox": "0.2.0-rc.4",
+    "SuQingLunchboxAttachedWeight_4222": "0.1.0-rc.1"
+  },
+  "content_tree_sha256": "ebc176c97809d2a47393b9927d2e0cc4298901abb864492e8fedae22e6c238ff",
+  "content_bytes": 3813504,
+  "content_file_count": 48,
+  "tags": [
+    "Build 42",
+    "Food",
+    "Items",
+    "QOL",
+    "WIP"
+  ],
+  "actual_workshop_children": [],
+  "actual_preview_bytes": 621554,
+  "previous_publication_summary": {
+    "current_update_version": "0.2.0-rc.4",
+    "visibility": "public",
+    "current_content_tree_sha256": "ece3b2add866e87a84a90e8af7a08e7175a45eb92df9eefe3cd63b47f2cfef72",
+    "verified_at_bjt": "2026-11-11T09:46:30.403562+08:00"
   }
 }
