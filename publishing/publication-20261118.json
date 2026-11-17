@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "app_id": 108600,
+  "workshop_item_id": "3834693433",
+  "workshop_url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3834693433",
+  "status": "verified_public",
+  "title": "蘇清的返鲜餐盒 | SuQing's Freshness Lunchbox [B42.22.2 SP]",
+  "version": "0.2.0-rc.4",
+  "mod_versions": {
+    "SuQingFreshnessLunchbox": "0.2.0-rc.4",
+    "SuQingLunchboxAttachedWeight_4222": "0.1.0-rc.1"
+  },
+  "content_tree_sha256": "379cce1d8e5d7c7fa9b5827c28a386f77558776ac354c8394d2601db88c54b3c",
+  "content_bytes": 3813564,
+  "content_file_count": 48,
+  "tags": "Build 42,Food,Items,QOL,WIP",
+  "actual_workshop_children": [],
+  "actual_preview_bytes": 621554,
+  "visibility": "public",
+  "visibility_value": 0,
+  "verified_at_bjt": "2026-11-18T02:59:26.373021+08:00",
+  "verification_scope": "Native upload callback and uncached Steam readback for description, metadata, package bytes, tags, preview and dependencies."
+}
