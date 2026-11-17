@@ -15,8 +15,8 @@ JDK = Path(r'E:\code\java-1.8.0-openjdk-1.8.0.392-1.b08.redhat.windows.x86_64\bi
 TARGET = MAIN / 'client/SuQingFreshnessLunchbox_AttachedContainers.lua'
 
 
-def run(command):
-    result = subprocess.run([str(value) for value in command], cwd=GAME, capture_output=True, encoding='utf-8', errors='replace')
+def run(command, cwd=ROOT):
+    result = subprocess.run([str(value) for value in command], cwd=cwd, capture_output=True, encoding='utf-8', errors='replace')
     output = result.stdout + result.stderr
     if result.returncode:
         raise AssertionError(output)
@@ -32,51 +32,66 @@ def method(text, signature):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--report', type=Path, default=ROOT / 'tests/attached_containers_validation.json')
+    parser.add_argument('--game', type=Path, default=GAME)
+    parser.add_argument('--ordinary', type=Path, default=ORDINARY, help='Ordinary upgrade shared module directory')
+    parser.add_argument('--ex-bundle', type=Path, help='EX and HavenFall mod root for the selected ordinary fixture')
     args = parser.parse_args()
+    game = args.game.resolve()
+    ordinary = args.ordinary.resolve()
     workspace = ROOT / 'tests/attached_containers_validation'
     classes = workspace / 'classes'
     classes.mkdir(parents=True, exist_ok=True)
     run([JDK / 'javac.exe', '-encoding', 'UTF-8', '-d', classes, ROOT / 'tools/integration_KahluaRunner.java'])
-    cp = f'{classes};{GAME / "pzopt/aot/pzopt.jar"};{GAME / "projectzomboid.jar"};{GAME};{GAME / "*"}'
-    java = [GAME / 'jre64/bin/java.exe', '--enable-native-access=ALL-UNNAMED',
+    cp = f'{classes};{game / "pzopt/aot/pzopt.jar"};{game / "projectzomboid.jar"};{game};{game / "*"}'
+    java = [game / 'jre64/bin/java.exe', '--enable-native-access=ALL-UNNAMED',
             f'-Duser.home={workspace / "home"}', '-Dfile.encoding=UTF-8', '-cp', cp, 'integration_KahluaRunner']
     common = [ROOT / 'tests/integration_bootstrap.lua', MAIN / 'shared/SuQingFreshnessLunchbox/Core.lua',
               ROOT / 'tests/attached_containers_setup.lua']
+    original_api = workspace / 'original_ordinary_api.lua'
+    original_api.write_text(
+        'OriginalCanUpgrade = SuQingContainerUpgrade.CanUpgrade\n'
+        'OriginalCanRestore = SuQingContainerUpgrade.CanRestore\n', encoding='utf-8')
+    native_attachment_guard = 'C.version = "1.1.0-rc.1"' in (ordinary / 'Core.lua').read_text(encoding='utf-8-sig')
     records = []
     for name, files in [
         ('native_kahlua_compile', ['--compile', TARGET]),
         ('container_ui_and_wrapper_boundaries', common + [TARGET, ROOT / 'tests/attached_containers_cases.lua']),
         ('actual_ordinary_core_calls', common + [ROOT / 'tests/integration_upgrade_setup.lua',
-            ORDINARY / 'Compatibility.lua', ORDINARY / 'Core.lua', ORDINARY / 'Refund.lua',
-            TARGET, ROOT / 'tests/attached_containers_native_core_cases.lua']),
+            ordinary / 'Compatibility.lua', ordinary / 'Core.lua', ordinary / 'Refund.lua',
+            original_api, TARGET, ROOT / 'tests/attached_containers_native_core_cases.lua']),
     ]:
-        output = run(java + files)
+        output = run(java + files, game)
         records.append({'name': name, 'result': 'PASS', 'output': output})
         print(output, flush=True)
     # Execute the installed ordinary/EX/HavenFall Lua and vanilla completion in
     # both file orders. This bridge must not disturb the strict outer identity.
-    personal = Path(r'C:\Users\15792\Zomboid\mods')
+    personal = args.ex_bundle or Path(r'C:\Users\15792\Zomboid\mods')
     ex = personal / 'ExSuQingBackpackSuperUpgrade_4221/42/media/lua'
     havenfall = personal / 'Codex_SuQingWearableCompat_4221/42/media/lua/client/Codex_SuQingHavenFallEX.lua'
     lunchbox_client = MAIN / 'client/SuQingFreshnessLunchbox_Crafting.lua'
-    ordinary_client = ORDINARY.parents[1] / 'client'
+    ordinary_client = ordinary.parents[1] / 'client'
     fixture = workspace / 'chain_config.lua'
-    fixture.write_text('GuardExpectBroken=false\n', encoding='utf-8')
+    if native_attachment_guard:
+        fixture.write_text("emit('OnGameStart')\n", encoding='utf-8')
+    else:
+        fixture.write_text('GuardExpectBroken=false\n', encoding='utf-8')
     for first in ['lunchbox_file_first', 'havenfall_file_first']:
         files = [ROOT / 'tests/integration_bootstrap.lua', ROOT / 'tests/integration_ex_guard_setup.lua',
-            GAME / 'media/lua/shared/Entity/TimedActions/ISHandcraftAction.lua',
+            game / 'media/lua/shared/Entity/TimedActions/ISHandcraftAction.lua',
             MAIN / 'shared/SuQingFreshnessLunchbox/Core.lua', MAIN / 'shared/SuQingFreshnessLunchbox/Crafting.lua',
-            ORDINARY / 'Compatibility.lua', ORDINARY / 'Core.lua', ORDINARY / 'Refund.lua',
+            ordinary / 'Compatibility.lua', ordinary / 'Core.lua', ordinary / 'Refund.lua',
             ordinary_client / 'SuQingContainerUpgrade_Crafting.lua', ordinary_client / 'SuQingContainerUpgrade_Variant.lua',
             *[ex / 'shared/ExSuQingBackpackSuperUpgrade' / name for name in ['Core.lua', 'Capacity.lua', 'Refund.lua']],
             ex / 'client/ExSuQingBackpackSuperUpgrade_Crafting.lua']
         files += [lunchbox_client, havenfall] if first == 'lunchbox_file_first' else [havenfall, lunchbox_client]
-        files += [TARGET, fixture, ROOT / 'tests/integration_ex_guard_cases.lua',
-                  ROOT / 'tests/attached_containers_completion_cases.lua']
-        output = run(java + files)
+        files += [TARGET, fixture]
+        if not native_attachment_guard:
+            files.append(ROOT / 'tests/integration_ex_guard_cases.lua')
+        files.append(ROOT / 'tests/attached_containers_completion_cases.lua')
+        output = run(java + files, game)
         records.append({'name': 'strict_ex_chain_' + first, 'result': 'PASS', 'output': output})
         print(output, flush=True)
-    classpath = f'{GAME / "pzopt/aot/pzopt.jar"};{GAME / "projectzomboid.jar"}'
+    classpath = f'{game / "pzopt/aot/pzopt.jar"};{game / "projectzomboid.jar"}'
     def bytecode(name):
         return run([JDK / 'javap.exe', '-classpath', classpath, '-c', '-p', name])
     character = bytecode('zombie.characters.IsoGameCharacter')

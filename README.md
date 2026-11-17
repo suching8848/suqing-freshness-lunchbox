@@ -2,6 +2,8 @@
 
 **2026-11-15 发布修订**。修复与背包 EX 一起使用时的密封制作保护包装，批次及模型资源沿用 0.2.0-rc.4。组合离线验证通过，实际制作待验收。
 
+返鲜餐盒 0.2.0-rc.4 热修兼容普通容器升级 1.1.0-rc.1。新版容器升级会直接拦截仍挂在快捷栏的餐盒，旧版 1.0.3 继续由餐盒提供这一保护。
+
 当前工坊ID、可见性与上传状态见[workshop-item.json](publishing/workshop-item.json)。release/中的冻结manifest保留准备时状态；其中历史uploaded=false不代表当前工坊状态。
 
 当前工坊公开版本为 **0.2.0-rc.4**，同包包含可选外挂减重补丁 **0.1.0-rc.1**。 [工坊条目](https://steamcommunity.com/sharedfiles/filedetails/?id=3834693433) · [发布记录](publishing/publication-20261115.json)

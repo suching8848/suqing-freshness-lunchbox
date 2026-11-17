@@ -1,3 +1,8 @@
+# 0.2.0-rc.4 — 2026-11-18 compatibility hotfix
+
+- 支持普通容器升级 1.1.0-rc.1 自带的挂点保护，保留对 1.0.3 的餐盒保护。
+- Use the built-in attachment guard in Container Upgrades 1.1.0-rc.1 and keep the lunchbox guard for 1.0.3.
+
 # 0.2.0-rc.4 — 2026-11-11
 
 2026-11-15 · 0.2.0-rc.4 · 适配背包 EX 的密封制作检查。 / Synchronize the sealed crafting guard with Backpack EX.

@@ -2,6 +2,8 @@
 
 **November 15 publication revision**. Updates the sealing and crafting guard when using Backpack EX. Batch rules and models follow 0.2.0-rc.4. Combined offline checks passed. In-game crafting awaits acceptance.
 
+The 0.2.0-rc.4 hotfix supports Container Upgrades 1.1.0-rc.1. That version blocks upgrades and restoration while the lunchbox is attached to the hotbar. The lunchbox still supplies that protection for 1.0.3.
+
 Current item identity, visibility and upload status: [workshop-item.json](publishing/workshop-item.json). Frozen manifests under release/ retain their preparation-time state; an old uploaded=false value there does not describe the current Steam item.
 
 Public Workshop release **0.2.0-rc.4** includes optional attached weight fix **0.1.0-rc.1**. [Workshop item](https://steamcommunity.com/sharedfiles/filedetails/?id=3834693433) · [Publication record](publishing/publication-20261115.json)

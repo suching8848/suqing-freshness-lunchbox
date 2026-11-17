@@ -48,14 +48,14 @@ function A.OnContainers(page,phase)
     end
 end
 
--- Ordinary 1.0.3 predates attached containers: isEquipped() excludes hotbar
--- attachments in B42.21. Guard only this exact lunchbox; all other targets and
--- all successful return values continue through the original ordinary API.
+-- Ordinary 1.0.3 needs the lunchbox guard because isEquipped() excludes
+-- hotbar attachments. Ordinary 1.1.0-rc.1 checks isAttachedItem itself.
 function A.InstallUpgradeGuard()
     if not C.SP() then return false,'multiplayer' end
     local ordinary=SuQingContainerUpgrade
     if type(ordinary)~='table' then A.upgradeStatus='absent';return false,'absent' end
-    if ordinary.version~='1.0.3' then
+    local version=ordinary.version
+    if version~='1.0.3' and version~='1.1.0-rc.1' then
         A.upgradeStatus='unsupported_version'
         warnOnce('unsupported_version',ordinary.version)
         return false,'unsupported_version'
@@ -71,6 +71,10 @@ function A.InstallUpgradeGuard()
         A.upgradeStatus='missing_api'
         warnOnce('missing_api')
         return false,'missing_api'
+    end
+    if version=='1.1.0-rc.1' then
+        A.upgradeStatus='native'
+        return true
     end
     local canUpgrade,canRestore=ordinary.CanUpgrade,ordinary.CanRestore
     A.guardCanUpgrade=function(item,character,...)

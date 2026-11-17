@@ -2,6 +2,19 @@ local T=AttachedTest
 local A=SuQingFreshnessLunchbox.AttachedContainers
 local U=SuQingContainerUpgrade
 local check,eq,case=T.check,T.eq,T.case
+case('attachment guard selects the verified path for this ordinary API',function()
+    check(A.InstallUpgradeGuard())
+    if U.version=='1.1.0-rc.1' then
+        eq(A.upgradeStatus,'native')
+        eq(U.CanUpgrade,OriginalCanUpgrade)
+        eq(U.CanRestore,OriginalCanRestore)
+    else
+        eq(U.version,'1.0.3')
+        eq(A.upgradeStatus,'ready')
+        eq(A.nativeCanUpgrade,OriginalCanUpgrade)
+        eq(A.nativeCanRestore,OriginalCanRestore)
+    end
+end)
 case('actual ordinary API permits detached box then blocks attachment',function()
     local a=T.actor();local b=T.box(a);SuQingFreshnessLunchbox.EnsureBox(b)
     check(U.CanUpgrade(b,a,1));a.attached:add(b)
