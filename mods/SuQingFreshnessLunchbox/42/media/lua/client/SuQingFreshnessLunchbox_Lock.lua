@@ -253,8 +253,9 @@ local function isBound(hook)
     return current==hook.wrapper or (hook.forwarder~=nil and current==hook.forwarder)
 end
 
--- Loot Tracker 1.8.5 periodically rewraps these two slots if its closure
--- is no longer outermost. Leave its reviewed forwarders above our guards.
+-- Loot Tracker 1.8.5 and 1.8.6 use the same reviewed LT_Clicks.lua.
+-- Keep its verified forwarders above the guards during periodic rechecks.
+local lootTrackerVersions={["1.8.5"]=true,["1.8.6"]=true}
 local lootTrackerLines={selectContainer=627,setNewContainer=661}
 local function sourcePath(path)
     return type(path)=="string" and string.lower((string.gsub(path,"\\","/"))) or nil
@@ -272,7 +273,7 @@ local function syncLootTracker()
     local check=LootTracker and LootTracker.Clicks and LootTracker.Clicks.checkClass
     if not check or type(getModInfoByID)~="function" then return end
     local info=getModInfoByID("LootTrackerB42")
-    if not info or not info.getModVersion or not info.getVersionDir or info:getModVersion()~="1.8.5" then return end
+    if not info or not info.getModVersion or not info.getVersionDir or not lootTrackerVersions[info:getModVersion()] then return end
     local dir=sourcePath(info:getVersionDir())
     if not dir then return end
     local path=dir.."/media/lua/client/loottracker/lt_clicks.lua"

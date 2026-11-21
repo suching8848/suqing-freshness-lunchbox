@@ -10,7 +10,7 @@ Public Workshop release **0.2.0-rc.4** includes optional attached weight fix **0
 
 **0.2.0-rc.4** is a Project Zomboid B42.22.2 single-player batch restoration candidate. The mod ID is `SuQingFreshnessLunchbox` and the item ID is `SuQingFreshnessLunchbox.FreshnessLunchbox`.
 
-Preserves Loot Tracker 1.8.5 search tracking and sealed-container restrictions when they share inventory selection.
+Preserves Loot Tracker 1.8.5 / 1.8.6 search tracking and sealed-container restrictions when they share inventory selection.
 
 The optional SuQing's Lunchbox Attached Weight Fix, `SuQingLunchboxAttachedWeight_4222`, applies the current container reduction to the contents of a backpack-bottom lunchbox. It supports B42.22.2 single-player and requires ZombieBuddy 2.3.4 and Java mod approval. The Workshop item contains both mods. Enable the weight fix separately alongside the lunchbox and ZombieBuddy, approve its Java mod, and fully restart. Disable the fix and restart to resume native attached weight. Native checks passed offline. The local game log confirms that ZombieBuddy loaded and applied the patch. Gameplay weight measurement is pending.
 

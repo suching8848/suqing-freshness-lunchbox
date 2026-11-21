@@ -10,7 +10,7 @@
 
 **0.2.0-rc.4** 是 Project Zomboid B42.22.2 单人批次返鲜候选。模组 ID 为 `SuQingFreshnessLunchbox`，物品 ID 为 `SuQingFreshnessLunchbox.FreshnessLunchbox`。
 
-与 Loot Tracker 1.8.5 共用库存选择接口时，保留搜刮记录及密封限制。
+与 Loot Tracker 1.8.5 / 1.8.6 共用库存选择接口时，保留搜刮记录及密封限制。
 
 可选配套「蘇清的返鲜餐盒外挂减重修复」`SuQingLunchboxAttachedWeight_4222` 让背包底部餐盒的内容物按当前升级比例减重。适用于 B42.22.2 单人，需要 ZombieBuddy 2.3.4 和 Java 模组批准。工坊同包提供，使用时与餐盒本体、ZombieBuddy 一起启用，批准 Java 模组后完整重启。停用配套并重启可恢复原生外挂负重。原生减重已离线验证，本机游戏日志确认补丁已加载并应用，游戏内实际重量待测。
 

@@ -1,3 +1,9 @@
+# 0.2.0-rc.4 — 2026-11-21
+
+共享库存锁支持 Loot Tracker 1.8.5 与 1.8.6。版本继续匹配返鲜冰箱的共享锁校验。
+
+The shared inventory lock supports Loot Tracker 1.8.5 and 1.8.6. The version remains compatible with the Freshness Fridge lock check.
+
 # 0.2.0-rc.4 — 2026-11-18 compatibility hotfix
 
 - 支持普通容器升级 1.1.0-rc.1 自带的挂点保护，保留对 1.0.3 的餐盒保护。
